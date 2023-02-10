@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/vue"
+  ],
+  "singleQuote": true,
+  "printWidth": 120, 
+  "trailingComma": "none",
+  "htmlWhitespaceSensitivity": "ignore",
+  "semi": false,
+  "tabWidth": 2
+}
