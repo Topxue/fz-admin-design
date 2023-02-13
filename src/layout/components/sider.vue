@@ -5,6 +5,7 @@
     @collapse="onCollapse"
     :width="appConfig.menuWidth"
     :collapsed-width="appConfig.collapsedWidth"
+    class="sider-wrapper"
   >
     <Logo v-if="appConfig.isShowLogo" />
 
@@ -71,11 +72,14 @@ onBeforeMount(() => {
 </script>
 
 <style scoped lang="less">
-.collapse-button {
-  color: var(--color-text-3);
-  background-color: var(--color-fill-1);
-  &:hover {
-    background-color: var(--color-fill-3);
+.sider-wrapper {
+  // background-color: red;
+  .collapse-button {
+    color: var(--color-text-3);
+    background-color: var(--color-fill-1);
+    &:hover {
+      background-color: var(--color-fill-3);
+    }
   }
 }
 </style>

@@ -51,6 +51,17 @@ export default {
   menuWidth: 220,
   // 收缩菜单宽度
   collapsedWidth: 48,
+  /**
+   * 菜单设置
+   */
+  // 默认菜单导航背景颜色
+  menuBgColor: '#545c64',
+  // 默认菜单导航字体颜色
+  // menuBarColor: '#eaeaea',
+  // 默认菜单高亮背景色
+  // menuBarActiveColor: 'rgba(0, 0, 0, 0.2)',
+  // 是否开启菜单背景颜色渐变
+  // isMenuBarColorGradual: false,
 
   /**
    * 后端控制路由

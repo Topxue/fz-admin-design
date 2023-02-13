@@ -64,6 +64,7 @@ declare interface AppState {
     isWartermark: boolean
     // 水印文案
     wartermarkText: string
+    menuBgColor: string
     /**
      * 布局切换
      * 注意：为了演示，切换布局时，颜色会被还原成默认，代码位置：/@/layout/navBars/breadcrumb/setings.vue

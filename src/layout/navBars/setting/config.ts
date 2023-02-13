@@ -18,3 +18,7 @@ export const DEFAULT_THEME_COLORS = [
   /* 深紫罗兰色 */
   { color: '#722ed1', themeColor: 'saucePurple' }
 ]
+
+export const themeColor = {
+  default: {}
+}

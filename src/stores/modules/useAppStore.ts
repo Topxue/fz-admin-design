@@ -24,6 +24,7 @@ const useAppStore = defineStore('app', {
 
     changeThemeColor(dark: boolean) {
       this.appConfig.isDark = dark
+      usePrimaryColor(this.appConfig.primary)
       document.body.setAttribute('arco-theme', dark ? 'dark' : '')
     },
 

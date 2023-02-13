@@ -37,3 +37,5 @@ declare interface RouteToFrom<T = any> extends RouteItem {
   path?: string
   children?: T[]
 }
+
+declare module '@arco-design/color'

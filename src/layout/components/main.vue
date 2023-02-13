@@ -23,7 +23,6 @@ const LayoutParentView = defineAsyncComponent(
 <style scoped lang="less">
 .layout-content {
   padding: 0;
-  margin-top: 50px;
-  // background: rg;
+  margin-top: 55px;
 }
 </style>

@@ -19,6 +19,7 @@ module.exports = {
   },
   rules: {
     'no-undef': 'off',
+    complexity: ['error', { max: 10 }],
     'vue/no-multiple-template-root': 'off',
     'vue/no-v-model-argument': 'off',
     'vue/no-reserved-component-names': 'off',
