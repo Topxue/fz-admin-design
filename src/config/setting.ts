@@ -22,8 +22,6 @@ export default {
   isCacheTagsView: false,
   // 是否开启 TagsView 拖拽
   isSortableTagsView: true,
-  // 是否开启 TagsView 共用
-  isShareTagsView: false,
   // 是否开启 Footer 底部版权信息
   isFooter: false,
   // 是否开启灰色模式
@@ -75,7 +73,7 @@ export default {
   // 定义的值与 `/src/layout/navBars/tagsView/tagsView.vue` 中的 class 同名
   tagsStyle: 'tags-style-five',
   // 主页面切换动画：可选值"<slide-right|slide-left|opacity>"，默认 opacity
-  animation: 'opacity',
+  animation: 'slide-right',
   // 分栏高亮风格：可选值"<columns-round|columns-card>"，默认 columns-round
   columnsAsideStyle: 'columns-round',
   // 分栏布局风格：可选值"<columns-horizontal|columns-vertical>"，默认 columns-horizontal

@@ -6,6 +6,7 @@
     :width="appConfig.menuWidth"
     :collapsed-width="appConfig.collapsedWidth"
     class="sider-wrapper"
+    v-show="!isTagsViewCurrenFull"
   >
     <Logo v-if="appConfig.isShowLogo" />
 
@@ -23,8 +24,11 @@
 import { ref, defineAsyncComponent, onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
 
-import type { RouteItem } from '@/types/global'
-import { useRoutesList, useAppStore } from '@/stores'
+import { useRoutesList, useAppStore, useTagsViewRoutes } from '@/stores'
+
+// 定义变量内容
+const storesTagsViewRoutes = useTagsViewRoutes()
+const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
 const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))
 const VerticalMenu = defineAsyncComponent(

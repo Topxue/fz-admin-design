@@ -65,7 +65,7 @@ export default [
             isLink: '',
             isHide: false,
             isKeepAlive: true,
-            isAffix: false,
+            isAffix: true,
             isIframe: false,
             roles: ['admin'],
             icon: 'iconfont icon-xitongshezhi'
@@ -80,7 +80,7 @@ export default [
                 isLink: '',
                 isHide: false,
                 isKeepAlive: true,
-                isAffix: false,
+                isAffix: true,
                 isIframe: false,
                 roles: ['admin'],
                 icon: 'iconfont icon-caidan'
@@ -95,7 +95,7 @@ export default [
                 isLink: '',
                 isHide: false,
                 isKeepAlive: true,
-                isAffix: false,
+                isAffix: true,
                 isIframe: false,
                 roles: ['admin'],
                 icon: 'iconfont icon-icon-'
@@ -113,7 +113,7 @@ export default [
             isLink: '',
             isHide: false,
             isKeepAlive: true,
-            isAffix: false,
+            isAffix: true,
             isIframe: false,
             roles: ['admin', 'common'],
             icon: 'iconfont icon-quanxian'
@@ -128,7 +128,7 @@ export default [
                 isLink: '',
                 isHide: false,
                 isKeepAlive: true,
-                isAffix: false,
+                isAffix: true,
                 isIframe: false,
                 roles: ['admin', 'common']
               },
@@ -142,7 +142,7 @@ export default [
                     isLink: '',
                     isHide: false,
                     isKeepAlive: true,
-                    isAffix: false,
+                    isAffix: true,
                     isIframe: false,
                     roles: ['admin', 'common']
                   }
@@ -161,7 +161,7 @@ export default [
             isLink: '',
             isHide: false,
             isKeepAlive: true,
-            isAffix: false,
+            isAffix: true,
             isIframe: false,
             roles: ['admin', 'common'],
             icon: 'iconfont icon-caidan'
@@ -177,7 +177,7 @@ export default [
                 isLink: '',
                 isHide: false,
                 isKeepAlive: true,
-                isAffix: false,
+                isAffix: true,
                 isIframe: false,
                 roles: ['admin', 'common'],
                 icon: 'iconfont icon-caidan'
@@ -192,7 +192,7 @@ export default [
                     isLink: '',
                     isHide: false,
                     isKeepAlive: true,
-                    isAffix: false,
+                    isAffix: true,
                     isIframe: false,
                     roles: ['admin', 'common'],
                     icon: 'iconfont icon-caidan'
@@ -208,7 +208,7 @@ export default [
                     isLink: '',
                     isHide: false,
                     isKeepAlive: true,
-                    isAffix: false,
+                    isAffix: true,
                     isIframe: false,
                     roles: ['admin', 'common'],
                     icon: 'iconfont icon-caidan'
@@ -223,7 +223,7 @@ export default [
                         isLink: '',
                         isHide: false,
                         isKeepAlive: true,
-                        isAffix: false,
+                        isAffix: true,
                         isIframe: false,
                         roles: ['admin', 'common'],
                         icon: 'iconfont icon-caidan'
@@ -240,7 +240,7 @@ export default [
                     isLink: '',
                     isHide: false,
                     isKeepAlive: true,
-                    isAffix: false,
+                    isAffix: true,
                     isIframe: false,
                     roles: ['admin', 'common'],
                     icon: 'iconfont icon-caidan'
@@ -257,76 +257,10 @@ export default [
                 isLink: '',
                 isHide: false,
                 isKeepAlive: true,
-                isAffix: false,
+                isAffix: true,
                 isIframe: false,
                 roles: ['admin', 'common'],
                 icon: 'iconfont icon-caidan'
-              }
-            }
-          ]
-        },
-        {
-          path: '/fun',
-          name: 'funIndex',
-          component: 'layout/routerView/parent',
-          redirect: '/fun/tagsView',
-          meta: {
-            title: '功能',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: 'iconfont icon-crew_feature'
-          },
-          children: [
-            {
-              path: '/fun/tagsView',
-              name: 'funTagsView',
-              component: 'fun/tagsView/index',
-              meta: {
-                title: 'tagView操作',
-                isLink: '',
-                isHide: false,
-                isKeepAlive: true,
-                isAffix: false,
-                isIframe: false,
-                roles: ['admin', 'common'],
-                icon: 'ele-Pointer'
-              }
-            }
-          ]
-        },
-        {
-          path: '/fun1',
-          name: 'funIndex',
-          component: 'layout/routerView/parent',
-          redirect: '/fun/tagsView',
-          meta: {
-            title: '功能',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: 'iconfont icon-crew_feature'
-          },
-          children: [
-            {
-              path: '/fun/tagsView',
-              name: 'funTagsView',
-              component: 'fun/tagsView/index',
-              meta: {
-                title: 'tagView操作',
-                isLink: '',
-                isHide: false,
-                isKeepAlive: true,
-                isAffix: false,
-                isIframe: false,
-                roles: ['admin', 'common'],
-                icon: 'ele-Pointer'
               }
             }
           ]
@@ -340,42 +274,27 @@ export default [
             isLink: '',
             isHide: false,
             isKeepAlive: true,
-            isAffix: false,
+            isAffix: true,
             isIframe: false,
             roles: ['admin', 'common'],
             icon: 'iconfont icon-gerenzhongxin'
           }
         },
-        {
-          path: '/tools',
-          name: 'tools',
-          component: 'tools/index',
-          meta: {
-            title: '工具合集',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: 'iconfont icon-gongju'
-          }
-        },
-        {
-          path: '/link',
-          name: 'layoutLinkView',
-          component: 'layout/routerView/link',
-          meta: {
-            title: '外部链接',
-            isLink: 'https://arco.design/vue/docs/start',
-            isHide: false,
-            isKeepAlive: false,
-            isAffix: false,
-            isIframe: false,
-            roles: ['admin'],
-            icon: 'iconfont icon-caozuo-wailian'
-          }
-        },
+        // {
+        //   path: '/link',
+        //   name: 'layoutLinkView',
+        //   component: 'layout/routerView/link',
+        //   meta: {
+        //     title: '外部链接',
+        //     isLink: 'https://arco.design/vue/docs/start',
+        //     isHide: false,
+        //     isKeepAlive: false,
+        //     isAffix: true,
+        //     isIframe: false,
+        //     roles: ['admin'],
+        //     icon: 'iconfont icon-caozuo-wailian'
+        //   }
+        // },
         {
           path: '/iframesOne',
           name: 'layoutIfameView',

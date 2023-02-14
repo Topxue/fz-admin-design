@@ -13,8 +13,8 @@ pinia.use(piniaPersist)
 export {
   useAppStore,
   useUserStore,
-  useKeepALiveNames,
   useRoutesList,
+  useKeepALiveNames,
   useTagsViewRoutes
 }
 

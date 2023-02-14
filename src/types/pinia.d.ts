@@ -16,6 +16,7 @@ declare interface RequestOldRoutesState {
 // TagsView 路由列表
 declare interface TagsViewRoutesState<T = any> {
   tagsViewRoutes: T[]
+  tagsViewList: T[]
   isTagsViewCurrenFull: Boolean
 }
 
@@ -52,8 +53,6 @@ declare interface AppState {
     isCacheTagsView: boolean
     // 是否开启 TagsView 拖拽
     isSortableTagsView: boolean
-    // 是否开启 TagsView 共用
-    isShareTagsView: boolean
     // 是否开启 Footer 底部版权信息
     isFooter: boolean
     // 是否开启灰色模式

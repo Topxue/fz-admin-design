@@ -31,6 +31,8 @@
         </div>
       </a-space>
     </div>
+
+    <a-input placeholder="测试缓存" />
   </div>
 </template>
 

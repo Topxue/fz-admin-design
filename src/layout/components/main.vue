@@ -1,11 +1,13 @@
 <template>
   <a-layout class="layout-content">
-    <!-- <a-breadcrumb :style="{ margin: '0 0 20px 0' }">
-      <a-breadcrumb-item>Home</a-breadcrumb-item>
-      <a-breadcrumb-item>List</a-breadcrumb-item>
-      <a-breadcrumb-item>App</a-breadcrumb-item>
-    </a-breadcrumb> -->
-
+    <TagsView v-show="!isTagsViewCurrenFull" />
+    <div
+      class="layout-navbars-close-full-icon"
+      v-show="isTagsViewCurrenFull"
+      @click="closeCurrentFull"
+    >
+      <icon-close class="close-icon" />
+    </div>
     <a-layout-content>
       <LayoutParentView />
     </a-layout-content>
@@ -13,16 +15,55 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue'
+import { storeToRefs } from 'pinia'
+import { computed, defineAsyncComponent } from 'vue'
+
+import { useTagsViewRoutes } from '@/stores'
+
+// 定义变量内容
+const storesTagsViewRoutes = useTagsViewRoutes()
+const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
+
+const marginTop = computed(() => (isTagsViewCurrenFull.value ? 0 : '54px'))
 
 const LayoutParentView = defineAsyncComponent(
   () => import('@/layout/routerView/parent.vue')
 )
+const TagsView = defineAsyncComponent(
+  () => import('@/layout/tagsView/index.vue')
+)
+
+const closeCurrentFull = () => {
+  storesTagsViewRoutes.setCurrenFullscreen(false)
+}
 </script>
 
 <style scoped lang="less">
 .layout-content {
   padding: 0;
-  margin-top: 55px;
+  margin-top: v-bind(marginTop);
+  height: 100%;
+  overflow: hidden;
+
+  .layout-navbars-close-full-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: fixed;
+    right: -28px;
+    top: -28px;
+    z-index: 10;
+    cursor: pointer;
+
+    .close-icon {
+      position: absolute;
+      left: 13px;
+      top: 35px;
+      color: #333;
+      transition: all 0.3s ease;
+    }
+  }
 }
 </style>

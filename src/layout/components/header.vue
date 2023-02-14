@@ -47,5 +47,6 @@ const menuWidth = computed(() => {
   height: @layoutHeader;
   padding: 0 10px 0 0;
   background: var(--color-bg-3);
+  border-bottom: 1px solid var(--color-neutral-3);
 }
 </style>

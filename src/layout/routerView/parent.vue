@@ -30,7 +30,8 @@ import {
   nextTick,
   onMounted,
   onBeforeMount,
-  defineAsyncComponent
+  defineAsyncComponent,
+  onUnmounted
 } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
@@ -61,7 +62,8 @@ const state = reactive<ParentViewState>({
 
 // 设置主界面切换动画
 const setTransitionName = computed(() => {
-  return appConfig.value.animation + '-transform'
+  console.log(appConfig.value.animation)
+  return appConfig.value.animation
 })
 
 // 设置 iframe 显示/隐藏
@@ -88,6 +90,10 @@ onBeforeMount(() => {
 
 // 获取组件缓存列表(name值)
 const getKeepAliveNames = computed(() => {
+  console.log(
+    appConfig.value.isTagsview ? cachedViews.value : state.keepAliveNameList
+  )
+
   return appConfig.value.isTagsview
     ? cachedViews.value
     : state.keepAliveNameList
@@ -118,6 +124,17 @@ onMounted(() => {
   //   }, 0)
   // })
 })
+
+// 页面卸载时
+onUnmounted(() => {
+  emitter.off('onTagsViewRefreshRouterView')
+})
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.layout-parent {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+</style>
