@@ -357,7 +357,7 @@ onMounted(() => {
 
   .tag-item {
     cursor: pointer;
-    &:hover {
+    &:hover:not(.is-active) {
       color: rgb(var(--primary-7));
     }
   }
@@ -365,9 +365,6 @@ onMounted(() => {
   .is-active {
     color: #fff;
     background-color: rgb(var(--primary-6));
-    &:hover {
-      color: #fff;
-    }
   }
 
   :deep .arco-tag .arco-icon-hover.arco-tag-icon-hover:hover::before {
