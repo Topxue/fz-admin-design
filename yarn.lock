@@ -994,6 +994,16 @@
     "@volar/typescript" "1.0.24"
     "@volar/vue-language-core" "1.0.24"
 
+"@vue-macros/common@~1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/@vue-macros/common/-/common-1.0.0.tgz#de4d96241c12adfd857d954618de031bf73a8a23"
+  integrity sha512-KclEa1Q7tx3xPIGxOgL+LghfIFdjOtzPik0bPsC8KmGOYp8qFmImGjWobUiS9LLr6PLCSsetsGUp1m8Hu9kIxg==
+  dependencies:
+    "@babel/types" "^7.20.7"
+    "@vue/compiler-sfc" "^3.2.45"
+    local-pkg "^0.4.3"
+    magic-string "^0.27.0"
+
 "@vue/babel-helper-vue-transform-on@^1.0.2":
   version "1.0.2"
   resolved "https://registry.npmjs.org/@vue/babel-helper-vue-transform-on/-/babel-helper-vue-transform-on-1.0.2.tgz"
@@ -1344,6 +1354,14 @@ arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz"
   integrity sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==
+
+ast-walker-scope@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmjs.org/ast-walker-scope/-/ast-walker-scope-0.4.0.tgz#d24826c8913d4498b1ecc7f03aa86d59e7eb8101"
+  integrity sha512-THVisYmmqkcopZXJDniGgVW6BRKtjutRLytqAgw0XDabYZmxC0GfFggTFZouMhvNT7jPBkx0vOy/2Y+udCDwgg==
+  dependencies:
+    "@babel/parser" "^7.20.13"
+    "@babel/types" "^7.20.7"
 
 astral-regex@^2.0.0:
   version "2.0.0"
@@ -5454,6 +5472,16 @@ unplugin-vue-components@^0.23.0:
     magic-string "^0.27.0"
     minimatch "^6.1.6"
     resolve "^1.22.1"
+    unplugin "^1.0.1"
+
+unplugin-vue-define-options@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/unplugin-vue-define-options/-/unplugin-vue-define-options-1.2.1.tgz#a96d6c35f6a35df791b672e3eea8458d955b56b7"
+  integrity sha512-ximwYzxHislX5nC4ZgD4ee6qrhzY65IhnhfzpzouY9mzbBDoEFUEVizVfvm+j4XBTtLXDloUuoVZhuqYdPfRTg==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.2"
+    "@vue-macros/common" "~1.0.0"
+    ast-walker-scope "^0.4.0"
     unplugin "^1.0.1"
 
 unplugin@^1.0.0, unplugin@^1.0.1:

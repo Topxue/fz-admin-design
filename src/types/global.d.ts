@@ -21,13 +21,13 @@ declare type RouteItem<T = any> = {
   children: T[]
   query?: { [key: string]: T }
   params?: { [key: string]: T }
-  // contextMenuClickId?: string | number
-  // commonUrl?: string
-  // isFnClick?: boolean
-  // url?: string
-  // transUrl?: string
-  // title?: string
-  // id?: string | number
+  contextMenuClickId?: string | number
+  commonUrl?: string
+  isFnClick?: boolean
+  url?: string
+  transUrl?: string
+  title?: string
+  id?: string | number
 }
 
 // 声明路由当前项类型集合

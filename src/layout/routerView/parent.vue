@@ -31,14 +31,15 @@ import {
   onMounted,
   onBeforeMount,
   defineAsyncComponent,
-  onUnmounted
+  onUnmounted,
+  watch
 } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 import router from '@/router'
 import { emitter } from '@/utils/route-listener'
-import { useAppStore, useKeepALiveNames } from '@/stores'
+import { useAppStore, useKeepALiveNames, useTagsViewRoutes } from '@/stores'
 
 // 引入组件
 const Iframes = defineAsyncComponent(
@@ -48,9 +49,11 @@ const Iframes = defineAsyncComponent(
 const route = useRoute()
 const appStore = useAppStore()
 
+const storeTagsView = useTagsViewRoutes()
 const storesKeepAliveNames = useKeepALiveNames()
 
 const { appConfig } = storeToRefs(appStore)
+const { tagsViewList } = storeToRefs(storeTagsView)
 const { keepAliveNames, cachedViews } = storeToRefs(storesKeepAliveNames)
 
 const state = reactive<ParentViewState>({
@@ -62,7 +65,6 @@ const state = reactive<ParentViewState>({
 
 // 设置主界面切换动画
 const setTransitionName = computed(() => {
-  console.log(appConfig.value.animation)
   return appConfig.value.animation
 })
 
@@ -90,10 +92,6 @@ onBeforeMount(() => {
 
 // 获取组件缓存列表(name值)
 const getKeepAliveNames = computed(() => {
-  console.log(
-    appConfig.value.isTagsview ? cachedViews.value : state.keepAliveNameList
-  )
-
   return appConfig.value.isTagsview
     ? cachedViews.value
     : state.keepAliveNameList
@@ -113,22 +111,31 @@ const getIframeListRoutes = async () => {
 // 页面加载时
 onMounted(() => {
   getIframeListRoutes()
-  // nextTick(() => {
-  //   setTimeout(() => {
-  //     if (appConfig.value.isCacheTagsView) {
-  //       let tagsViewArr: RouteItem[] = Session.get('tagsViewList') || []
-  //       cachedViews.value = tagsViewArr
-  //         .filter((item) => item.meta?.isKeepAlive)
-  //         .map((item) => item.name as string)
-  //     }
-  //   }, 0)
-  // })
+
+  nextTick(() => {
+    setTimeout(() => {
+      if (appConfig.value.isCacheTagsView) {
+        let tagsViewArr: RouteItem[] = tagsViewList.value || []
+        cachedViews.value = tagsViewArr
+          .filter((item) => item.meta?.isKeepAlive)
+          .map((item) => item.name as string)
+      }
+    }, 0)
+  })
 })
 
 // 页面卸载时
 onUnmounted(() => {
   emitter.off('onTagsViewRefreshRouterView')
 })
+
+// 监听路由变化，防止 tagsView 多标签时，切换动画消失
+watch(
+  () => route.fullPath,
+  () => {
+    state.refreshRouterViewKey = route.fullPath
+  }
+)
 </script>
 
 <style scoped lang="less">

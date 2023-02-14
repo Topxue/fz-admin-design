@@ -30,7 +30,7 @@ import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import router from '@/router'
 import { Eaction, TEaction } from './types'
-import { useTagsViewRoutes } from '@/stores'
+import { useTagsViewRoutes, useKeepALiveNames } from '@/stores'
 import { isObjectValueEqual } from '@/utils'
 import { Message } from '@arco-design/web-vue'
 import { emitter } from '@/utils/route-listener'
@@ -38,6 +38,8 @@ import { emitter } from '@/utils/route-listener'
 const TagItem = defineAsyncComponent(() => import('./tag-item.vue'))
 
 const tagsViewStore = useTagsViewRoutes()
+const storesKeepALiveNames = useKeepALiveNames()
+
 const { tagsViewList } = storeToRefs(tagsViewStore)
 
 const route = useRoute()
@@ -117,14 +119,57 @@ const updateTagsViewStore = () => {
   tagsViewStore.setTagsViewList(state.tagsList)
 }
 
+// 处理 url，地址栏链接有参数时，tagsview 右键菜单刷新功能失效问题
+const transUrlParams = (v: RouteItem) => {
+  let params = v.query && Object.keys(v.query).length > 0 ? v.query : v.params
+  if (!params) return ''
+  let path = ''
+  for (let [key, value] of Object.entries(params)) {
+    if (v.meta?.isDynamic) path += `/${value}`
+    else path += `&${key}=${value}`
+  }
+  // 判断是否是动态路由（xxx/:id/:name"）isDynamic
+  if (v.meta?.isDynamic) {
+    /**
+     *
+     * isFnClick 用于判断是通过方法调用，还是直接右键菜单点击（此处只针对动态路由）
+     * 原因：
+     * 1、右键菜单点击时，路由的 path 还是原始定义的路由格式，如：/params/dynamic/details/:t/:id/:tagsViewName
+     * 2、通过事件调用时，路由的 path 不是原始定义的路由格式，如：/params/dynamic/details/fz-design-admin/111/我是动态路由测试tagsViewName
+     *
+     * 所以右侧菜单点击时，需要处理路径拼接 v.path.split(':')[0]，得到路径 + 参数的完整路径
+     */
+    return v.isFnClick
+      ? decodeURI(v.path)
+      : `${v.path.split(':')[0]}${path.replace(/^\//, '')}`
+  } else {
+    return `${v.path}${path.replace(/^&/, '?')}`
+  }
+}
+
 // 2、刷新当前 tagsView：
-const refreshCurrentTagsView = (fullPath: string) => {
+const refreshCurrentTagsView = async (fullPath: string) => {
+  const decodeURIPath = decodeURI(fullPath)
+  let item: any = {}
+  state.tagsList.forEach((v: RouteItem) => {
+    v.transUrl = transUrlParams(v)
+    if (v.transUrl) {
+      if (v.transUrl === transUrlParams(v)) item = v
+    } else {
+      if (v.path === decodeURIPath) item = v
+    }
+  })
+  if (!item) return false
+
+  await storesKeepALiveNames.delCachedView(item)
   emitter.emit('onTagsViewRefreshRouterView', fullPath)
+  if (item.meta?.isKeepAlive) storesKeepALiveNames.addCachedView(item)
 }
 // 3、关闭当前 tagsView
 const closeCurrentTagsView = (path: string) => {
   state.tagsList.map((v: any, k: number, arr: any) => {
     if (v.path === path) {
+      storesKeepALiveNames.delCachedView(v)
       state.tagsList.splice(k, 1)
       setTimeout(() => {
         if (
@@ -174,11 +219,16 @@ const closeCurrentTagsView = (path: string) => {
 
   updateTagsViewStore()
 }
+
 // 关闭其他
 const closeOthersTagsView = (path: string) => {
-  state.tagsList = state.tagsList.filter(
-    (item, index) => item.path === path || index === 0
-  )
+  state.tagsList = state.tagsList.filter((item, index) => {
+    if (item.path === path || index === 0) {
+      storesKeepALiveNames.delOthersCachedViews(item)
+
+      return item
+    }
+  })
 
   updateTagsViewStore()
 }
@@ -267,14 +317,18 @@ const tagOnClick = (item: RouteItem) => {
 const addTagsView = (path: string, to?: any) => {
   // 防止拿取不到路由信息
   nextTick(async () => {
+    if (to?.meta?.isLink && !to.meta.isIframe) return false
     if (to.meta.isAffix && !to.meta.isHide) {
       const isExistence = state.tagsList.some((item) => item.path === path)
       if (isExistence) return
 
-      state.tagsList.push({
+      const routeItem = {
         path: setTagsViewHighlight(to) as any,
         ...to
-      })
+      }
+
+      state.tagsList.push(routeItem)
+      storesKeepALiveNames.addCachedView(routeItem)
     }
 
     updateTagsViewStore()

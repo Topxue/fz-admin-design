@@ -32,16 +32,24 @@
       </a-space>
     </div>
 
-    <a-input placeholder="测试缓存" />
+    <a-input placeholder="测试缓存" v-model="testValue" />
   </div>
 </template>
-
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores'
+import { ref } from 'vue'
+
+defineOptions({
+  name: 'personal'
+})
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
+
+const testValue = ref('')
+
+console.log('21312')
 </script>
 
 <style scoped lang="less">
