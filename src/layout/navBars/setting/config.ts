@@ -1,4 +1,4 @@
-export const DEFAULT_THEME_COLORS = [
+export const defaultThemeColors = [
   /* 道奇蓝（默认） */
   { color: '#115CDD', themeColor: 'default' },
   /* 亮白色 */
@@ -19,6 +19,20 @@ export const DEFAULT_THEME_COLORS = [
   { color: '#722ed1', themeColor: 'saucePurple' }
 ]
 
-export const themeColor = {
-  default: {}
-}
+/**
+ * 布局模式
+ */
+export const layoutModel = [
+  {
+    model: 'vertical',
+    text: '左侧模式'
+  },
+  {
+    model: 'horizontal',
+    text: '顶部模式'
+  },
+  {
+    model: 'mix',
+    text: '混合模式'
+  }
+]

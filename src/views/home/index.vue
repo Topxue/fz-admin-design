@@ -12,6 +12,6 @@
   padding: 10px;
   box-sizing: border-box;
   border-radius: 3px;
-  background-color: var(--color-bg-3);
+  background-color: var(--color-bg-2);
 }
 </style>

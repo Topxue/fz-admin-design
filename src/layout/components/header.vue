@@ -1,6 +1,10 @@
 <template>
   <a-layout-header class="layout-header" v-show="!isTagsViewCurrenFull">
-    <NavbarIndex />
+    <div class="layout-header__optional">
+      <slot></slot>
+      <NavbarIndex />
+    </div>
+    <TagsView />
   </a-layout-header>
 </template>
 
@@ -13,6 +17,9 @@ import { useAppStore, useTagsViewRoutes } from '@/stores'
 const NavbarIndex = defineAsyncComponent(
   () => import('@/layout/navBars/index.vue')
 )
+const TagsView = defineAsyncComponent(
+  () => import('@/layout/tagsView/index.vue')
+)
 
 const store = useAppStore()
 const { appConfig } = storeToRefs(store)
@@ -21,8 +28,15 @@ const { appConfig } = storeToRefs(store)
 const storesTagsViewRoutes = useTagsViewRoutes()
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
+// 是否为顶部模式
+const isHorizontal = computed(() => appConfig.value.layout === 'horizontal')
+
 const menuWidth = computed(() => {
   const isCollapse = appConfig.value.isCollapse
+
+  // 顶部模式占满width 100%
+  if (isHorizontal.value) return '0px'
+
   const calcWidth = isCollapse
     ? appConfig.value.collapsedWidth
     : appConfig.value.menuWidth
@@ -35,18 +49,23 @@ const menuWidth = computed(() => {
 @import '@/assets/style/variable.less';
 
 .layout-header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
   position: fixed;
   top: 0;
   right: 0;
   z-index: 10;
   transition: width 0.1s ease;
   width: calc(100% - v-bind(menuWidth));
-  height: @layoutHeader;
-  padding: 0 10px 0 0;
-  background: var(--color-bg-3);
-  border-bottom: 1px solid var(--color-neutral-3);
+  background: var(--color-bg-2);
+
+  &__optional {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: @layoutHeader;
+    padding-right: 10px;
+    box-sizing: border-box;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
 }
 </style>

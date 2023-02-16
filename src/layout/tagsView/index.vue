@@ -351,9 +351,13 @@ onMounted(() => {
 
 <style scoped lang="less">
 .layout-navbars-tagsview {
-  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  height: 38px;
+  padding: 0 10px;
   box-sizing: border-box;
   background-color: var(--color-bg-2);
+  box-shadow: 0 0 1px #888;
 
   .tag-item {
     cursor: pointer;

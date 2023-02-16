@@ -22,10 +22,28 @@
       </a-switch>
     </div>
 
+    <a-divider orientation="center">布局模式</a-divider>
+    <ul class="layout-model">
+      <a-tooltip
+        :content="item.text"
+        position="bottom"
+        v-for="item in layoutModel"
+        :key="item.model"
+      >
+        <li
+          :class="gloablConfig.layout === item.model ? 'is-select' : ''"
+          @click="changeLayout(item.model)"
+        >
+          <div />
+          <div />
+        </li>
+      </a-tooltip>
+    </ul>
+
     <a-divider orientation="center">主题色</a-divider>
     <ul class="theme-color">
       <li
-        v-for="(item, index) in DEFAULT_THEME_COLORS"
+        v-for="(item, index) in defaultThemeColors"
         :key="index"
         :style="getThemeColorStyle(item.color)"
         @click="changeThemeColor(item)"
@@ -60,7 +78,7 @@ import { computed, reactive } from 'vue'
 import { storeToRefs } from 'pinia'
 
 import { useAppStore } from '@/stores'
-import { DEFAULT_THEME_COLORS } from './config'
+import { layoutModel, defaultThemeColors } from './config'
 
 withDefaults(
   defineProps<{
@@ -80,7 +98,8 @@ const { appConfig } = storeToRefs(appStore)
 
 const gloablConfig = reactive({
   isDark: appConfig.value.isDark,
-  primary: appConfig.value.primary
+  primary: appConfig.value.primary,
+  layout: appConfig.value.layout
 })
 
 const getThemeColorStyle = computed(() => {
@@ -93,9 +112,12 @@ const changeTheme = (value: boolean) => {
   appStore.changeThemeColor(value)
 }
 
+// 切换布局
+const changeLayout = (model: 'vertical' | 'horizontal' | 'mix') => {
+  appStore.changeLayout(model)
+}
 // 切换主题
 const changeThemeColor = (item: { color: string; themeColor: string }) => {
-  console.log(item, 'item..')
   gloablConfig.primary = item.color
   appStore.changePrimaryColor(item.color)
 }
@@ -128,5 +150,81 @@ const handleCancel = () => {
 
 .setting-item {
   text-align: center;
+}
+
+.is-select {
+  border: 2px solid rgb(var(--primary-6));
+}
+
+.layout-model {
+  margin-top: 25px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  li {
+    width: 18%;
+    height: 45px;
+    background: #f0f2f5;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 1px 2.5px 0 rgb(0 0 0 / 18%);
+
+    &:nth-child(1) {
+      div {
+        &:nth-child(1) {
+          width: 30%;
+          height: 100%;
+          background: #1b2a47;
+        }
+
+        &:nth-child(2) {
+          width: 70%;
+          height: 30%;
+          top: 0;
+          right: 0;
+          background: #fff;
+          box-shadow: 0 0 1px #888;
+          position: absolute;
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 30%;
+          background: #1b2a47;
+          box-shadow: 0 0 1px #888;
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      div {
+        &:nth-child(1) {
+          width: 100%;
+          height: 30%;
+          background: #1b2a47;
+          box-shadow: 0 0 1px #888;
+        }
+
+        &:nth-child(2) {
+          width: 30%;
+          height: 70%;
+          bottom: 0;
+          left: 0;
+          background: #fff;
+          box-shadow: 0 0 1px #888;
+          position: absolute;
+        }
+      }
+    }
+  }
 }
 </style>

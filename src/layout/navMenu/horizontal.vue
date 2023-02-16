@@ -1,9 +1,13 @@
 <template>
   <a-menu
     class="menu-wrapper"
+    mode="horizontal"
     @menu-item-click="handleMenuItemClick"
     :selected-keys="[defaultActive]"
   >
+    <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
+      <Logo />
+    </a-menu-item>
     <template v-for="route in menuLists">
       <a-sub-menu
         :key="route.path"
@@ -41,6 +45,7 @@ import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { setParentHighlight } from './utils'
 
+const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))
 const MenuItem = defineAsyncComponent(
   () => import('@/layout/navMenu/menuItem.vue')
 )
@@ -77,8 +82,4 @@ onBeforeRouteUpdate((to) => {
 })
 </script>
 
-<style scoped lang="less">
-.menu-wrapper {
-  height: calc(100vh - 100px);
-}
-</style>
+<style scoped lang="less"></style>

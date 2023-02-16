@@ -1,6 +1,6 @@
 export default {
   // 默认 primary 主题颜色
-  primary: '#115cdd',
+  primary: '#115CDD',
   // 是否开启深色模式
   isDark: false,
   /**
@@ -37,8 +37,8 @@ export default {
    * 注意：为了演示，切换布局时，颜色会被还原成默认，代码位置：/@/layout/navBars/breadcrumb/setings.vue
    * 中的 `initSetLayoutChange(设置布局切换，重置主题样式)` 方法
    */
-  // 布局切换：可选值"<defaults|classic|transverse|columns>"，默认 defaults
-  layout: 'defaults',
+  // 布局切换：可选值"<vertical|horizontal|mix>"，默认 vertical
+  layout: 'vertical',
 
   /**
    * 界面设置
@@ -83,7 +83,7 @@ export default {
    * 全局网站标题 / 副标题
    */
   // 网站主标题（菜单导航、浏览器当前网页标题）
-  globalTitle: 'fz-admin-design',
+  globalTitle: 'fz-design-admin',
   // 默认全局组件大小，可选值"<large|'default'|small>"，默认 'large'
   globalComponentSize: 'large'
 }

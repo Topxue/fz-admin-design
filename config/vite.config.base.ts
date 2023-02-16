@@ -1,12 +1,18 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import svgLoader from 'vite-svg-loader'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
-import svgLoader from 'vite-svg-loader'
 import DefineOptions from 'unplugin-vue-define-options/vite'
+import { viteBuildInfo } from './plugin/info'
+import { include, exclude } from './plugin/optimize'
 
 export default defineConfig({
-  plugins: [vue(), vueJsx(), svgLoader({ svgoConfig: {} }), DefineOptions()],
+  plugins: [vue(), vueJsx(), svgLoader(), DefineOptions(), viteBuildInfo()],
+  optimizeDeps: {
+    include,
+    exclude
+  },
   resolve: {
     alias: [
       {
@@ -14,12 +20,8 @@ export default defineConfig({
         replacement: resolve(__dirname, '../src')
       },
       {
-        find: 'assets',
+        find: '@/assets',
         replacement: resolve(__dirname, '../src/assets')
-      },
-      {
-        find: 'vue',
-        replacement: 'vue/dist/vue.esm-bundler.js' // compile template
       }
     ],
     extensions: ['.ts', '.js']

@@ -1,6 +1,5 @@
 <template>
   <a-layout class="layout-content">
-    <TagsView v-show="!isTagsViewCurrenFull" />
     <div
       class="layout-navbars-close-full-icon"
       v-show="isTagsViewCurrenFull"
@@ -18,19 +17,24 @@
 import { storeToRefs } from 'pinia'
 import { computed, defineAsyncComponent } from 'vue'
 
-import { useTagsViewRoutes } from '@/stores'
+import { useTagsViewRoutes, useAppStore } from '@/stores'
 
 // 定义变量内容
 const storesTagsViewRoutes = useTagsViewRoutes()
+
+const { appConfig } = storeToRefs(useAppStore())
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
-const marginTop = computed(() => (isTagsViewCurrenFull.value ? 0 : '54px'))
+const marginTop = computed(() =>
+  isTagsViewCurrenFull.value
+    ? 0
+    : appConfig.value.isTagsview
+    ? `${54 + 38}px`
+    : '54px'
+)
 
 const LayoutParentView = defineAsyncComponent(
   () => import('@/layout/routerView/parent.vue')
-)
-const TagsView = defineAsyncComponent(
-  () => import('@/layout/tagsView/index.vue')
 )
 
 const closeCurrentFull = () => {

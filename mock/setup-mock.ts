@@ -1,4 +1,4 @@
-import debug from './env'
+const debug = process.env.NODE_ENV !== 'production'
 
 export default ({ mock, setup }: { mock?: boolean; setup: () => void }) => {
   if (mock !== false && debug) setup()

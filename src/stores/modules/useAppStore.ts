@@ -31,6 +31,11 @@ const useAppStore = defineStore('app', {
     changePrimaryColor(color: string) {
       this.appConfig.primary = color
       usePrimaryColor(color)
+    },
+
+    // 切换布局
+    changeLayout(model: 'vertical' | 'horizontal' | 'mix') {
+      this.appConfig.layout = model
     }
   },
   persist: {

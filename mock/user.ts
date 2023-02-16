@@ -1,4 +1,4 @@
-import { successResponseWrap } from '@/utils/setup-mock'
+import { successResponseWrap } from './setup-mock'
 
 export default [
   {

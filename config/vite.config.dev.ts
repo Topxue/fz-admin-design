@@ -21,11 +21,6 @@ export default mergeConfig(
         // logger: false, //是否在控制台显示请求日志
         supportTs: true
       })
-      // eslint({
-      //   cache: false,
-      //   include: ['src/**/*.ts', 'src/**/*.tsx', 'src/**/*.vue'],
-      //   exclude: ['node_modules']
-      // })
     ]
   },
   baseConfig

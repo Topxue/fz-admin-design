@@ -21,10 +21,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineAsyncComponent, onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
+import { ref, defineAsyncComponent, onBeforeMount } from 'vue'
+import { useAppStore, useTagsViewRoutes } from '@/stores'
 
-import { useRoutesList, useAppStore, useTagsViewRoutes } from '@/stores'
+import useMenuList from '@/hooks/useMenuList'
 
 // 定义变量内容
 const storesTagsViewRoutes = useTagsViewRoutes()
@@ -35,28 +36,10 @@ const VerticalMenu = defineAsyncComponent(
   () => import('@/layout/navMenu/vertical.vue')
 )
 
-const store = useRoutesList()
 const appStore = useAppStore()
-const { routesList } = storeToRefs(store)
 const { appConfig } = storeToRefs(appStore)
 
 const menuList = ref<RouteItem[] | any>([])
-
-// 设置/过滤路由（非静态路由/是否显示在菜单中）
-const setFilterRoutes = () => {
-  menuList.value = filterRoutesFun(routesList.value)
-}
-
-// 路由过滤递归函数
-const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
-  return arr
-    .filter((item: T) => !item.meta?.isHide)
-    .map((item: T) => {
-      item = Object.assign({}, item)
-      if (item.children) item.children = filterRoutesFun(item.children)
-      return item
-    })
-}
 
 const onCollapse = (state: boolean) => {
   const DELAY_COUNT = state ? 0 : 100
@@ -71,13 +54,15 @@ const onCollapse = (state: boolean) => {
 }
 
 onBeforeMount(() => {
-  setFilterRoutes()
+  menuList.value = useMenuList()
 })
 </script>
 
 <style scoped lang="less">
 .sider-wrapper {
-  // background-color: red;
+  box-shadow: 0 0 1px #888;
+  position: relative;
+  z-index: 100;
   .collapse-button {
     color: var(--color-text-3);
     background-color: var(--color-fill-1);

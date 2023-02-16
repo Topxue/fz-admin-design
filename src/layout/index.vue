@@ -14,7 +14,8 @@ const { appConfig } = storeToRefs(appStore)
 
 // 引入组件
 const layouts: any = {
-  defaults: defineAsyncComponent(() => import('@/layout/main/defaults.vue'))
+  vertical: defineAsyncComponent(() => import('@/layout/main/vertical.vue')),
+  horizontal: defineAsyncComponent(() => import('@/layout/main/horizontal.vue'))
 }
 
 onMounted(() => {
