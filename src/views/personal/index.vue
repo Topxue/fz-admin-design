@@ -48,8 +48,6 @@ const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 
 const testValue = ref('')
-
-console.log('21312')
 </script>
 
 <style scoped lang="less">

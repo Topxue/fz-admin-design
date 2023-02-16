@@ -3,10 +3,10 @@ import { RouteRecordRaw } from 'vue-router'
 import router from '@/router'
 import { getMenuList } from '@/services/api/user'
 import pinia, {
-  useKeepALiveNames,
+  useUserStore,
   useRoutesList,
-  useTagsViewRoutes,
-  useUserStore
+  useKeepALiveNames,
+  useTagsViewRoutes
 } from '@/stores'
 import { dynamicRoutes, notFoundAndNoPower } from '@/router/routers'
 
@@ -74,9 +74,15 @@ export async function setFilterMenuAndCacheTagsViewRoutes() {
  */
 export function setCacheTagsViewRoutes() {
   const storesTagsView = useTagsViewRoutes(pinia)
-  storesTagsView.setTagsViewRoutes(
-    formatTwoStageRoutes(formatFlatteningRoutes(dynamicRoutes))[0].children
-  )
+
+  const asyncRoutes = formatTwoStageRoutes(
+    formatFlatteningRoutes(dynamicRoutes)
+  )[0].children
+
+  storesTagsView.setTagsViewRoutes(asyncRoutes)
+
+  asyncRoutes[0].component = asyncRoutes[0].path
+  storesTagsView.setTagsViewList([asyncRoutes[0]])
 }
 
 /**

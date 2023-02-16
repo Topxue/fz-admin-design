@@ -57,9 +57,6 @@ const state = reactive<{
   tagsViewList: []
 })
 
-// const visible = ref(false)
-// const tagsViewList = ref<RouteItem[]>([])
-
 // 初始化菜单数据
 const initTageView = () => {
   // 初始化菜单数据

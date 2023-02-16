@@ -12,7 +12,7 @@ const useTagsViewRoutes = defineStore('tagsViewRoutes', {
       {
         path: '/home',
         name: 'home',
-        component: 'home/index',
+        component: 'home',
         meta: {
           title: '首页',
           isLink: '',
@@ -38,6 +38,10 @@ const useTagsViewRoutes = defineStore('tagsViewRoutes', {
     },
     setTagsViewList(data: Array<RouteItem>) {
       this.tagsViewList = data
+    },
+    clearTagsVieList() {
+      this.tagsViewList = []
+      this.tagsViewRoutes = []
     }
   },
   persist: {

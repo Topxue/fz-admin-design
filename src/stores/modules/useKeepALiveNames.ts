@@ -30,6 +30,10 @@ const useKeepALiveNames = defineStore('keepALiveNames', {
     },
     async delAllCachedViews() {
       this.cachedViews = []
+    },
+    async clearAllCached() {
+      this.cachedViews = []
+      this.keepAliveNames = []
     }
   }
 })

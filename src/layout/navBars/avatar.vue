@@ -17,13 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '@/stores'
 import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores'
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 
-const handleSelect = () => {}
+const handleSelect = (type: string) => {
+  if (type === 'loginOut') {
+    userStore.loginOut()
+  }
+}
 </script>
 
 <style scoped lang="less">

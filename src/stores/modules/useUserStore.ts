@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import to from 'await-to-js'
 
+import router from '@/router'
 import { getUserInfo, login } from '@/services/api/user'
+import { useRoutesList, useKeepALiveNames, useTagsViewRoutes } from '../index'
 
 const userStore = defineStore('user', {
   state: (): UserState => ({
@@ -51,6 +53,16 @@ const userStore = defineStore('user', {
       this.token = res.data.token
 
       return res
+    },
+
+    // 退出登录
+    async loginOut() {
+      this.resetInfo()
+      useRoutesList().clearRoutesList()
+      useKeepALiveNames().clearAllCached()
+      useTagsViewRoutes().clearTagsVieList()
+
+      router.push('/login')
     },
 
     setInfo(partial: Partial<UserState>) {
