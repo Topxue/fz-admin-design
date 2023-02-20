@@ -32,6 +32,7 @@ export default function setupPermissionGuard(router: Router) {
       } else {
         const storesRoutesList = useRoutesList(pinia)
         const { routesList } = storeToRefs(storesRoutesList)
+
         if (routesList.value.length === 0) {
           // 后端控制路由：路由数据初始化，防止刷新时丢失
           await initBackEndControlRoutes()

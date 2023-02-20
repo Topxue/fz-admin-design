@@ -62,6 +62,8 @@ const initTagsViewList = async () => {
   ) as string
 
   state.tagsList = [...tagsViewList.value]
+
+  await addTagsView(route.path, <RouteToFrom>route)
 }
 
 // 设置 tagsView 高亮

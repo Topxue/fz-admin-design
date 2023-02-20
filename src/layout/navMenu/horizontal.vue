@@ -6,7 +6,7 @@
     :selected-keys="[defaultActive]"
   >
     <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
-      <Logo />
+      <Logo class="horizontal-ment-logo" v-if="appConfig.isShowLogo" />
     </a-menu-item>
     <template v-for="route in menuLists">
       <a-sub-menu
@@ -41,9 +41,15 @@
 
 <script setup lang="ts">
 import { ref, computed, defineAsyncComponent } from 'vue'
-import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
-import type { RouteRecordRaw } from 'vue-router'
+import {
+  onBeforeRouteUpdate,
+  useRoute,
+  useRouter,
+  RouteRecordRaw
+} from 'vue-router'
+import { useAppStore } from '@/stores'
 import { setParentHighlight } from './utils'
+import { storeToRefs } from 'pinia'
 
 const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))
 const MenuItem = defineAsyncComponent(
@@ -52,6 +58,7 @@ const MenuItem = defineAsyncComponent(
 
 const route = useRoute()
 const router = useRouter()
+const { appConfig } = storeToRefs(useAppStore())
 
 // 定义父组件传过来的值
 const props = withDefaults(
@@ -78,8 +85,18 @@ const handleMenuItemClick = (path: string) => {
 
 // 路由更新时
 onBeforeRouteUpdate((to) => {
-  defaultActive.value = setParentHighlight(to)
+  defaultActive.value = setParentHighlight(to as any)
 })
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+:deep .horizontal-ment-logo {
+  img {
+    width: 30px;
+    height: 30px;
+  }
+  span {
+    color: var(--color-text-1);
+  }
+}
+</style>

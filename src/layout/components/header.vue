@@ -4,7 +4,7 @@
       <slot></slot>
       <NavbarIndex />
     </div>
-    <TagsView />
+    <TagsView v-if="isTagsView" />
   </a-layout-header>
 </template>
 
@@ -28,8 +28,14 @@ const { appConfig } = storeToRefs(store)
 const storesTagsViewRoutes = useTagsViewRoutes()
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
-// 是否为顶部模式
-const isHorizontal = computed(() => appConfig.value.layout === 'horizontal')
+// 是否顶部模式&经典模式
+const isHorizontal = computed(
+  () =>
+    appConfig.value.layout === 'horizontal' ||
+    appConfig.value.layout === 'classic'
+)
+// 是否显示TagsView
+const isTagsView = computed(() => appConfig.value.isTagsview)
 
 const menuWidth = computed(() => {
   const isCollapse = appConfig.value.isCollapse

@@ -25,14 +25,14 @@ export const defaultThemeColors = [
 export const layoutModel = [
   {
     model: 'vertical',
-    text: '左侧模式'
+    text: '默认'
   },
   {
     model: 'horizontal',
-    text: '顶部模式'
+    text: '顶部'
   },
   {
-    model: 'mix',
-    text: '混合模式'
+    model: 'classic',
+    text: '经典'
   }
 ]

@@ -35,8 +35,6 @@ const dynamicViewsModules: Record<string, Function> = Object.assign(
  */
 
 export async function initBackEndControlRoutes() {
-  // 界面 loading 动画开始执行
-  // if (window.nextLoading === undefined) NextLoading.start()
   // 无 token 停止执行下一步
   if (!useUserStore().getToken) return false
   // 触发初始化用户信息
@@ -80,9 +78,8 @@ export function setCacheTagsViewRoutes() {
   )[0].children
 
   storesTagsView.setTagsViewRoutes(asyncRoutes)
-
-  asyncRoutes[0].component = asyncRoutes[0].path
-  storesTagsView.setTagsViewList([asyncRoutes[0]])
+  // asyncRoutes[0].component = asyncRoutes[0].path
+  // storesTagsView.setTagsViewList([asyncRoutes[0]])
 }
 
 /**

@@ -8,24 +8,7 @@ import { defineStore } from 'pinia'
  */
 const useTagsViewRoutes = defineStore('tagsViewRoutes', {
   state: (): TagsViewRoutesState => ({
-    tagsViewList: [
-      {
-        path: '/home',
-        name: 'home',
-        component: 'home',
-        meta: {
-          title: '首页',
-          isLink: '',
-          isHide: false,
-          isKeepAlive: true,
-          isAffix: true,
-          isIframe: false,
-          roles: ['admin', 'common'],
-          icon: 'iconfont icon-shouye'
-        },
-        children: []
-      }
-    ],
+    tagsViewList: [],
     tagsViewRoutes: [],
     isTagsViewCurrenFull: false
   }),

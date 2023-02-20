@@ -19,7 +19,6 @@ import { computed, defineAsyncComponent } from 'vue'
 
 import { useTagsViewRoutes, useAppStore } from '@/stores'
 
-// 定义变量内容
 const storesTagsViewRoutes = useTagsViewRoutes()
 
 const { appConfig } = storeToRefs(useAppStore())

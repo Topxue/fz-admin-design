@@ -47,12 +47,8 @@ declare interface AppState {
     isTagsview: boolean
     // 是否开启 Breadcrumb 图标
     isBreadcrumbIcon: boolean
-    // 是否开启 Tagsview 图标
-    isTagsviewIcon: boolean
     // 是否开启 TagsView 缓存
     isCacheTagsView: boolean
-    // 是否开启 TagsView 拖拽
-    isSortableTagsView: boolean
     // 是否开启 Footer 底部版权信息
     isFooter: boolean
     // 是否开启灰色模式
@@ -85,7 +81,6 @@ declare interface AppState {
     // Tagsview 风格：可选值"<tags-style-one|tags-style-four|tags-style-five>"，默认 tags-style-five
     // 定义的值与 `/src/layout/navBars/tagsView/tagsView.vue` 中的 class 同名
     tagsStyle: string
-    // 主页面切换动画：可选值"<slide-right|slide-left|opacity>"，默认 opacity
     animation: string
     // 分栏高亮风格：可选值"<columns-round|columns-card>"，默认 columns-round
     columnsAsideStyle: string

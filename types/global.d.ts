@@ -38,4 +38,7 @@ declare interface RouteToFrom<T = any> extends RouteItem {
   children?: T[]
 }
 
+// 声明 HTMLElement
+declare type HtmlType = HTMLElement | string | undefined | null
+
 declare module '@arco-design/color'
