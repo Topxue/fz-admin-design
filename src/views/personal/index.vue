@@ -25,7 +25,9 @@
             </div>
             <div>
               <icon-location />
-              <a-typography-text>{{ userInfo.locationName }}</a-typography-text>
+              <a-typography-text>
+                {{ userInfo.locationName }}
+              </a-typography-text>
             </div>
           </a-space>
         </div>
@@ -46,11 +48,13 @@ const { userInfo } = storeToRefs(userStore)
 </script>
 
 <style scoped lang="less">
+.fz-container {
+  padding: 0;
+}
 .header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
   height: 204px;
   color: var(--gray-10);
   background: url(//p3-armor.byteimg.com/tos-cn-i-49unhts6dw/41c6b125cc2e27021bf7fcc9a9b1897c.svg~tplv-49unhts6dw-image.image)

@@ -213,7 +213,7 @@ const changeLayout = (model: string) => {
 // 切换主题
 const changeThemeColor = (item: { color: string; themeColor: string }) => {
   gloablConfig.primary = item.color
-  appStore.changePrimaryColor(item.color)
+  appStore.changePrimaryColor(item)
 }
 
 const setGrayscale = (state: boolean) => {

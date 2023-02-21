@@ -14,6 +14,7 @@ export default function setupPermissionGuard(router: Router) {
 
     if (to.path === '/login' && !token) {
       next()
+      NProgress.done()
     } else {
       if (!token) {
         next(
@@ -22,6 +23,7 @@ export default function setupPermissionGuard(router: Router) {
           )}`
         )
         useUserStore().resetInfo()
+        NProgress.done()
       } else if (token && to.path === '/login') {
         next('/home')
       } else {

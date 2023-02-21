@@ -29,9 +29,10 @@ const useAppStore = defineStore('app', {
       document.body.setAttribute('arco-theme', dark ? 'dark' : '')
     },
 
-    changePrimaryColor(color: string) {
-      this.appConfig.primary = color
-      usePrimaryColor(color)
+    changePrimaryColor(item: { color: string; themeColor: string }) {
+      usePrimaryColor(item.color)
+      this.appConfig.primary = item.color
+      // document.body.setAttribute('arco-theme', item.themeColor)
     },
 
     // 切换布局

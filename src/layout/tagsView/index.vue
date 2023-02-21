@@ -181,7 +181,7 @@ const transUrlParams = (v: RouteItem) => {
 // 2、刷新当前 tagsView：
 const refreshCurrentTagsView = async (fullPath: string) => {
   const decodeURIPath = decodeURI(fullPath)
-  let item: any = {}
+  let item: RouteToFrom = {}
   state.tagsViewList.forEach((v: RouteItem) => {
     v.transUrl = transUrlParams(v)
     if (v.transUrl) {
@@ -191,7 +191,6 @@ const refreshCurrentTagsView = async (fullPath: string) => {
     }
   })
   if (!item) return false
-
   await storesKeepALiveNames.delCachedView(item)
   emitter.emit('onTagsViewRefreshRouterView', fullPath)
   if (item.meta?.isKeepAlive) storesKeepALiveNames.addCachedView(item)

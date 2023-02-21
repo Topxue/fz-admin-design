@@ -34,11 +34,20 @@ export const notFoundAndNoPower = [
     }
   },
   {
-    path: '/401',
-    name: 'noPower',
-    component: () => import('@/views/error/401.vue'),
+    path: '/403',
+    name: 'noAuth',
+    component: () => import('@/views/error/403.vue'),
     meta: {
-      title: '401',
+      title: '403',
+      isHide: true
+    }
+  },
+  {
+    path: '/500',
+    name: 'noPower',
+    component: () => import('@/views/error/500.vue'),
+    meta: {
+      title: '500',
       isHide: true
     }
   }

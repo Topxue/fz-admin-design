@@ -1,12 +1,12 @@
 <template>
-  <ErrorWrapper :status="404" text="抱歉，你访问的页面不存在" />
+  <ErrorWrapper :status="500" text="抱歉，服务器出错了" />
 </template>
 
 <script setup lang="ts">
 import ErrorWrapper from './error-wrapper.vue'
 
 defineOptions({
-  name: '404'
+  name: '500'
 })
 </script>
 

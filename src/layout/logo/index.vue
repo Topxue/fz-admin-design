@@ -34,9 +34,9 @@ const isCollapsed = computed(() => appConfig.value.isCollapse)
   }
   overflow: hidden;
   &-medium-img {
-    width: 20px;
+    width: 30px;
     border-radius: 4px;
-    margin-right: 5px;
+    margin-right: 10px;
   }
 }
 

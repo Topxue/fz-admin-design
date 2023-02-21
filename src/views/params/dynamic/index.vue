@@ -3,7 +3,7 @@
     <a-space direction="vertical" align="center" fill>
       <a-input v-model="state.tagName" placeholder="请输入tagsView" />
       <a-input v-model="state.value" placeholder="请输入路由参数id" />
-      <a-button type="primary" @click="onGoDetailsClick">普通路由传参</a-button>
+      <a-button type="primary" @click="onGoDetailsClick">动态由传参</a-button>
     </a-space>
   </div>
 </template>
@@ -13,7 +13,7 @@ import router from '@/router'
 import { reactive } from 'vue'
 
 defineOptions({
-  name: 'paramsCommon'
+  name: 'paramsDynamic'
 })
 
 const state = reactive({
@@ -23,8 +23,9 @@ const state = reactive({
 
 const onGoDetailsClick = () => {
   router.push({
-    path: '/params/common/detail',
-    query: {
+    name: 'paramsDynamicDetails',
+    params: {
+      t: 'fz-design-admin',
       id: state.value
     }
   })

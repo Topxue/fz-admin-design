@@ -1,7 +1,6 @@
 <template>
   <div class="login-form-wrapper">
-    <div class="login-form-title">登录</div>
-    <div class="login-form-error-msg">{{ errorMessage }}</div>
+    <div class="login-form-title">FZADMIN</div>
     <a-form
       ref="loginForm"
       :model="userInfo"
@@ -62,7 +61,7 @@ const store = useUserStore()
 const route = useRoute()
 const router = useRouter()
 
-const errorMessage = ref('')
+// const errorMessage = ref('')
 
 const userInfo = reactive({
   username: 'admin',
@@ -126,10 +125,11 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
   }
 
   &-title {
-    color: var(--color-text-3);
-    font-weight: 500;
-    font-size: 24px;
-    line-height: 32px;
+    color: var(--color-text-4);
+    text-align: center;
+    text-transform: uppercase;
+    font: bold 200% Consolas, Monaco, monospace;
+    margin-bottom: 15px;
   }
 
   &-sub-title {

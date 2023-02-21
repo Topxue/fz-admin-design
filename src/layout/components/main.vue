@@ -66,6 +66,9 @@ const closeCurrentFull = () => {
       top: 35px;
       color: #333;
       transition: all 0.3s ease;
+      &:hover {
+        color: rgb(var(--primary-6));
+      }
     }
   }
 }

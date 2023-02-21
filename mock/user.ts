@@ -79,7 +79,7 @@ export default [
                 title: '普通路由',
                 isLink: '',
                 isHide: false,
-                isKeepAlive: false,
+                isKeepAlive: true,
                 isAffix: false,
                 isIframe: false,
                 roles: ['admin', 'common'],
@@ -104,7 +104,7 @@ export default [
             {
               path: '/params/dynamic',
               name: 'paramsDynamic',
-              component: 'params/dynamic',
+              component: 'params/dynamic/index',
               meta: {
                 title: '动态路由',
                 isLink: '',
@@ -114,7 +114,37 @@ export default [
                 isIframe: false,
                 roles: ['admin', 'common']
               }
+            },
+            {
+              path: '/params/dynamic/details/:t/:id',
+              name: 'paramsDynamicDetails',
+              component: 'params/dynamic/detail',
+              meta: {
+                title: '动态路由参数详情',
+                isLink: '',
+                isHide: true,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin'],
+                icon: 'ele-Lightning'
+              }
             }
+            // {
+            //   path: '/params/dynamic/detail',
+            //   name: 'paramsDynamicDetail',
+            //   component: 'params/dynamic/dynamic-detail',
+            //   meta: {
+            //     title: '动态路由参数详情',
+            //     isLink: '',
+            //     isHide: true,
+            //     isKeepAlive: false,
+            //     isAffix: false,
+            //     isIframe: false,
+            //     roles: ['admin', 'common'],
+            //     icon: 'iconfont icon-shouye'
+            //   }
+            // }
           ]
         },
         // {

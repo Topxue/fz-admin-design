@@ -40,6 +40,7 @@ import { storeToRefs } from 'pinia'
 import router from '@/router'
 import { emitter } from '@/utils/route-listener'
 import { useAppStore, useKeepALiveNames, useTagsViewRoutes } from '@/stores'
+import { Session } from '@/utils/storage'
 
 // 引入组件
 const Iframes = defineAsyncComponent(
@@ -49,11 +50,9 @@ const Iframes = defineAsyncComponent(
 const route = useRoute()
 const appStore = useAppStore()
 
-const storeTagsView = useTagsViewRoutes()
 const storesKeepAliveNames = useKeepALiveNames()
 
 const { appConfig } = storeToRefs(appStore)
-const { tagsViewList } = storeToRefs(storeTagsView)
 const { keepAliveNames, cachedViews } = storeToRefs(storesKeepAliveNames)
 
 const state = reactive<ParentViewState>({
@@ -115,7 +114,7 @@ onMounted(() => {
   nextTick(() => {
     setTimeout(() => {
       if (appConfig.value.isCacheTagsView) {
-        let tagsViewArr: RouteItem[] = tagsViewList.value || []
+        let tagsViewArr: RouteItem[] = Session.get('tagsViewList') || []
         cachedViews.value = tagsViewArr
           .filter((item) => item.meta?.isKeepAlive)
           .map((item) => item.name as string)
