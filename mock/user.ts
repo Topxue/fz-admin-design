@@ -56,215 +56,277 @@ export default [
           children: []
         },
         {
-          path: '/system',
-          name: 'system',
+          path: '/params',
+          name: 'params',
           component: 'layout/routerView/parent',
-          redirect: '/system/menu',
+          redirect: '/params/common',
           meta: {
-            title: '系统管理',
+            title: '路由参数',
             isLink: '',
             isHide: false,
-            isKeepAlive: true,
-            isAffix: true,
+            isKeepAlive: false,
+            isAffix: false,
             isIframe: false,
-            roles: ['admin'],
-            icon: 'iconfont icon-xitongshezhi'
+            roles: ['admin', 'common'],
+            icon: 'iconfont icon-shouye'
           },
           children: [
             {
-              path: '/system/menu',
-              name: 'systemMenu',
-              component: 'system/menu/index',
+              path: '/params/common',
+              name: 'paramsCommon',
+              component: 'params/common/index',
               meta: {
-                title: '菜单管理',
+                title: '普通路由',
                 isLink: '',
                 isHide: false,
-                isKeepAlive: true,
-                isAffix: true,
+                isKeepAlive: false,
+                isAffix: false,
                 isIframe: false,
-                roles: ['admin'],
-                icon: 'iconfont icon-caidan'
+                roles: ['admin', 'common'],
+                icon: 'iconfont icon-shouye'
               }
             },
             {
-              path: '/system/user',
-              name: 'systemUser',
-              component: 'system/user/index',
+              path: '/params/common/detail',
+              name: 'paramsCommonDetail',
+              component: 'params/common/common-detail',
               meta: {
-                title: '用户管理',
+                title: '普通路由参数详情',
                 isLink: '',
-                isHide: false,
-                isKeepAlive: true,
-                isAffix: true,
+                isHide: true,
+                isKeepAlive: false,
+                isAffix: false,
                 isIframe: false,
-                roles: ['admin'],
-                icon: 'iconfont icon-icon-'
+                roles: ['admin', 'common'],
+                icon: 'iconfont icon-shouye'
               }
-            }
-          ]
-        },
-        {
-          path: '/limits',
-          name: 'limits',
-          component: 'layout/routerView/parent',
-          redirect: '/limits/frontEnd',
-          meta: {
-            title: '权限管理',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: true,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: 'iconfont icon-quanxian'
-          },
-          children: [
+            },
             {
-              path: '/limits/backEnd',
-              name: 'limitsBackEnd',
-              component: 'layout/routerView/parent',
+              path: '/params/dynamic',
+              name: 'paramsDynamic',
+              component: 'params/dynamic',
               meta: {
-                title: '后端控制',
+                title: '动态路由',
                 isLink: '',
                 isHide: false,
-                isKeepAlive: true,
-                isAffix: true,
+                isKeepAlive: false,
+                isAffix: false,
                 isIframe: false,
                 roles: ['admin', 'common']
-              },
-              children: [
-                {
-                  path: '/limits/backEnd/page',
-                  name: 'limitsBackEndEndPage',
-                  component: 'limits/backEnd/page/index',
-                  meta: {
-                    title: '页面权限',
-                    isLink: '',
-                    isHide: false,
-                    isKeepAlive: true,
-                    isAffix: true,
-                    isIframe: false,
-                    roles: ['admin', 'common']
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          path: '/menu',
-          name: 'menu',
-          component: 'layout/routerView/parent',
-          redirect: '/menu/menu1',
-          meta: {
-            title: '菜单嵌套',
-            isLink: '',
-            isHide: false,
-            isKeepAlive: true,
-            isAffix: true,
-            isIframe: false,
-            roles: ['admin', 'common'],
-            icon: 'iconfont icon-caidan'
-          },
-          children: [
-            {
-              path: '/menu/menu1',
-              name: 'menu1',
-              component: 'layout/routerView/parent',
-              redirect: '/menu/menu1/menu11',
-              meta: {
-                title: '菜单1',
-                isLink: '',
-                isHide: false,
-                isKeepAlive: true,
-                isAffix: true,
-                isIframe: false,
-                roles: ['admin', 'common'],
-                icon: 'iconfont icon-caidan'
-              },
-              children: [
-                {
-                  path: '/menu/menu1/menu11',
-                  name: 'menu11',
-                  component: 'menu/menu1/menu11/index',
-                  meta: {
-                    title: '菜单11',
-                    isLink: '',
-                    isHide: false,
-                    isKeepAlive: true,
-                    isAffix: true,
-                    isIframe: false,
-                    roles: ['admin', 'common'],
-                    icon: 'iconfont icon-caidan'
-                  }
-                },
-                {
-                  path: '/menu/menu1/menu12',
-                  name: 'menu12',
-                  component: 'layout/routerView/parent',
-                  redirect: '/menu/menu1/menu12/menu121',
-                  meta: {
-                    title: '菜单2',
-                    isLink: '',
-                    isHide: false,
-                    isKeepAlive: true,
-                    isAffix: true,
-                    isIframe: false,
-                    roles: ['admin', 'common'],
-                    icon: 'iconfont icon-caidan'
-                  },
-                  children: [
-                    {
-                      path: '/menu/menu1/menu12/menu121',
-                      name: 'menu121',
-                      component: 'menu/menu1/menu12/menu121/index',
-                      meta: {
-                        title: '菜单21',
-                        isLink: '',
-                        isHide: false,
-                        isKeepAlive: true,
-                        isAffix: true,
-                        isIframe: false,
-                        roles: ['admin', 'common'],
-                        icon: 'iconfont icon-caidan'
-                      }
-                    }
-                  ]
-                },
-                {
-                  path: '/menu/menu1/menu13',
-                  name: 'menu13',
-                  component: 'menu/menu1/menu13/index',
-                  meta: {
-                    title: '菜单3',
-                    isLink: '',
-                    isHide: false,
-                    isKeepAlive: true,
-                    isAffix: true,
-                    isIframe: false,
-                    roles: ['admin', 'common'],
-                    icon: 'iconfont icon-caidan'
-                  }
-                }
-              ]
-            },
-            {
-              path: '/menu/menu2',
-              name: 'menu2',
-              component: 'menu/menu2/index',
-              meta: {
-                title: '菜单2',
-                isLink: '',
-                isHide: false,
-                isKeepAlive: true,
-                isAffix: true,
-                isIframe: false,
-                roles: ['admin', 'common'],
-                icon: 'iconfont icon-caidan'
               }
             }
           ]
         },
+        // {
+        //   path: '/system',
+        //   name: 'system',
+        //   component: 'layout/routerView/parent',
+        //   redirect: '/system/menu',
+        //   meta: {
+        //     title: '系统管理',
+        //     isLink: '',
+        //     isHide: false,
+        //     isKeepAlive: true,
+        //     isAffix: false,
+        //     isIframe: false,
+        //     roles: ['admin'],
+        //     icon: 'iconfont icon-xitongshezhi'
+        //   },
+        //   children: [
+        //     {
+        //       path: '/system/menu',
+        //       name: 'systemMenu',
+        //       component: 'system/menu/index',
+        //       meta: {
+        //         title: '菜单管理',
+        //         isLink: '',
+        //         isHide: false,
+        //         isKeepAlive: true,
+        //         isAffix: false,
+        //         isIframe: false,
+        //         roles: ['admin'],
+        //         icon: 'iconfont icon-caidan'
+        //       }
+        //     },
+        //     {
+        //       path: '/system/user',
+        //       name: 'systemUser',
+        //       component: 'system/user/index',
+        //       meta: {
+        //         title: '用户管理',
+        //         isLink: '',
+        //         isHide: false,
+        //         isKeepAlive: true,
+        //         isAffix: false,
+        //         isIframe: false,
+        //         roles: ['admin'],
+        //         icon: 'iconfont icon-icon-'
+        //       }
+        //     }
+        //   ]
+        // },
+        // {
+        //   path: '/limits',
+        //   name: 'limits',
+        //   component: 'layout/routerView/parent',
+        //   redirect: '/limits/frontEnd',
+        //   meta: {
+        //     title: '权限管理',
+        //     isLink: '',
+        //     isHide: false,
+        //     isKeepAlive: true,
+        //     isAffix: false,
+        //     isIframe: false,
+        //     roles: ['admin', 'common'],
+        //     icon: 'iconfont icon-quanxian'
+        //   },
+        //   children: [
+        //     {
+        //       path: '/limits/backEnd',
+        //       name: 'limitsBackEnd',
+        //       component: 'layout/routerView/parent',
+        //       meta: {
+        //         title: '后端控制',
+        //         isLink: '',
+        //         isHide: false,
+        //         isKeepAlive: true,
+        //         isAffix: false,
+        //         isIframe: false,
+        //         roles: ['admin', 'common']
+        //       },
+        //       children: [
+        //         {
+        //           path: '/limits/backEnd/page',
+        //           name: 'limitsBackEndEndPage',
+        //           component: 'limits/backEnd/page/index',
+        //           meta: {
+        //             title: '页面权限',
+        //             isLink: '',
+        //             isHide: false,
+        //             isKeepAlive: true,
+        //             isAffix: false,
+        //             isIframe: false,
+        //             roles: ['admin', 'common']
+        //           }
+        //         }
+        //       ]
+        //     }
+        //   ]
+        // },
+        // {
+        //   path: '/menu',
+        //   name: 'menu',
+        //   component: 'layout/routerView/parent',
+        //   redirect: '/menu/menu1',
+        //   meta: {
+        //     title: '菜单嵌套',
+        //     isLink: '',
+        //     isHide: false,
+        //     isKeepAlive: true,
+        //     isAffix: false,
+        //     isIframe: false,
+        //     roles: ['admin', 'common'],
+        //     icon: 'iconfont icon-caidan'
+        //   },
+        //   children: [
+        //     {
+        //       path: '/menu/menu1',
+        //       name: 'menu1',
+        //       component: 'layout/routerView/parent',
+        //       redirect: '/menu/menu1/menu11',
+        //       meta: {
+        //         title: '菜单1',
+        //         isLink: '',
+        //         isHide: false,
+        //         isKeepAlive: true,
+        //         isAffix: false,
+        //         isIframe: false,
+        //         roles: ['admin', 'common'],
+        //         icon: 'iconfont icon-caidan'
+        //       },
+        //       children: [
+        //         {
+        //           path: '/menu/menu1/menu11',
+        //           name: 'menu11',
+        //           component: 'menu/menu1/menu11/index',
+        //           meta: {
+        //             title: '菜单11',
+        //             isLink: '',
+        //             isHide: false,
+        //             isKeepAlive: true,
+        //             isAffix: false,
+        //             isIframe: false,
+        //             roles: ['admin', 'common'],
+        //             icon: 'iconfont icon-caidan'
+        //           }
+        //         },
+        //         {
+        //           path: '/menu/menu1/menu12',
+        //           name: 'menu12',
+        //           component: 'layout/routerView/parent',
+        //           redirect: '/menu/menu1/menu12/menu121',
+        //           meta: {
+        //             title: '菜单2',
+        //             isLink: '',
+        //             isHide: false,
+        //             isKeepAlive: true,
+        //             isAffix: false,
+        //             isIframe: false,
+        //             roles: ['admin', 'common'],
+        //             icon: 'iconfont icon-caidan'
+        //           },
+        //           children: [
+        //             {
+        //               path: '/menu/menu1/menu12/menu121',
+        //               name: 'menu121',
+        //               component: 'menu/menu1/menu12/menu121/index',
+        //               meta: {
+        //                 title: '菜单21',
+        //                 isLink: '',
+        //                 isHide: false,
+        //                 isKeepAlive: true,
+        //                 isAffix: false,
+        //                 isIframe: false,
+        //                 roles: ['admin', 'common'],
+        //                 icon: 'iconfont icon-caidan'
+        //               }
+        //             }
+        //           ]
+        //         },
+        //         {
+        //           path: '/menu/menu1/menu13',
+        //           name: 'menu13',
+        //           component: 'menu/menu1/menu13/index',
+        //           meta: {
+        //             title: '菜单3',
+        //             isLink: '',
+        //             isHide: false,
+        //             isKeepAlive: true,
+        //             isAffix: false,
+        //             isIframe: false,
+        //             roles: ['admin', 'common'],
+        //             icon: 'iconfont icon-caidan'
+        //           }
+        //         }
+        //       ]
+        //     },
+        //     {
+        //       path: '/menu/menu2',
+        //       name: 'menu2',
+        //       component: 'menu/menu2/index',
+        //       meta: {
+        //         title: '菜单2',
+        //         isLink: '',
+        //         isHide: false,
+        //         isKeepAlive: true,
+        //         isAffix: false,
+        //         isIframe: false,
+        //         roles: ['admin', 'common'],
+        //         icon: 'iconfont icon-caidan'
+        //       }
+        //     }
+        //   ]
+        // },
         {
           path: '/personal',
           name: 'personal',
@@ -274,7 +336,7 @@ export default [
             isLink: '',
             isHide: false,
             isKeepAlive: true,
-            isAffix: true,
+            isAffix: false,
             isIframe: false,
             roles: ['admin', 'common'],
             icon: 'iconfont icon-gerenzhongxin'
@@ -289,7 +351,7 @@ export default [
         //     isLink: 'https://arco.design/vue/docs/start',
         //     isHide: false,
         //     isKeepAlive: false,
-        //     isAffix: true,
+        //     isAffix: false,
         //     isIframe: false,
         //     roles: ['admin'],
         //     icon: 'iconfont icon-caozuo-wailian'
@@ -305,7 +367,7 @@ export default [
               'https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1',
             isHide: false,
             isKeepAlive: true,
-            isAffix: true,
+            isAffix: false,
             isIframe: true,
             roles: ['admin'],
             icon: 'iconfont icon-neiqianshujuchucun'

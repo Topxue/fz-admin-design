@@ -1,8 +1,10 @@
 import { RouteRecordRaw } from 'vue-router'
+import { storeToRefs } from 'pinia'
 
 import router from '@/router'
 import { getMenuList } from '@/services/api/user'
 import pinia, {
+  useAppStore,
   useUserStore,
   useRoutesList,
   useKeepALiveNames,
@@ -35,10 +37,13 @@ const dynamicViewsModules: Record<string, Function> = Object.assign(
  */
 
 export async function initBackEndControlRoutes() {
+  // const { appConfig } = storeToRefs(useAppStore())
+
   // 无 token 停止执行下一步
   if (!useUserStore().getToken) return false
   // 触发初始化用户信息
   await useUserStore().getUserInfo()
+
   // 获取路由菜单数据
   const res = await getBackEndControlRoutes()
   // 无登录权限时，添加判断
@@ -223,6 +228,7 @@ export function dynamicImport(
 
   if (matchKeys?.length === 1) {
     const matchKey = matchKeys[0]
+
     return dynamicViewsModules[matchKey]
   }
   if (matchKeys?.length > 1) {

@@ -55,10 +55,7 @@ export const deepClone = (target: any, map: any = new Map()) => {
  * @param b 要比较的对象二
  * @returns 相同返回 true，反之则反
  */
-export function isObjectValueEqual(
-  a: { [key: string]: any },
-  b: { [key: string]: any }
-) {
+export function isObjectValueEqual(a: any, b: any) {
   if (!a || !b) return false
   const aProps = Object.getOwnPropertyNames(a)
   const bProps = Object.getOwnPropertyNames(b)

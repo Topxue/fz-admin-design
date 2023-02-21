@@ -16,15 +16,12 @@ declare interface RequestOldRoutesState {
 // TagsView 路由列表
 declare interface TagsViewRoutesState<T = any> {
   tagsViewRoutes: T[]
-  tagsViewList: T[]
   isTagsViewCurrenFull: Boolean
 }
 
 // 路由列表
 declare interface RoutesListState<T = any> {
   routesList: T[]
-  isColumnsMenuHover: Boolean
-  isColumnsNavHover: Boolean
 }
 
 // AppConfig全局配置

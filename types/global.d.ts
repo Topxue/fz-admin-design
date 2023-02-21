@@ -38,6 +38,15 @@ declare interface RouteToFrom<T = any> extends RouteItem {
   children?: T[]
 }
 
+// navBars tagsView
+declare type TagsViewState<T = any> = {
+  routeActive: string | T
+  routePath: string | unknown
+  tagsRefsIndex: number
+  tagsViewList: T[]
+  tagsViewRoutesList: T[]
+}
+
 // 声明 HTMLElement
 declare type HtmlType = HTMLElement | string | undefined | null
 

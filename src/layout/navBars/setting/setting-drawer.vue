@@ -101,6 +101,17 @@
         </a-switch>
       </li>
       <li>
+        <span>是否开启 TagsView 缓存</span>
+        <a-switch
+          type="round"
+          v-model="gloablConfig.isCacheTagsView"
+          @change="setCacheTagsView"
+        >
+          <template #checked>开</template>
+          <template #unchecked>关</template>
+        </a-switch>
+      </li>
+      <li>
         <span>开启水印</span>
         <a-switch
           type="round"
@@ -133,17 +144,6 @@
           </a-select>
         </div>
       </li>
-      <!-- <li>
-        <span>是否开启 TagsView 缓存</span>
-        <a-switch
-          type="round"
-          v-model="gloablConfig.isCacheTagsView"
-          @change="setCacheTagsView"
-        >
-          <template #checked>开</template>
-          <template #unchecked>关</template>
-        </a-switch>
-      </li> -->
     </ul>
 
     <template #footer>
@@ -250,13 +250,13 @@ const changePageAnimation = (animation: string) => {
   })
 }
 
-// const setCacheTagsView = (state: boolean) => {
-//   appStore.updateSettings({
-//     appConfig: {
-//       isCacheTagsView: state
-//     }
-//   })
-// }
+const setCacheTagsView = (state: boolean) => {
+  appStore.updateSettings({
+    appConfig: {
+      isCacheTagsView: state
+    }
+  })
+}
 
 // 复制配置
 const onCopyConfigClick = () => {

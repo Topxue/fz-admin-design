@@ -140,7 +140,8 @@ watch(
 
 <style scoped lang="less">
 .layout-parent {
-  height: calc(100vh - 100px);
+  // height: calc(100vh - 100px);
+  height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
 }

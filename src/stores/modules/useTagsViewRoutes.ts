@@ -8,7 +8,6 @@ import { defineStore } from 'pinia'
  */
 const useTagsViewRoutes = defineStore('tagsViewRoutes', {
   state: (): TagsViewRoutesState => ({
-    tagsViewList: [],
     tagsViewRoutes: [],
     isTagsViewCurrenFull: false
   }),
@@ -33,7 +32,8 @@ const useTagsViewRoutes = defineStore('tagsViewRoutes', {
       {
         key: '__TAGS_VIEW__',
         storage: window.localStorage,
-        paths: ['tagsViewList', 'isTagsViewCurrenFull']
+        paths: ['isTagsViewCurrenFull']
+        // paths: ['tagsViewList', 'isTagsViewCurrenFull']
       }
     ]
   }

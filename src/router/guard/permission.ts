@@ -1,5 +1,4 @@
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
+import NProgress from '@/utils/progress'
 
 import { storeToRefs } from 'pinia'
 import type { Router } from 'vue-router'
@@ -10,13 +9,11 @@ import pinia, { useRoutesList, useUserStore } from '@/stores'
 export default function setupPermissionGuard(router: Router) {
   // 路由加载前
   router.beforeEach(async (to, from, next) => {
-    NProgress.configure({ showSpinner: false })
     if (to.meta.title) NProgress.start()
     const token = useUserStore().getToken
 
     if (to.path === '/login' && !token) {
       next()
-      NProgress.done()
     } else {
       if (!token) {
         next(
@@ -25,10 +22,8 @@ export default function setupPermissionGuard(router: Router) {
           )}`
         )
         useUserStore().resetInfo()
-        NProgress.done()
       } else if (token && to.path === '/login') {
         next('/home')
-        NProgress.done()
       } else {
         const storesRoutesList = useRoutesList(pinia)
         const { routesList } = storeToRefs(storesRoutesList)

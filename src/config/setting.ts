@@ -12,7 +12,7 @@ export default {
   // 是否开启 Tagsview
   isTagsview: true,
   // 是否开启 TagsView 缓存
-  // isCacheTagsView: false,
+  isCacheTagsView: false,
   // 是否开启 Footer 底部版权信息
   isFooter: false,
   // 是否开启灰色模式
@@ -50,11 +50,8 @@ export default {
   // 是否开启菜单背景颜色渐变
   // isMenuBarColorGradual: false,
 
-  /**
-   * 后端控制路由
-   */
   // 是否开启后端控制路由
-  isRequestRoutes: true,
+  isRequestRoutes: false,
   /**
    * 其它设置
    */
