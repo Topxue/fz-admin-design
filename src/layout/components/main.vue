@@ -45,8 +45,8 @@ const closeCurrentFull = () => {
 .layout-content {
   padding: 0;
   margin-top: v-bind(marginTop);
-  height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
+  height: calc(100vh - marginTop);
 
   .layout-navbars-close-full-icon {
     width: 60px;

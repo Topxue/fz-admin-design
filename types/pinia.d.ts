@@ -107,7 +107,7 @@ declare interface UserState {
     registrationDate: string
     accountId: string
     certification: string
-    role: string
+    role: 'admin' | 'user'
   }
   token: string
 }

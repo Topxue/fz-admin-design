@@ -23,12 +23,13 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { ref, defineAsyncComponent, onBeforeMount } from 'vue'
-import { useAppStore, useTagsViewRoutes } from '@/stores'
 
 import useMenuList from '@/hooks/useMenuList'
+import { useAppStore, useTagsViewRoutes } from '@/stores'
 
 // 定义变量内容
 const storesTagsViewRoutes = useTagsViewRoutes()
+
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
 const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))

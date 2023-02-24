@@ -18,11 +18,7 @@ const useTagsViewRoutes = defineStore('tagsViewRoutes', {
     setCurrenFullscreen(bool: Boolean) {
       this.isTagsViewCurrenFull = bool
     },
-    setTagsViewList(data: Array<RouteItem>) {
-      this.tagsViewList = data
-    },
     clearTagsVieList() {
-      this.tagsViewList = []
       this.tagsViewRoutes = []
     }
   },

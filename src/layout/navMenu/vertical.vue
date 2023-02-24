@@ -3,20 +3,25 @@
     class="menu-wrapper"
     @menu-item-click="handleMenuItemClick"
     :selected-keys="[defaultActive]"
+    accordion
   >
     <template v-for="route in menuLists">
       <a-sub-menu
         :key="route.path"
         v-if="route.children && route.children.length > 0"
       >
-        <template #icon><icon-apps></icon-apps></template>
+        <template #icon>
+          <icon-font :icon="route.meta.icon" />
+        </template>
         <template #title>{{ route.meta.title }}</template>
         <MenuItem :chil="route.children" />
       </a-sub-menu>
 
       <template v-else>
         <a-menu-item :key="route.path">
-          <template #icon><icon-bug></icon-bug></template>
+          <template #icon>
+            <icon-font :icon="route.meta.icon" />
+          </template>
           <template
             v-if="
               !route.meta.isLink || (route.meta.isLink && route.meta.isIframe)
@@ -36,10 +41,13 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { ref, computed, defineAsyncComponent } from 'vue'
 import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { setParentHighlight } from './utils'
+import { useTagsViewRoutes } from '@/stores'
+import { verifyUrl } from '@/utils/validate'
 
 const MenuItem = defineAsyncComponent(
   () => import('@/layout/navMenu/menuItem.vue')
@@ -47,6 +55,10 @@ const MenuItem = defineAsyncComponent(
 
 const route = useRoute()
 const router = useRouter()
+
+// 定义变量内容
+const storesTagsViewRoutes = useTagsViewRoutes()
+const { tagsViewRoutes } = storeToRefs(storesTagsViewRoutes)
 
 // 定义父组件传过来的值
 const props = withDefaults(
@@ -68,12 +80,26 @@ const menuLists = computed(() => {
 })
 
 const handleMenuItemClick = (path: string) => {
-  router.push(path)
+  const routeItem = tagsViewRoutes.value.find((item) => item.path === path)
+
+  if (routeItem.meta.isLink) {
+    onALinkClick(routeItem)
+  } else {
+    router.push(path)
+  }
+}
+
+const onALinkClick = (val: RouteItem) => {
+  const { origin, pathname } = window.location
+  // router.push(val.path)
+
+  if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
+  else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
 }
 
 // 路由更新时
 onBeforeRouteUpdate((to) => {
-  defaultActive.value = setParentHighlight(to)
+  defaultActive.value = setParentHighlight(to as any)
 })
 </script>
 

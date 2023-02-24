@@ -13,25 +13,48 @@ export default [
   {
     url: '/api/user/info',
     method: 'post',
-    response: () => {
-      return successResponseWrap({
-        name: '薛伟鹏',
-        avatar: 'https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg',
-        email: 'ivewxue@email.com',
-        job: 'frontend',
-        jobName: '前端搬砖师',
-        organization: 'Frontend',
-        organizationName: '前端',
-        location: 'jinan',
-        locationName: '济南',
-        introduction: '以人为镜可以明得失，以代码为镜可以通逻辑。',
-        personalWebsite: 'https://my-blog-github.vercel.app/',
-        phone: '176****3639',
-        registrationDate: '2022-10-31 09:27:00',
-        accountId: '15012312300',
-        certification: 1,
-        role: 'admin'
-      })
+    response: ({ body }) => {
+      const role = body.username
+
+      return successResponseWrap(
+        role === 'admin'
+          ? {
+              name: '薛伟鹏',
+              avatar: 'https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg',
+              email: 'ivewxue@email.com',
+              job: 'frontend',
+              jobName: '前端搬砖师',
+              organization: 'Frontend',
+              organizationName: '前端',
+              location: 'jinan',
+              locationName: '济南',
+              introduction: '以人为镜可以明得失，以代码为镜可以通逻辑。',
+              personalWebsite: 'https://my-blog-github.vercel.app/',
+              phone: '176****3639',
+              registrationDate: '2022-10-31 09:27:00',
+              accountId: '15012312300',
+              certification: 1,
+              role: 'admin'
+            }
+          : {
+              name: 'user',
+              avatar: 'https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg',
+              email: 'ivewxue@email.com',
+              job: 'frontend',
+              jobName: '前端搬砖师',
+              organization: 'Frontend',
+              organizationName: '前端',
+              location: 'jinan',
+              locationName: '济南',
+              introduction: '以人为镜可以明得失，以代码为镜可以通逻辑。',
+              personalWebsite: 'https://my-blog-github.vercel.app/',
+              phone: '176****3639',
+              registrationDate: '2022-10-31 09:27:00',
+              accountId: '15012312300',
+              certification: 1,
+              role: 'user'
+            }
+      )
     }
   },
   {
@@ -51,9 +74,56 @@ export default [
             isAffix: true,
             isIframe: false,
             roles: ['admin', 'common'],
-            icon: 'iconfont icon-shouye'
+            icon: 'IconHome'
           },
           children: []
+        },
+        {
+          path: '/system',
+          name: 'system',
+          component: 'layout/routerView/parent',
+          redirect: '/system/menu',
+          meta: {
+            title: '系统管理',
+            isLink: '',
+            isHide: false,
+            isKeepAlive: true,
+            isAffix: false,
+            isIframe: false,
+            roles: ['admin'],
+            icon: 'IconSettings'
+          },
+          children: [
+            {
+              path: '/system/menu',
+              name: 'systemMenu',
+              component: 'system/menu/index',
+              meta: {
+                title: '菜单管理',
+                isLink: '',
+                isHide: false,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin'],
+                icon: 'iconfont icon-caidan'
+              }
+            },
+            {
+              path: '/system/user',
+              name: 'systemUser',
+              component: 'system/user/index',
+              meta: {
+                title: '用户管理',
+                isLink: '',
+                isHide: false,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin']
+              }
+            }
+          ]
         },
         {
           path: '/params',
@@ -68,7 +138,7 @@ export default [
             isAffix: false,
             isIframe: false,
             roles: ['admin', 'common'],
-            icon: 'iconfont icon-shouye'
+            icon: 'IconApps'
           },
           children: [
             {
@@ -127,236 +197,71 @@ export default [
                 isAffix: false,
                 isIframe: false,
                 roles: ['admin'],
-                icon: 'ele-Lightning'
+                icon: 'iconfont icon-select'
               }
             }
-            // {
-            //   path: '/params/dynamic/detail',
-            //   name: 'paramsDynamicDetail',
-            //   component: 'params/dynamic/dynamic-detail',
-            //   meta: {
-            //     title: '动态路由参数详情',
-            //     isLink: '',
-            //     isHide: true,
-            //     isKeepAlive: false,
-            //     isAffix: false,
-            //     isIframe: false,
-            //     roles: ['admin', 'common'],
-            //     icon: 'iconfont icon-shouye'
-            //   }
-            // }
           ]
         },
-        // {
-        //   path: '/system',
-        //   name: 'system',
-        //   component: 'layout/routerView/parent',
-        //   redirect: '/system/menu',
-        //   meta: {
-        //     title: '系统管理',
-        //     isLink: '',
-        //     isHide: false,
-        //     isKeepAlive: true,
-        //     isAffix: false,
-        //     isIframe: false,
-        //     roles: ['admin'],
-        //     icon: 'iconfont icon-xitongshezhi'
-        //   },
-        //   children: [
-        //     {
-        //       path: '/system/menu',
-        //       name: 'systemMenu',
-        //       component: 'system/menu/index',
-        //       meta: {
-        //         title: '菜单管理',
-        //         isLink: '',
-        //         isHide: false,
-        //         isKeepAlive: true,
-        //         isAffix: false,
-        //         isIframe: false,
-        //         roles: ['admin'],
-        //         icon: 'iconfont icon-caidan'
-        //       }
-        //     },
-        //     {
-        //       path: '/system/user',
-        //       name: 'systemUser',
-        //       component: 'system/user/index',
-        //       meta: {
-        //         title: '用户管理',
-        //         isLink: '',
-        //         isHide: false,
-        //         isKeepAlive: true,
-        //         isAffix: false,
-        //         isIframe: false,
-        //         roles: ['admin'],
-        //         icon: 'iconfont icon-icon-'
-        //       }
-        //     }
-        //   ]
-        // },
-        // {
-        //   path: '/limits',
-        //   name: 'limits',
-        //   component: 'layout/routerView/parent',
-        //   redirect: '/limits/frontEnd',
-        //   meta: {
-        //     title: '权限管理',
-        //     isLink: '',
-        //     isHide: false,
-        //     isKeepAlive: true,
-        //     isAffix: false,
-        //     isIframe: false,
-        //     roles: ['admin', 'common'],
-        //     icon: 'iconfont icon-quanxian'
-        //   },
-        //   children: [
-        //     {
-        //       path: '/limits/backEnd',
-        //       name: 'limitsBackEnd',
-        //       component: 'layout/routerView/parent',
-        //       meta: {
-        //         title: '后端控制',
-        //         isLink: '',
-        //         isHide: false,
-        //         isKeepAlive: true,
-        //         isAffix: false,
-        //         isIframe: false,
-        //         roles: ['admin', 'common']
-        //       },
-        //       children: [
-        //         {
-        //           path: '/limits/backEnd/page',
-        //           name: 'limitsBackEndEndPage',
-        //           component: 'limits/backEnd/page/index',
-        //           meta: {
-        //             title: '页面权限',
-        //             isLink: '',
-        //             isHide: false,
-        //             isKeepAlive: true,
-        //             isAffix: false,
-        //             isIframe: false,
-        //             roles: ['admin', 'common']
-        //           }
-        //         }
-        //       ]
-        //     }
-        //   ]
-        // },
-        // {
-        //   path: '/menu',
-        //   name: 'menu',
-        //   component: 'layout/routerView/parent',
-        //   redirect: '/menu/menu1',
-        //   meta: {
-        //     title: '菜单嵌套',
-        //     isLink: '',
-        //     isHide: false,
-        //     isKeepAlive: true,
-        //     isAffix: false,
-        //     isIframe: false,
-        //     roles: ['admin', 'common'],
-        //     icon: 'iconfont icon-caidan'
-        //   },
-        //   children: [
-        //     {
-        //       path: '/menu/menu1',
-        //       name: 'menu1',
-        //       component: 'layout/routerView/parent',
-        //       redirect: '/menu/menu1/menu11',
-        //       meta: {
-        //         title: '菜单1',
-        //         isLink: '',
-        //         isHide: false,
-        //         isKeepAlive: true,
-        //         isAffix: false,
-        //         isIframe: false,
-        //         roles: ['admin', 'common'],
-        //         icon: 'iconfont icon-caidan'
-        //       },
-        //       children: [
-        //         {
-        //           path: '/menu/menu1/menu11',
-        //           name: 'menu11',
-        //           component: 'menu/menu1/menu11/index',
-        //           meta: {
-        //             title: '菜单11',
-        //             isLink: '',
-        //             isHide: false,
-        //             isKeepAlive: true,
-        //             isAffix: false,
-        //             isIframe: false,
-        //             roles: ['admin', 'common'],
-        //             icon: 'iconfont icon-caidan'
-        //           }
-        //         },
-        //         {
-        //           path: '/menu/menu1/menu12',
-        //           name: 'menu12',
-        //           component: 'layout/routerView/parent',
-        //           redirect: '/menu/menu1/menu12/menu121',
-        //           meta: {
-        //             title: '菜单2',
-        //             isLink: '',
-        //             isHide: false,
-        //             isKeepAlive: true,
-        //             isAffix: false,
-        //             isIframe: false,
-        //             roles: ['admin', 'common'],
-        //             icon: 'iconfont icon-caidan'
-        //           },
-        //           children: [
-        //             {
-        //               path: '/menu/menu1/menu12/menu121',
-        //               name: 'menu121',
-        //               component: 'menu/menu1/menu12/menu121/index',
-        //               meta: {
-        //                 title: '菜单21',
-        //                 isLink: '',
-        //                 isHide: false,
-        //                 isKeepAlive: true,
-        //                 isAffix: false,
-        //                 isIframe: false,
-        //                 roles: ['admin', 'common'],
-        //                 icon: 'iconfont icon-caidan'
-        //               }
-        //             }
-        //           ]
-        //         },
-        //         {
-        //           path: '/menu/menu1/menu13',
-        //           name: 'menu13',
-        //           component: 'menu/menu1/menu13/index',
-        //           meta: {
-        //             title: '菜单3',
-        //             isLink: '',
-        //             isHide: false,
-        //             isKeepAlive: true,
-        //             isAffix: false,
-        //             isIframe: false,
-        //             roles: ['admin', 'common'],
-        //             icon: 'iconfont icon-caidan'
-        //           }
-        //         }
-        //       ]
-        //     },
-        //     {
-        //       path: '/menu/menu2',
-        //       name: 'menu2',
-        //       component: 'menu/menu2/index',
-        //       meta: {
-        //         title: '菜单2',
-        //         isLink: '',
-        //         isHide: false,
-        //         isKeepAlive: true,
-        //         isAffix: false,
-        //         isIframe: false,
-        //         roles: ['admin', 'common'],
-        //         icon: 'iconfont icon-caidan'
-        //       }
-        //     }
-        //   ]
-        // },
+        {
+          path: '/able',
+          name: 'able',
+          component: 'layout/routerView/parent',
+          redirect: '/able/icon-select',
+          meta: {
+            title: '功能',
+            isLink: '',
+            isHide: false,
+            isKeepAlive: false,
+            isAffix: false,
+            isIframe: false,
+            roles: ['admin', 'common'],
+            icon: 'IconApps'
+          },
+          children: [
+            {
+              path: '/able/icon-select',
+              name: 'IconSelect',
+              component: 'able/icon-select/index',
+              meta: {
+                title: '图标选择器',
+                isLink: '',
+                isHide: false,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin', 'common']
+              }
+            },
+            {
+              path: '/able/print',
+              name: 'Print',
+              component: 'able/print/index',
+              meta: {
+                title: '打印',
+                isLink: '',
+                isHide: false,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin', 'common']
+              }
+            },
+            {
+              path: '/able/pdf',
+              name: 'Pdf',
+              component: 'able/pdf',
+              meta: {
+                title: 'PDF预览',
+                isLink: '',
+                isHide: false,
+                isKeepAlive: true,
+                isAffix: false,
+                isIframe: false,
+                roles: ['admin', 'common']
+              }
+            }
+          ]
+        },
         {
           path: '/personal',
           name: 'personal',
@@ -372,21 +277,21 @@ export default [
             icon: 'iconfont icon-gerenzhongxin'
           }
         },
-        // {
-        //   path: '/link',
-        //   name: 'layoutLinkView',
-        //   component: 'layout/routerView/link',
-        //   meta: {
-        //     title: '外部链接',
-        //     isLink: 'https://arco.design/vue/docs/start',
-        //     isHide: false,
-        //     isKeepAlive: false,
-        //     isAffix: false,
-        //     isIframe: false,
-        //     roles: ['admin'],
-        //     icon: 'iconfont icon-caozuo-wailian'
-        //   }
-        // },
+        {
+          path: '/link',
+          name: 'layoutLinkView',
+          component: 'layout/routerView/link',
+          meta: {
+            title: '外部链接',
+            isLink: 'https://arco.design/vue/docs/start',
+            isHide: false,
+            isKeepAlive: false,
+            isAffix: false,
+            isIframe: false,
+            roles: ['admin'],
+            icon: 'IconLink'
+          }
+        },
         {
           path: '/iframesOne',
           name: 'layoutIfameView',

@@ -2,11 +2,19 @@
   <router-view />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script lang="ts" setup>
+import { onBeforeMount } from 'vue'
+import setIntroduction from '@/utils/setIconFont'
 
-export default defineComponent({
+defineOptions({
   name: 'App'
+})
+
+onBeforeMount(() => {
+  // 设置批量第三方 icon 图标
+  setIntroduction.cssCdn()
+  // 设置批量第三方 js
+  setIntroduction.jsCdn()
 })
 </script>
 

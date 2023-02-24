@@ -1,5 +1,5 @@
 import { storeToRefs } from 'pinia'
-import { useRoutesList } from '@/stores'
+import pinia, { useRoutesList } from '@/stores'
 
 // 路由过滤递归函数
 const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
@@ -13,7 +13,7 @@ const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
 }
 
 export default function useMenuList() {
-  const useRouteStore = useRoutesList()
+  const useRouteStore = useRoutesList(pinia)
   const { routesList } = storeToRefs(useRouteStore)
 
   return filterRoutesFun(routesList.value)

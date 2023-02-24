@@ -22,6 +22,10 @@ export default defineConfig({
       {
         find: '@/assets',
         replacement: resolve(__dirname, '../src/assets')
+      },
+      {
+        find: 'vue',
+        replacement: 'vue/dist/vue.esm-bundler.js' // compile template
       }
     ],
     extensions: ['.ts', '.js']

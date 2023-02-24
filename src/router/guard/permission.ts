@@ -6,13 +6,16 @@ import type { Router } from 'vue-router'
 import { initBackEndControlRoutes } from './backEnd'
 import pinia, { useRoutesList, useUserStore } from '@/stores'
 
+/** 路由白名单 */
+const whiteList = ['/login']
+
 export default function setupPermissionGuard(router: Router) {
   // 路由加载前
   router.beforeEach(async (to, from, next) => {
     if (to.meta.title) NProgress.start()
-    const token = useUserStore().getToken
+    const token = useUserStore(pinia).getToken
 
-    if (to.path === '/login' && !token) {
+    if (whiteList.includes(to.path) && !token) {
       next()
       NProgress.done()
     } else {
@@ -24,7 +27,7 @@ export default function setupPermissionGuard(router: Router) {
         )
         useUserStore().resetInfo()
         NProgress.done()
-      } else if (token && to.path === '/login') {
+      } else if (token && whiteList.includes(to.path)) {
         next('/home')
       } else {
         const storesRoutesList = useRoutesList(pinia)

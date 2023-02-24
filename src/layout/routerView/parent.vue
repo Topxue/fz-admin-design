@@ -38,9 +38,9 @@ import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 
 import router from '@/router'
-import { emitter } from '@/utils/route-listener'
-import { useAppStore, useKeepALiveNames, useTagsViewRoutes } from '@/stores'
 import { Session } from '@/utils/storage'
+import { emitter } from '@/utils/route-listener'
+import { useAppStore, useKeepALiveNames } from '@/stores'
 
 // 引入组件
 const Iframes = defineAsyncComponent(
@@ -137,11 +137,4 @@ watch(
 )
 </script>
 
-<style scoped lang="less">
-.layout-parent {
-  // height: calc(100vh - 100px);
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-</style>
+<style scoped lang="less"></style>

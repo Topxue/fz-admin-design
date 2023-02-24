@@ -20,11 +20,11 @@
         >
           <span>{{ routeItem.meta.title }}</span>
         </template>
-        <template v-else>
+        <!-- <template v-else>
           <a class="w100" @click.prevent="onALinkClick(routeItem)">
             {{ routeItem.meta.title }}
           </a>
-        </template>
+        </template> -->
       </a-menu-item>
     </template>
   </template>
@@ -47,9 +47,12 @@ const props = defineProps({
 const chils = computed(() => {
   return <RouteItems>props.chil
 })
+
 // 打开外部链接
-const onALinkClick = (routeItem: RouteItem) => {
-  console.log(routeItem, 'routeItem..')
-  // other.handleOpenLink(routeItem)
-}
+// const onALinkClick = (routeItem: RouteItem) => {
+//   const { origin, pathname } = window.location
+//   router.push(val.path)
+//   if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
+//   else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
+// }
 </script>

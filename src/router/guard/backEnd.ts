@@ -1,10 +1,8 @@
 import { RouteRecordRaw } from 'vue-router'
-import { storeToRefs } from 'pinia'
 
 import router from '@/router'
-import { getMenuList } from '@/services/api/user'
+import { getRouteList } from '@/services/api/user'
 import pinia, {
-  useAppStore,
   useUserStore,
   useRoutesList,
   useKeepALiveNames,
@@ -29,23 +27,22 @@ const dynamicViewsModules: Record<string, Function> = Object.assign(
 
 /**
  * 后端控制路由：初始化方法，防止刷新时路由丢失
- * @method NextLoading 界面 loading 动画开始执行
- * @method useUserInfo().setUserInfos() 触发初始化用户信息 pinia
+ * @method useUserInfo().setUserInfo() 触发初始化用户信息 pinia
  * @method useRequestOldRoutes().setRequestOldRoutes() 存储接口原始路由（未处理component），根据需求选择使用
  * @method setAddRoute 添加动态路由
  * @method setFilterMenuAndCacheTagsViewRoutes 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
  */
 
 export async function initBackEndControlRoutes() {
-  // const { appConfig } = storeToRefs(useAppStore())
-
   // 无 token 停止执行下一步
-  if (!useUserStore().getToken) return false
+  if (!useUserStore(pinia).getToken) return false
+
   // 触发初始化用户信息
-  await useUserStore().getUserInfo()
+  await useUserStore(pinia).getUserInfo()
 
   // 获取路由菜单数据
   const res = await getBackEndControlRoutes()
+  console.log(res, 'res...')
   // 无登录权限时，添加判断
   if (res.data.length <= 0) return Promise.resolve(true)
   // 存储接口原始路由（未处理component），根据需求选择使用
@@ -83,8 +80,6 @@ export function setCacheTagsViewRoutes() {
   )[0].children
 
   storesTagsView.setTagsViewRoutes(asyncRoutes)
-  // asyncRoutes[0].component = asyncRoutes[0].path
-  // storesTagsView.setTagsViewList([asyncRoutes[0]])
 }
 
 /**
@@ -150,7 +145,7 @@ export function formatTwoStageRoutes(arr: any) {
       }
       newArr[0].children.push({ ...v })
       // 存 name 值，keep-alive 中 include 使用，实现路由的缓存
-      // 路径：/@/layout/routerView/parent.vue
+      // 路径：@/layout/routerView/parent.vue
       if (newArr[0].meta.isKeepAlive && v.meta.isKeepAlive) {
         cacheList.push(v.name)
         const stores = useKeepALiveNames(pinia)
@@ -164,7 +159,7 @@ export function formatTwoStageRoutes(arr: any) {
 /**
  * 添加动态路由
  * @method router.addRoute
- * @description 此处循环为 dynamicRoutes（/@/router/route）第一个顶级 children 的路由一维数组，非多级嵌套
+ * @description 此处循环为 dynamicRoutes（@/router/routers）第一个顶级 children 的路由一维数组，非多级嵌套
  * @link 参考：https://next.router.vuejs.org/zh/api/#addroute
  */
 export async function setAddRoute() {
@@ -179,16 +174,25 @@ export async function setAddRoute() {
  * @returns 返回后端路由菜单数据
  */
 export function getBackEndControlRoutes() {
-  return getMenuList()
-  // 模拟 admin 与 test
-  // const stores = useUserInfo(pinia)
-  // const { userInfos } = storeToRefs(stores)
-  // const auth = userInfos.value.roles[0]
-  // // 管理员 admin
-  // if (auth === 'admin') return menuApi.getAdminMenu()
-  // // 其它用户 test
-  // else return menuApi.getTestMenu()
+  const role = useUserStore().userInfo?.role || 'admin'
+
+  return getRouteList({ role })
 }
+
+/** 重置路由 */
+// export function resetRouter() {
+//   router.getRoutes().forEach((route) => {
+//     const { name } = route
+//     if (name && router.hasRoute(name)) {
+//       console.log(name, 'name..')
+//       router.removeRoute(name)
+//       // router.options.routes = formatTwoStageRoutes(
+//       //   formatFlatteningRoutes(buildHierarchyTree(ascending(routes)))
+//       // )
+//     }
+//   })
+//   // usePermissionStoreHook().clearAllCachePage()
+// }
 
 /**
  * 后端路由 component 转换

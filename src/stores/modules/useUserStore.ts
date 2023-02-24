@@ -23,21 +23,23 @@ const userStore = defineStore('user', {
       registrationDate: '',
       accountId: '',
       certification: '',
-      role: ''
+      role: 'admin'
     },
     token: ''
   }),
 
   getters: {
-    getToken(state: UserState) {
-      return state.token
-    }
+    getToken: (state: UserState) => state.token
   },
 
   actions: {
     // 获取用户信息
     async getUserInfo() {
-      const [error, res]: any = await to(getUserInfo())
+      const [error, res]: any = await to(
+        getUserInfo({
+          username: this.userInfo.role
+        })
+      )
       if (error) return
 
       this.setInfo({
@@ -51,16 +53,17 @@ const userStore = defineStore('user', {
       if (error) return
 
       this.token = res.data.token
+      this.userInfo.role = params.username === 'admin' ? 'admin' : 'user'
 
       return res
     },
 
     // 退出登录
     async loginOut() {
-      this.resetInfo()
-      useRoutesList().clearRoutesList()
-      useKeepALiveNames().clearAllCached()
-      useTagsViewRoutes().clearTagsVieList()
+      await this.resetInfo()
+      await useRoutesList().clearRoutesList()
+      await useKeepALiveNames().clearAllCached()
+      await useTagsViewRoutes().clearTagsVieList()
 
       router.push('/login')
     },
@@ -68,6 +71,12 @@ const userStore = defineStore('user', {
     setInfo(partial: Partial<UserState>) {
       this.$patch(partial)
     },
+
+    // async clearCachedAll() {
+    //   await this.resetInfo()
+    //   await useRoutesList().clearRoutesList()
+    //   await useKeepALiveNames().clearAllCached()
+    // },
 
     resetInfo() {
       this.$reset()
