@@ -13,7 +13,6 @@ import store from '@/stores'
 import router from './router'
 
 import './style/main.less'
-import './style/tailwind.css'
 
 const app = createApp(App)
 

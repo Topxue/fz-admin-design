@@ -21,12 +21,11 @@
       </a-card>
     </div>
     <!-- 组件方式 -->
-    <div class="fz-containe">
+    <div class="fz-container">
       <a-card title="组件方式">
         <a-space>
           <div>
-            <p class="mb-2.5 text-red-1">单个权限验证（:value="xxx"）</p>
-
+            <p class="mb-2.5">单个权限验证（:value="xxx"）</p>
             <Auth :value="'system:user:add'">
               <a-button>21312</a-button>
             </Auth>
@@ -45,8 +44,8 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import pinia, { useUserStore } from '@/stores'
 import { storeToRefs } from 'pinia'
+import pinia, { useUserStore } from '@/stores'
 import { initBackEndControlRoutes } from '@/router/guard/backEnd'
 
 const userStore = useUserStore(pinia)
