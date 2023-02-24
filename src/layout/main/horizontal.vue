@@ -12,8 +12,13 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, onBeforeMount, ref } from 'vue'
+import { ref, watch, onBeforeMount, defineAsyncComponent } from 'vue'
 import useMenuList from '@/hooks/useMenuList'
+import { useRoutesList } from '@/stores'
+import { storeToRefs } from 'pinia'
+
+const useRouteStore = useRoutesList()
+const { routesList } = storeToRefs(useRouteStore)
 
 const LayoutHeader = defineAsyncComponent(
   () => import('@/layout/components/header.vue')
@@ -30,6 +35,14 @@ const menuList = ref<RouteItem[] | any>([])
 onBeforeMount(() => {
   menuList.value = useMenuList()
 })
+
+// 监听路由数据变化
+watch(
+  () => routesList.value,
+  () => {
+    menuList.value = useMenuList()
+  }
+)
 </script>
 
 <style lang="less" scoped>

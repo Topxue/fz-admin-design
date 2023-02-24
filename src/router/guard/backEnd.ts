@@ -42,7 +42,6 @@ export async function initBackEndControlRoutes() {
 
   // 获取路由菜单数据
   const res = await getBackEndControlRoutes()
-  console.log(res, 'res...')
   // 无登录权限时，添加判断
   if (res.data.length <= 0) return Promise.resolve(true)
   // 存储接口原始路由（未处理component），根据需求选择使用

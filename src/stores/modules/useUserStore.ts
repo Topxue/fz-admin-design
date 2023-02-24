@@ -23,7 +23,8 @@ const userStore = defineStore('user', {
       registrationDate: '',
       accountId: '',
       certification: '',
-      role: 'admin'
+      role: 'admin',
+      permissions: []
     },
     token: ''
   }),

@@ -52,7 +52,7 @@ const menuWidth = computed(() => {
 </script>
 
 <style scoped lang="less">
-@import '@/assets/style/variable.less';
+@import '@/style/variable.less';
 
 .layout-header {
   position: fixed;

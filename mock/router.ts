@@ -172,6 +172,21 @@ const adminRoutes = [
           roles: ['admin', 'common'],
           icon: 'iconfont icon-shouye'
         }
+      },
+      {
+        path: '/permission/permission-button',
+        name: 'PermissionButton',
+        component: 'permission/permission-button',
+        meta: {
+          title: '按钮权限',
+          isLink: '',
+          isHide: false,
+          isKeepAlive: true,
+          isAffix: false,
+          isIframe: false,
+          roles: ['admin', 'common'],
+          icon: 'iconfont icon-shouye'
+        }
       }
     ]
   },
@@ -401,6 +416,21 @@ const userRoutes = [
         component: 'permission/permission-page',
         meta: {
           title: '页面权限',
+          isLink: '',
+          isHide: false,
+          isKeepAlive: true,
+          isAffix: false,
+          isIframe: false,
+          roles: ['admin', 'common'],
+          icon: 'iconfont icon-shouye'
+        }
+      },
+      {
+        path: '/permission/permission-button',
+        name: 'PermissionButton',
+        component: 'permission/permission-button',
+        meta: {
+          title: '按钮权限',
           isLink: '',
           isHide: false,
           isKeepAlive: true,

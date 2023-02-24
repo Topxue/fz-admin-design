@@ -1,10 +1,8 @@
 import type { Plugin } from 'vite'
-import { isArray } from '@/utils/is'
+import { isArray } from '../../src/utils/is'
 import compressPlugin from 'vite-plugin-compression'
 
-export const configCompressPlugin = (
-  compress: ViteCompression
-): Plugin | Plugin[] => {
+const configCompressPlugin = (compress: ViteCompression): Plugin | Plugin[] => {
   if (compress === 'none') return null
 
   const gz = {
@@ -61,3 +59,5 @@ export const configCompressPlugin = (
 
   return plugins
 }
+
+export default configCompressPlugin

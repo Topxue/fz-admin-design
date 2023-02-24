@@ -1,9 +1,15 @@
 import { App } from 'vue'
 
-import IconFont from './IconFont/index.tsx'
+import IconFont from './IconFont'
+import Auth from './Auth/auth.vue'
+import Auths from './Auth/auths.vue'
+import AuthAll from './Auth/authAll.vue'
 
 export default {
   install(Vue: App) {
+    Vue.component('Auth', Auth)
+    Vue.component('Auths', Auths)
+    Vue.component('AuthAll', AuthAll)
     Vue.component('IconFont', IconFont)
   }
 }

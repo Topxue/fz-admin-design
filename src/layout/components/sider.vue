@@ -22,14 +22,16 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { ref, defineAsyncComponent, onBeforeMount } from 'vue'
+import { ref, defineAsyncComponent, onBeforeMount, watch } from 'vue'
 
 import useMenuList from '@/hooks/useMenuList'
-import { useAppStore, useTagsViewRoutes } from '@/stores'
+import { useAppStore, useRoutesList, useTagsViewRoutes } from '@/stores'
 
 // 定义变量内容
+const useRouteStore = useRoutesList()
 const storesTagsViewRoutes = useTagsViewRoutes()
 
+const { routesList } = storeToRefs(useRouteStore)
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
 const Logo = defineAsyncComponent(() => import('@/layout/logo/index.vue'))
@@ -57,6 +59,14 @@ const onCollapse = (state: boolean) => {
 onBeforeMount(() => {
   menuList.value = useMenuList()
 })
+
+// 监听路由数据变化
+watch(
+  () => routesList.value,
+  () => {
+    menuList.value = useMenuList()
+  }
+)
 </script>
 
 <style scoped lang="less">

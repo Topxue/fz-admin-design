@@ -50,4 +50,19 @@ declare type TagsViewState<T = any> = {
 // 声明 HTMLElement
 declare type HtmlType = HTMLElement | string | undefined | null
 
+// 申明 数组
+declare type EmptyArrayType<T = any> = T[]
+
+/**
+ * 打包压缩格式的类型声明
+ */
+type ViteCompression =
+  | 'none'
+  | 'gzip'
+  | 'brotli'
+  | 'both'
+  | 'gzip-clear'
+  | 'brotli-clear'
+  | 'both-clear'
+
 declare module '@arco-design/color'

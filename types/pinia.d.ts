@@ -108,6 +108,7 @@ declare interface UserState {
     accountId: string
     certification: string
     role: 'admin' | 'user'
+    permissions: string[]
   }
   token: string
 }

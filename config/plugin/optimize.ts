@@ -7,7 +7,7 @@
 const include = [
   'qs',
   'mitt',
-  'dayjs',
+  // 'dayjs',
   'axios',
   'pinia',
   'echarts',

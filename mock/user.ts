@@ -34,7 +34,8 @@ export default [
               registrationDate: '2022-10-31 09:27:00',
               accountId: '15012312300',
               certification: 1,
-              role: 'admin'
+              role: 'admin',
+              permissions: ['system:user:add']
             }
           : {
               name: 'user',
@@ -52,7 +53,8 @@ export default [
               registrationDate: '2022-10-31 09:27:00',
               accountId: '15012312300',
               certification: 1,
-              role: 'user'
+              role: 'user',
+              permissions: []
             }
       )
     }
