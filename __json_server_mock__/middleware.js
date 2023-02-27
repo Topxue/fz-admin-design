@@ -1,4 +1,4 @@
-import { successResponseWrap } from './setup-mock'
+const SUCCESS_CODE = 10000
 
 // 管理员菜单
 const adminRoutes = [
@@ -550,14 +550,113 @@ const userRoutes = [
   }
 ]
 
-export default [
-  {
-    url: '/api/user/menu',
-    method: 'post',
-    response: ({ body }) => {
-      return successResponseWrap(
-        body.role === 'admin' ? adminRoutes : userRoutes
-      )
+// eslint-disable-next-line complexity
+module.exports = (req, res, next) => {
+  /**
+   * 登录
+   */
+  if (req.method === 'POST' && req.path === '/user/login') {
+    const username = req.body.username,
+      password = req.body.password
+
+    if (username === 'admin' && password === '123456') {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: {
+          token: '__ADMIN_TOKEN__'
+        }
+      })
+    } else if (username === 'user' && password === '123456') {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: {
+          token: '__USER_TOKEN__'
+        }
+      })
+    } else {
+      return res.status(200).json({
+        message: '用户名或者密码错误'
+      })
     }
   }
-]
+
+  /**
+   * 获取用户信息
+   */
+  if (req.method === 'POST' && req.path === '/user/info') {
+    const token = req.body.token
+
+    if (token === '__ADMIN_TOKEN__') {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: {
+          name: '薛伟鹏',
+          avatar: 'https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg',
+          email: 'ivewxue@email.com',
+          job: 'frontend',
+          jobName: '前端搬砖师',
+          organization: 'Frontend',
+          organizationName: '前端',
+          location: 'jinan',
+          locationName: '济南',
+          introduction: '以人为镜可以明得失，以代码为镜可以通逻辑。',
+          personalWebsite: 'https://my-blog-github.vercel.app/',
+          phone: '176****3639',
+          registrationDate: '2022-10-31 09:27:00',
+          accountId: '15012312300',
+          certification: 1,
+          role: 'admin',
+          permissions: [
+            'system:button:add',
+            'system:button:edit',
+            'system:button:delete',
+            'system:button:link'
+          ]
+        }
+      })
+    } else {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: {
+          name: 'user',
+          avatar: 'https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg',
+          email: 'ivewxue@email.com',
+          job: 'frontend',
+          jobName: '前端搬砖师',
+          organization: 'Frontend',
+          organizationName: '前端',
+          location: 'jinan',
+          locationName: '济南',
+          introduction: '以人为镜可以明得失，以代码为镜可以通逻辑。',
+          personalWebsite: 'https://my-blog-github.vercel.app/',
+          phone: '176****3639',
+          registrationDate: '2022-10-31 09:27:00',
+          accountId: '15012312300',
+          certification: 1,
+          role: 'user',
+          permissions: ['system:button:add', 'system:button:link']
+        }
+      })
+    }
+  }
+
+  /**
+   * 获取路由菜单
+   */
+  if (req.method === 'POST' && req.path === '/user/menu') {
+    const role = req.body.role
+    if (role === 'admin') {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: adminRoutes
+      })
+    } else {
+      return res.status(200).json({
+        code: SUCCESS_CODE,
+        data: userRoutes
+      })
+    }
+  }
+
+  next()
+}

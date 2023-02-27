@@ -55,7 +55,16 @@ class HttpRequest {
     // 响应拦截器
     service.interceptors.response.use(
       (response) => {
-        return response.data
+        if (response.data.code === 10000) {
+          return response.data
+        }
+
+        Message.error({
+          content: response.data.message || 'Error',
+          duration: 5 * 1000
+        })
+
+        return Promise.reject(response.data)
       },
       (error) => {
         console.log('err' + error)

@@ -1,5 +1,5 @@
-import { mergeConfig } from 'vite'
 import { resolve } from 'path'
+import { loadEnv, mergeConfig } from 'vite'
 
 import baseConfig from './vite.config.base'
 import { cdn } from './plugin/cdn'
@@ -11,6 +11,8 @@ import removeConsole from 'vite-plugin-remove-console'
 
 // import configImageminPlugin from './plugin/imagemin'
 
+const { VITE_CDN } = loadEnv('production', './')
+
 /** 路径查找 */
 const pathResolve = (dir: string): string => {
   return resolve(__dirname, '..', dir)
@@ -20,12 +22,12 @@ export default mergeConfig(
   {
     mode: 'production',
     plugins: [
-      cdn,
+      VITE_CDN ? cdn : null,
       removeConsole(),
-      configCompressPlugin('gzip'),
       configVisualizerPlugin(),
+      configStyleImportPlugin(),
       configArcoResolverPlugin(),
-      configStyleImportPlugin()
+      configCompressPlugin('gzip')
       // configImageminPlugin()
     ],
     build: {

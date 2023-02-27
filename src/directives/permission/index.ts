@@ -13,16 +13,11 @@ function checkPermission(app: App) {
   app.directive('auth', {
     mounted(el, binding) {
       const stores = useUserStore(pinia)
-
       const isPermission = stores.userInfo.permissions.some(
         (v: string) => v === binding.value
       )
-
-      console.log(isPermission, 'isPermission..')
-
       if (!isPermission) el.parentNode.removeChild(el)
-    },
-    deep: true
+    }
   })
 
   // 多个权限验证，满足一个则显示（v-auths="[xxx,xxx]"）

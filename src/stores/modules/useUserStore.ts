@@ -38,7 +38,7 @@ const userStore = defineStore('user', {
     async getUserInfo() {
       const [error, res]: any = await to(
         getUserInfo({
-          username: this.userInfo.role
+          token: this.token
         })
       )
       if (error) return
