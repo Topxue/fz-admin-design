@@ -71,7 +71,7 @@ const columns = [
     align: 'center'
   },
   {
-    title: '组件路径',
+    title: '路由地址',
     dataIndex: 'path',
     align: 'center',
     slotName: 'path'

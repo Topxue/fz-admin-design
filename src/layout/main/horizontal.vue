@@ -1,13 +1,11 @@
 <template>
   <a-layout class="layout">
-    <a-layout>
-      <LayoutHeader>
-        <div class="horizontal-menu">
-          <HorizontalMenu :menu-list="menuList" />
-        </div>
-      </LayoutHeader>
-      <LayoutContent />
-    </a-layout>
+    <LayoutHeader>
+      <div class="horizontal-menu">
+        <HorizontalMenu :menu-list="menuList" />
+      </div>
+    </LayoutHeader>
+    <LayoutContent />
   </a-layout>
 </template>
 

@@ -1,21 +1,28 @@
-# vue3-admin-template
+# fz-admin-design 精简版
 
-`vue3、ts、arco-design、pinia`
+## 介绍
+**精简版是基于 master分支 提炼出的架子，包含主体功能，更适合实际项目开发。**
 
-## Project Setup
+## 开始
 
 ```sh
 yarn
 ```
 
-### Compile and Hot-Reload for Development
+### 运行
 
 ```sh
 yarn dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### 生产
 
 ```sh
 yarn build
+```
+
+### 测试
+
+```sh
+yarn build:staging
 ```

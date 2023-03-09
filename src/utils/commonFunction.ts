@@ -5,6 +5,7 @@ import { formatDate } from './formatTime'
 // 通用函数
 export default function () {
   const { toClipboard } = useClipboard()
+
   // 百分比格式化
   const percentFormat = (
     row: EmptyArrayType,
@@ -52,6 +53,11 @@ export default function () {
     return Number.parseFloat(value).toFixed(2)
   }
 
+  // 字符串 'true' | 'false'转 true | false
+  const stringToBool = (value: string) => {
+    return /^true$/i.test(value)
+  }
+
   // 点击复制文本
   const copyText = (text: string) => {
     return new Promise((resolve, reject) => {
@@ -73,6 +79,7 @@ export default function () {
     dateFormatYMDHMS,
     dateFormatHMS,
     scaleFormat,
-    scale2Format
+    scale2Format,
+    stringToBool
   }
 }
