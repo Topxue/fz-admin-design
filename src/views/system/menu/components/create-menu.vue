@@ -9,6 +9,13 @@
       <template #icon="item">
         <icon-select v-model="item.icon" />
       </template>
+      <!-- 显示状态 -->
+      <!-- <template #isHide="item">
+        <a-radio-group v-model="item.isHide">
+          <a-radio value="true">显示</a-radio>
+          <a-radio value="false">隐藏</a-radio>
+        </a-radio-group>
+      </template> -->
     </fz-form>
   </fz-drawer>
 </template>
@@ -16,10 +23,13 @@
 <script setup lang="ts">
 import { ref, defineAsyncComponent } from 'vue'
 import { formOptions } from './options'
+import useFunction from '@/utils/commonFunction'
 
 const IconSelect = defineAsyncComponent(
   () => import('@/components/IconSelector/index.vue')
 )
+
+const { stringToBool } = useFunction()
 
 const formRef = ref()
 
@@ -43,7 +53,17 @@ const handleClose = () => {
 const handleCreate = async () => {
   const valid = await formRef.value.onSubmit()
 
-  console.log(valid, 'valid...')
+  if (valid) {
+    const params = {
+      ...valid,
+      isHide: stringToBool(valid.isHide),
+      isKeepAlive: stringToBool(valid.isKeepAlive),
+      isAffix: stringToBool(valid.isAffix),
+      isIframe: stringToBool(valid.isIframe)
+    }
+
+    console.log(params, 'params...')
+  }
 }
 </script>
 

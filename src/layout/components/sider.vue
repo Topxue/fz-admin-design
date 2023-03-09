@@ -45,15 +45,11 @@ const { appConfig } = storeToRefs(appStore)
 const menuList = ref<RouteItem[] | any>([])
 
 const onCollapse = (state: boolean) => {
-  const DELAY_COUNT = state ? 0 : 100
-
-  setTimeout(() => {
-    appStore.updateSettings({
-      appConfig: {
-        isCollapse: state
-      }
-    })
-  }, DELAY_COUNT)
+  appStore.updateSettings({
+    appConfig: {
+      isCollapse: state
+    }
+  })
 }
 
 onBeforeMount(() => {

@@ -28,39 +28,14 @@ const { appConfig } = storeToRefs(store)
 const storesTagsViewRoutes = useTagsViewRoutes()
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
-// 是否顶部模式&经典模式
-const isHorizontal = computed(
-  () =>
-    appConfig.value.layout === 'horizontal' ||
-    appConfig.value.layout === 'classic'
-)
 // 是否显示TagsView
 const isTagsView = computed(() => appConfig.value.isTagsview)
-
-const menuWidth = computed(() => {
-  const isCollapse = appConfig.value.isCollapse
-
-  // 顶部模式占满width 100%
-  if (isHorizontal.value) return '0px'
-
-  const calcWidth = isCollapse
-    ? appConfig.value.collapsedWidth
-    : appConfig.value.menuWidth
-
-  return calcWidth + 'px'
-})
 </script>
 
 <style scoped lang="less">
 @import '@/style/variable.less';
 
 .layout-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 10;
-  transition: width 0.1s ease;
-  width: calc(100% - v-bind(menuWidth));
   background: var(--color-bg-2);
 
   &__optional {

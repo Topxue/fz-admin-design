@@ -123,15 +123,15 @@ export const formOptions = reactive({
       model: 'isHide',
       label: '显示状态',
       options: {
-        value: '1',
+        value: 'true',
         options: [
           {
             label: '显示',
-            value: '1'
+            value: 'true'
           },
           {
             label: '隐藏',
-            value: '0'
+            value: 'false'
           }
         ]
       }
@@ -141,15 +141,15 @@ export const formOptions = reactive({
       model: 'isKeepAlive',
       label: '页面缓存',
       options: {
-        value: '0',
+        value: 'false',
         options: [
           {
             label: '缓存',
-            value: '1'
+            value: 'true'
           },
           {
             label: '不缓存',
-            value: '0'
+            value: 'false'
           }
         ]
       }
@@ -159,15 +159,15 @@ export const formOptions = reactive({
       model: 'isAffix',
       label: '是否固定',
       options: {
-        value: '0',
+        value: 'false',
         options: [
           {
             label: '固定',
-            value: '1'
+            value: 'true'
           },
           {
             label: '不固定',
-            value: '0'
+            value: 'false'
           }
         ]
       }
@@ -177,27 +177,23 @@ export const formOptions = reactive({
       model: 'isLinked',
       label: '是否外链',
       options: {
-        value: '0',
+        value: 'false',
         options: [
           {
             label: '是',
-            value: '1'
+            value: 'true'
           },
           {
             label: '否',
-            value: '0'
+            value: 'false'
           }
         ],
         onChange: (val: string) => {
           const target = formOptions.list.find(
             (item) => item.model === 'isLink'
           )
-
           if (target) {
-            target.options.value = ''
-            target.options.disabled = val != '1'
-
-            console.log(target, 'target...')
+            target.options.disabled = val !== 'true'
           }
         }
       }
@@ -207,15 +203,15 @@ export const formOptions = reactive({
       model: 'isIframe',
       label: '是否内嵌',
       options: {
-        value: '0',
+        value: 'false',
         options: [
           {
             label: '是',
-            value: '1'
+            value: 'true'
           },
           {
             label: '否',
-            value: '0'
+            value: 'false'
           }
         ]
       }

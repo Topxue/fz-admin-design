@@ -13,12 +13,7 @@ type AxiosResponseReturnTypes =
   | any
 
 class HttpRequest {
-  #instance: any = {}
-  #config = {
-    baseURL: '',
-    timeout: 60000
-  }
-
+  instance: any = null
   constructor(baseURL: string) {
     this.initInstance(baseURL)
   }
@@ -32,11 +27,9 @@ class HttpRequest {
       timeout: 60000
     }
 
-    this.#config = config
-
     const instance = axios.create(config)
     this.interceptors(instance)
-    this.#instance = instance
+    this.instance = instance
   }
 
   // 拦截器
@@ -79,7 +72,7 @@ class HttpRequest {
   }
 
   request(options: any) {
-    return this.#instance(options)
+    return this.instance(options)
   }
 
   get(url: string, config?: AxiosRequestConfig): AxiosResponseReturnTypes {
