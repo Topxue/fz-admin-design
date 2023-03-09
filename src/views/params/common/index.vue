@@ -1,11 +1,19 @@
 <template>
-  <div class="fz-container">
-    <a-space direction="vertical" align="center" fill>
-      <a-input v-model="state.tagName" placeholder="请输入tagsView" />
-      <a-input v-model="state.value" placeholder="请输入路由参数id" />
-      <a-button type="primary" @click="onGoDetailsClick">普通路由传参</a-button>
-    </a-space>
-  </div>
+  <a-card title="普通路由传参" class="fz-container">
+    <a-row :gutter="20" justify="center" align="center">
+      <a-col :span="8">
+        <a-input v-model="state.tagName" placeholder="请输入tagsView" />
+      </a-col>
+      <a-col :span="8">
+        <a-input v-model="state.value" placeholder="请输入路由参数id" />
+      </a-col>
+      <a-col :span="8">
+        <a-button type="primary" @click="onGoDetailsClick">
+          普通路由传参
+        </a-button>
+      </a-col>
+    </a-row>
+  </a-card>
 </template>
 
 <script setup lang="ts">
@@ -31,10 +39,4 @@ const onGoDetailsClick = () => {
 }
 </script>
 
-<style scoped lang="less">
-.fz-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
+<style scoped lang="less"></style>

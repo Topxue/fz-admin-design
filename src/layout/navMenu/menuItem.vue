@@ -11,7 +11,9 @@
     </a-sub-menu>
     <template v-else>
       <a-menu-item :key="routeItem.path">
-        <!-- <template #icon><icon-apps></icon-apps></template> -->
+        <!-- <template #icon v-if="routeItem.meta.icon">
+          <icon-font :icon="routeItem.meta.icon" />
+        </template> -->
         <template
           v-if="
             !routeItem.meta.isLink ||

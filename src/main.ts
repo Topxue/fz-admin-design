@@ -4,6 +4,8 @@ import { createPinia } from 'pinia'
 import ArcoVue from '@arco-design/web-vue'
 import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import '@arco-themes/vue-fzui-theme/css/arco.css'
+import Fzui from 'fz-arco-design'
+import 'fz-arco-design/dist/style.css'
 
 import globalComponents from '@/components'
 import { directive } from './directives'
@@ -19,6 +21,7 @@ const app = createApp(App)
 directive(app)
 app.use(createPinia())
 app.use(ArcoVue, {})
+app.use(Fzui)
 app.use(globalComponents)
 app.use(ArcoVueIcon)
 app.use(router)

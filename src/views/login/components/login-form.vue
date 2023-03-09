@@ -1,6 +1,6 @@
 <template>
   <div class="login-form-wrapper">
-    <div class="login-form-title">FZADMIN</div>
+    <div class="login-form-title">Fzadmin</div>
     <a-form
       ref="loginForm"
       :model="userInfo"

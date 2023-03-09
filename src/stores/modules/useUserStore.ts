@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import to from 'await-to-js'
+import { FzModal } from 'fz-arco-design'
 
 import router from '@/router'
 import { getUserInfo, login } from '@/services/api/user'
@@ -60,13 +61,22 @@ const userStore = defineStore('user', {
     },
 
     // 退出登录
-    async loginOut() {
-      await this.resetInfo()
-      await useRoutesList().clearRoutesList()
-      await useKeepALiveNames().clearAllCached()
-      await useTagsViewRoutes().clearTagsVieList()
+    loginOut() {
+      // eslint-disable-next-line @typescript-eslint/no-this-alias
+      const _this = this
 
-      router.push('/login')
+      FzModal.warning({
+        title: '提示',
+        content: '此操作将退出登录, 是否继续？',
+        async onOk() {
+          await _this.resetInfo()
+          await useRoutesList().clearRoutesList()
+          await useKeepALiveNames().clearAllCached()
+          await useTagsViewRoutes().clearTagsVieList()
+
+          router.push('/login')
+        }
+      })
     },
 
     setInfo(partial: Partial<UserState>) {

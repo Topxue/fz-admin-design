@@ -1,4 +1,6 @@
 const SUCCESS_CODE = 10000
+const ADMIN_TOKEN = '__ADMIN_TOKEN__'
+const USER_TOKEN = '__USER_TOKEN__'
 
 // 管理员菜单
 const adminRoutes = [
@@ -13,7 +15,7 @@ const adminRoutes = [
       isKeepAlive: true,
       isAffix: true,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconHome'
     },
     children: []
@@ -77,7 +79,7 @@ const adminRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconApps'
     },
     children: [
@@ -92,7 +94,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -107,7 +109,7 @@ const adminRoutes = [
           isKeepAlive: false,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -122,7 +124,7 @@ const adminRoutes = [
           isKeepAlive: false,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -154,7 +156,7 @@ const adminRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconExperiment'
     },
     children: [
@@ -169,7 +171,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -184,7 +186,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       }
@@ -193,8 +195,9 @@ const adminRoutes = [
   {
     path: '/able',
     name: 'able',
-    component: 'layout/routerView/parent',
-    redirect: '/able/icon-select',
+    // component: '/able/icon-select',
+    // component: 'layout/routerView/parent',
+    // redirect: '/able/icon-select',
     meta: {
       title: '功能',
       isLink: '',
@@ -202,7 +205,7 @@ const adminRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconApps'
     },
     children: [
@@ -217,7 +220,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -231,7 +234,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -245,7 +248,7 @@ const adminRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       }
     ]
@@ -261,7 +264,7 @@ const adminRoutes = [
       isKeepAlive: true,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'iconfont icon-gerenzhongxin'
     }
   },
@@ -312,7 +315,7 @@ const userRoutes = [
       isKeepAlive: true,
       isAffix: true,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconHome'
     },
     children: []
@@ -329,7 +332,7 @@ const userRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconApps'
     },
     children: [
@@ -344,7 +347,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -359,7 +362,7 @@ const userRoutes = [
           isKeepAlive: false,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -374,7 +377,7 @@ const userRoutes = [
           isKeepAlive: false,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -406,7 +409,7 @@ const userRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconExperiment'
     },
     children: [
@@ -421,7 +424,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       },
@@ -436,7 +439,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common'],
+          roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
       }
@@ -454,7 +457,7 @@ const userRoutes = [
       isKeepAlive: false,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'IconApps'
     },
     children: [
@@ -469,7 +472,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -483,7 +486,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       },
       {
@@ -497,7 +500,7 @@ const userRoutes = [
           isKeepAlive: true,
           isAffix: false,
           isIframe: false,
-          roles: ['admin', 'common']
+          roles: ['admin', 'user']
         }
       }
     ]
@@ -513,7 +516,7 @@ const userRoutes = [
       isKeepAlive: true,
       isAffix: false,
       isIframe: false,
-      roles: ['admin', 'common'],
+      roles: ['admin', 'user'],
       icon: 'iconfont icon-gerenzhongxin'
     }
   },
@@ -563,14 +566,14 @@ module.exports = (req, res, next) => {
       return res.status(200).json({
         code: SUCCESS_CODE,
         data: {
-          token: '__ADMIN_TOKEN__'
+          token: ADMIN_TOKEN
         }
       })
     } else if (username === 'user' && password === '123456') {
       return res.status(200).json({
         code: SUCCESS_CODE,
         data: {
-          token: '__USER_TOKEN__'
+          token: USER_TOKEN
         }
       })
     } else {

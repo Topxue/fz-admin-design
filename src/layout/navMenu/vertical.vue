@@ -82,7 +82,7 @@ const menuLists = computed(() => {
 const handleMenuItemClick = (path: string) => {
   const routeItem = tagsViewRoutes.value.find((item) => item.path === path)
 
-  if (routeItem.meta.isLink) {
+  if (routeItem.meta.isLink && !routeItem.meta.isIframe) {
     onALinkClick(routeItem)
   } else {
     router.push(path)

@@ -44,8 +44,8 @@ import Illustration from '@/assets/svg/illustration.svg?component'
     border-radius: 6px;
     padding: 30px 20px;
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    // backdrop-filter: blur(20px);
+    // -webkit-backdrop-filter: blur(20px);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
   }
 
