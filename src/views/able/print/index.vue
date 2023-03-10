@@ -1,36 +1,34 @@
 <template>
-  <div class="fz-container">
-    <a-card title="打印（报表、图表、图片）">
-      <template #extra>
-        <div class="extra-wrapper">
-          <a-select class="extra-select" v-model="printNode">
-            <a-option value=".table">Table</a-option>
-            <a-option value=".echart">Echart</a-option>
-            <a-option value=".image">Image</a-option>
-          </a-select>
-          <a-button type="primary" class="print-button" @click="onPrint">
-            打印
-          </a-button>
-        </div>
-      </template>
-      <h3 class="panel">Table</h3>
-      <a-table :columns="columns" :data="data" class="table" />
-      <a-divider />
-      <h3 class="panel">Echart</h3>
-      <div class="echart" style="height: 300px" ref="echartRef"></div>
-
-      <a-divider />
-      <h3 class="panel">Image</h3>
-      <div>
-        <img
-          src="https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg"
-          alt="avatars"
-          class="image"
-          style="width: 200px; height: 200px; margin: 50px auto"
-        />
+  <a-card title="打印（报表、图表、图片）" class="fz-container">
+    <template #extra>
+      <div class="extra-wrapper">
+        <a-select class="extra-select" v-model="printNode">
+          <a-option value=".table">Table</a-option>
+          <a-option value=".echart">Echart</a-option>
+          <a-option value=".image">Image</a-option>
+        </a-select>
+        <a-button type="primary" class="print-button" @click="onPrint">
+          打印
+        </a-button>
       </div>
-    </a-card>
-  </div>
+    </template>
+    <h3 class="panel">Table</h3>
+    <a-table :columns="columns" :data="data" class="table" />
+    <a-divider />
+    <h3 class="panel">Echart</h3>
+    <div class="echart" style="height: 300px" ref="echartRef"></div>
+
+    <a-divider />
+    <h3 class="panel">Image</h3>
+    <div>
+      <img
+        src="https://s2.loli.net/2022/10/31/6SzsNWChtIHkj5b.jpg"
+        alt="avatars"
+        class="image"
+        style="width: 200px; height: 200px; margin: 50px auto"
+      />
+    </div>
+  </a-card>
 </template>
 
 <script setup lang="ts">

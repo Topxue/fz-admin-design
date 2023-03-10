@@ -51,6 +51,10 @@ watch(
   .horizontal-menu {
     flex: 1;
     margin-right: 100px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
   }
 }
 </style>
