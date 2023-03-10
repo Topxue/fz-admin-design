@@ -35,7 +35,7 @@ export default {
    * 界面设置
    */
   // 菜单宽度
-  menuWidth: 220,
+  menuWidth: 200,
   // 收缩菜单宽度
   collapsedWidth: 48,
   /**

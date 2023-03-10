@@ -38,7 +38,9 @@
       </a-form-item>
       <a-space :size="16" direction="vertical">
         <div class="login-form-password-actions"></div>
-        <a-button type="primary" html-type="submit" long>登录</a-button>
+        <a-button type="primary" html-type="submit" long :loading="loading">
+          登录
+        </a-button>
         <a-button type="text" long class="login-form-register-btn">
           注册
         </a-button>
@@ -54,18 +56,18 @@ import { Message } from '@arco-design/web-vue'
 import { ValidatedError } from '@arco-design/web-vue/es/form/interface'
 
 import { useUserStore } from '@/stores'
+import useLoading from '@/hooks/loading'
 import { formatAxis } from '@/utils/formatTime'
 import { initBackEndControlRoutes } from '@/router/guard/backEnd'
 
 const store = useUserStore()
 const route = useRoute()
 const router = useRouter()
-
-// const errorMessage = ref('')
+const { loading, setLoading } = useLoading()
 
 const userInfo = reactive({
   username: 'admin',
-  password: 'admin'
+  password: 'admin123'
 })
 
 // 时间获取
@@ -81,9 +83,12 @@ const handleSubmit = async ({
   values: Record<string, any>
 }) => {
   if (!errors) {
-    const data = await store.login(values as typeof userInfo)
-    if (!data) return
-
+    setLoading(true)
+    const res = await store.login(values as typeof userInfo)
+    if (!res?.data) {
+      setLoading(false)
+      return
+    }
     // 添加完动态路由，再进行 router 跳转
     const isNoPower = await initBackEndControlRoutes()
     // 执行完 initBackEndControlRoutes，再执行 signInSuccess
@@ -115,6 +120,8 @@ const signInSuccess = (isNoPower: boolean | undefined) => {
     // 登录成功提示
     Message.success(`${currentTimeInfo}，欢迎回来👏🏻`)
   }
+
+  setLoading(false)
 }
 </script>
 

@@ -1,47 +1,42 @@
-import { defineStore } from 'pinia'
 import to from 'await-to-js'
+import { defineStore } from 'pinia'
 import { FzModal } from 'fz-arco-design'
 
 import router from '@/router'
-import { getUserInfo, login } from '@/services/api/user'
-import { useRoutesList, useKeepALiveNames, useTagsViewRoutes } from '../index'
+import {
+  getUserInfo,
+  login,
+  LoginData,
+  refreshTokenApi,
+  RefreshTokenResult
+} from '@/services/api/user'
+import { useRoutesList, useKeepALiveNames, useTagsViewRoutes } from '@/stores'
 
 const userStore = defineStore('user', {
   state: (): UserState => ({
     userInfo: {
-      name: '',
-      avatar: '',
-      job: '',
-      organization: '',
-      location: '',
-      email: '',
-      introduction: '',
-      personalWebsite: '',
-      jobName: '',
-      organizationName: '',
-      locationName: '',
-      phone: '',
-      registrationDate: '',
-      accountId: '',
-      certification: '',
-      role: 'admin',
+      user: {
+        avatar: '',
+        id: '',
+        nickname: ''
+      },
+      roles: [],
       permissions: []
     },
-    token: ''
+    accessToken: '',
+    expiresTime: '',
+    userId: '',
+    refreshToken: ''
   }),
 
   getters: {
-    getToken: (state: UserState) => state.token
+    getToken: (state: UserState) => state.accessToken
   },
 
   actions: {
     // 获取用户信息
     async getUserInfo() {
-      const [error, res]: any = await to(
-        getUserInfo({
-          token: this.token
-        })
-      )
+      const [error, res]: any = await to(getUserInfo())
       if (error) return
 
       this.setInfo({
@@ -50,13 +45,11 @@ const userStore = defineStore('user', {
     },
 
     // 登录
-    async login(params: { username: string; password: string }) {
-      const [error, res]: any = await to(login(params))
+    async login(params: LoginData) {
+      const [error, res] = await to(login(params))
       if (error) return
 
-      this.token = res.data.token
-      this.userInfo.role = params.username === 'admin' ? 'admin' : 'user'
-
+      this.setInfo({ ...res.data })
       return res
     },
 
@@ -69,25 +62,34 @@ const userStore = defineStore('user', {
         title: '提示',
         content: '此操作将退出登录, 是否继续？',
         async onOk() {
+          router.push('/login')
+
           await _this.resetInfo()
           await useRoutesList().clearRoutesList()
           await useKeepALiveNames().clearAllCached()
           await useTagsViewRoutes().clearTagsVieList()
-
-          router.push('/login')
         }
+      })
+    },
+
+    /** 刷新`token` */
+    handRefreshToken(data: { refreshToken: string }) {
+      console.log(data, 'refreshToken...')
+
+      // eslint-disable-next-line no-async-promise-executor
+      return new Promise<RefreshTokenResult>(async (resolve, reject) => {
+        const [error, res] = await to(refreshTokenApi(data))
+        if (error) return reject(error)
+        console.log(res)
+
+        this.setInfo({ ...res.data })
+        resolve(res)
       })
     },
 
     setInfo(partial: Partial<UserState>) {
       this.$patch(partial)
     },
-
-    // async clearCachedAll() {
-    //   await this.resetInfo()
-    //   await useRoutesList().clearRoutesList()
-    //   await useKeepALiveNames().clearAllCached()
-    // },
 
     resetInfo() {
       this.$reset()
@@ -98,8 +100,7 @@ const userStore = defineStore('user', {
     strategies: [
       {
         key: '__USER_INFO__',
-        storage: window.localStorage,
-        paths: ['token', 'userInfo']
+        storage: window.localStorage
       }
     ]
   }

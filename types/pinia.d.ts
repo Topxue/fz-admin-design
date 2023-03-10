@@ -92,23 +92,16 @@ declare interface AppState {
 // 用户信息
 declare interface UserState {
   userInfo: {
-    name: string
-    avatar: string
-    job: string
-    organization: string
-    location: string
-    email: string
-    introduction: string
-    personalWebsite: string
-    jobName: string
-    organizationName: string
-    locationName: string
-    phone: string
-    registrationDate: string
-    accountId: string
-    certification: string
-    role: 'admin' | 'user'
+    user: {
+      avatar: string
+      id: string
+      nickname: string
+    }
+    roles: string[]
     permissions: string[]
   }
-  token: string
+  userId: string
+  accessToken: string
+  refreshToken: string
+  expiresTime: string
 }

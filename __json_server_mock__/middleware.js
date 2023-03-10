@@ -1,4 +1,4 @@
-const SUCCESS_CODE = 10000
+const SUCCESS_CODE = 200
 const ADMIN_TOKEN = '__ADMIN_TOKEN__'
 const USER_TOKEN = '__USER_TOKEN__'
 
@@ -558,7 +558,7 @@ module.exports = (req, res, next) => {
   /**
    * 登录
    */
-  if (req.method === 'POST' && req.path === '/user/login') {
+  if (req.method === 'POST' && req.path === '/system/auth/login') {
     const username = req.body.username,
       password = req.body.password
 

@@ -5,6 +5,7 @@
  * @method remove 移除永久缓存
  * @method clear 移除全部永久缓存
  */
+
 export const Local = {
   // 设置永久缓存
   set(key: string, val: any) {

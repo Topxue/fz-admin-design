@@ -22,7 +22,7 @@
   dependencies:
     "color" "^3.1.3"
 
-"@arco-design/web-vue@^2.40.0", "@arco-design/web-vue@^2.40.1":
+"@arco-design/web-vue@^2.40.0", "@arco-design/web-vue@^2.43.2":
   "integrity" "sha512-zzXmayX/DIJiPuxIntj3KJrLe6VrFoX6ixpmbrLl7SAnoecGAMSXnaAy6sw0xOybrZid3ytYEzAuqTI/p9aOQw=="
   "resolved" "https://registry.npmjs.org/@arco-design/web-vue/-/web-vue-2.42.1.tgz"
   "version" "2.42.1"
@@ -36,10 +36,10 @@
     "resize-observer-polyfill" "^1.5.1"
     "scroll-into-view-if-needed" "^2.2.28"
 
-"@arco-themes/vue-fzui-theme@^0.0.3":
-  "integrity" "sha512-0eKI73xu3Oefq8VX9Vy0ImdUWmOlDzuxFJAc/2udsfUQ4sgY/r/HW2QFWWlvAZoTp/e0U6a+cOMvJHcD3ZjuJw=="
-  "resolved" "https://registry.npmjs.org/@arco-themes/vue-fzui-theme/-/vue-fzui-theme-0.0.3.tgz"
-  "version" "0.0.3"
+"@arco-themes/vue-fzui-theme@^0.0.4":
+  "integrity" "sha512-czMGXO39vigYe4xXmFDLQL+B+NlmLpvYNx5yS8MPIFEQvHq24Z8qWlMTmMvMKrzzQNo55dHy4VKNVZPw98TeGA=="
+  "resolved" "https://registry.npmjs.org/@arco-themes/vue-fzui-theme/-/vue-fzui-theme-0.0.4.tgz"
+  "version" "0.0.4"
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.18.6":
   "integrity" "sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q=="
@@ -731,6 +731,11 @@
   "integrity" "sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A=="
   "resolved" "https://registry.npmjs.org/@types/nprogress/-/nprogress-0.2.0.tgz"
   "version" "0.2.0"
+
+"@types/qs@^6.9.7":
+  "integrity" "sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw=="
+  "resolved" "https://registry.npmjs.org/@types/qs/-/qs-6.9.7.tgz"
+  "version" "6.9.7"
 
 "@types/semver@^7.3.12":
   "integrity" "sha512-21cFJr9z3g5dW8B0CVI9g2O9beqaThGQ6ZFBqHfwhzLDKUxaqTIy3vnfah/UPkfOiF2pLq+tGz+W8RyCskuslw=="

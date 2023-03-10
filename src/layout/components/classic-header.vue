@@ -32,7 +32,7 @@ const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
 .layout-header {
   position: relative;
-  z-index: 9999;
+  z-index: 101;
   background: var(--color-bg-2);
 
   &__optional {
