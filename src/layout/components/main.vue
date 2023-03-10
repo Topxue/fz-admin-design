@@ -15,16 +15,25 @@
 
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 
-import { useTagsViewRoutes } from '@/stores'
+import { useAppStore, useTagsViewRoutes } from '@/stores'
 
 const storesTagsViewRoutes = useTagsViewRoutes()
+const { appConfig } = storeToRefs(useAppStore())
 
 const { isTagsViewCurrenFull } = storeToRefs(storesTagsViewRoutes)
 
 const LayoutParentView = defineAsyncComponent(
   () => import('@/layout/routerView/parent.vue')
+)
+
+const marginTop = computed(() =>
+  isTagsViewCurrenFull.value
+    ? 0
+    : appConfig.value.isTagsview
+    ? `${54 + 38}px`
+    : '54px'
 )
 
 const closeCurrentFull = () => {
@@ -34,10 +43,9 @@ const closeCurrentFull = () => {
 
 <style scoped lang="less">
 .layout-content {
-  height: calc(100vh - 85px);
+  // height: calc(100vh - 85px);
+  height: calc(100vh - v-bind(marginTop));
   overflow-x: hidden;
-  // overflow: auto;
-  // padding: 0;
 
   .layout-navbars-close-full-icon {
     width: 60px;
