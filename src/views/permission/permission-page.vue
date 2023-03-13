@@ -11,7 +11,7 @@
         <a-row>
           <a-col :span="4">
             <a-select :default-value="getRole" @change="changeRole">
-              <a-option value="admin">管理员角色</a-option>
+              <a-option value="super_admin">超级管理员角色</a-option>
               <a-option value="user">普通角色</a-option>
             </a-select>
           </a-col>
@@ -30,7 +30,7 @@ import { initBackEndControlRoutes } from '@/router/guard/backEnd'
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 
-const getRole = computed(() => userInfo.value.role)
+const getRole = computed(() => userInfo.value.roles[0])
 
 const changeRole = async (role: string) => {
   const data = await userStore.login({ username: role, password: '123456' })

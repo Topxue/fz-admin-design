@@ -24,8 +24,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, onMounted, nextTick, defineAsyncComponent, watch } from 'vue'
 import { storeToRefs } from 'pinia'
+import { reactive, onMounted, nextTick, defineAsyncComponent, watch } from 'vue'
 import { onBeforeRouteUpdate, useRoute } from 'vue-router'
 
 import router from '@/router'
@@ -88,13 +88,13 @@ const getTagsViewRoutes = async () => {
   initTagsView()
 }
 
-// pinia 中获取路由信息：如果是设置了固定的（isAffix），进行初始化显示
+// pinia 中获取路由信息：如果是设置了固定的（affix），进行初始化显示
 const initTagsView = async () => {
   if (Session.get('tagsViewList') && appConfig.value.isCacheTagsView) {
     state.tagsViewList = await Session.get('tagsViewList')
   } else {
     await state.tagsViewRoutesList.map((v: RouteItem) => {
-      if (v.meta?.isAffix && !v.meta.isHide) {
+      if (v.meta?.affix && !v.meta.hidden) {
         v.url = setTagsViewHighlight(v)
         state.tagsViewList.push({ ...v })
         storesKeepALiveNames.addCachedView(v)
@@ -181,7 +181,8 @@ const transUrlParams = (v: RouteItem) => {
 // 2、刷新当前 tagsView：
 const refreshCurrentTagsView = async (fullPath: string) => {
   const decodeURIPath = decodeURI(fullPath)
-  let item: RouteToFrom = {}
+  let item: Partial<RouteToFrom> = {}
+
   state.tagsViewList.forEach((v: RouteItem) => {
     v.transUrl = transUrlParams(v)
     if (v.transUrl) {
@@ -193,7 +194,7 @@ const refreshCurrentTagsView = async (fullPath: string) => {
   if (!item) return false
   await storesKeepALiveNames.delCachedView(item)
   emitter.emit('onTagsViewRefreshRouterView', fullPath)
-  if (item.meta?.isKeepAlive) storesKeepALiveNames.addCachedView(item)
+  if (item.meta?.keepAlive) storesKeepALiveNames.addCachedView(item)
 }
 // 3、关闭当前 tagsView
 const closeCurrentTagsView = (path: string) => {
@@ -271,13 +272,13 @@ const closeAllTagsView = () => {
 }
 
 // 开启当前页全屏
-const openCurrenFullscreen = async (path: string): any => {
+const openCurrenFullscreen = async (path: string) => {
   const item = state.tagsViewList.find((v: any) => v.path === path) as RouteItem
 
   if (item.meta.isDynamic) {
-    await router.push({ name: item.name, params: item.params })
+    await router.push({ name: item.name as string, params: item.params })
   } else {
-    await router.push({ name: item.name, query: item.query })
+    await router.push({ name: item.name as string, query: item.query })
   }
 
   tagsViewStore.setCurrenFullscreen(true)
@@ -367,7 +368,7 @@ const singleAddTagsView = (path: string, to?: RouteToFrom) => {
   })
 }
 
-// 1、添加 tagsView：未设置隐藏（isHide）也添加到在 tagsView 中（可开启多标签详情，单标签详情）
+// 1、添加 tagsView：未设置隐藏（hidden）也添加到在 tagsView 中（可开启多标签详情，单标签详情）
 const addTagsView = (path: string, to?: RouteToFrom) => {
   // 防止拿取不到路由信息
   nextTick(async () => {
@@ -398,7 +399,7 @@ const addTagsView = (path: string, to?: RouteToFrom) => {
       item = state.tagsViewRoutesList.find((v: RouteItem) => v.path === path)
     }
     if (!item) return false
-    if (item?.meta?.isLink && !item.meta.isIframe) return false
+    if (item?.meta?.linkUrl && !item.meta.iframe) return false
     if (to?.meta?.isDynamic)
       item.params = to?.params ? to?.params : route.params
     else item.query = to?.query ? to?.query : route.query

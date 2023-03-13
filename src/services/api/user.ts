@@ -35,6 +35,13 @@ export function login(data: LoginData) {
 }
 
 /**
+ * 退出登录
+ */
+export const loginOut = () => {
+  return request.post<any, ResponseResult<boolean>>('/system/auth/logout')
+}
+
+/**
  * 获取用户信息
  * @param {tender_id} 租户编号
  */
@@ -47,7 +54,9 @@ export function getUserInfo() {
  * @param {tender_id} 租户编号
  */
 export function getRouteList() {
-  return request.get('/system/auth/list-menus')
+  return request.get<unknown, ResponseResult<Array<RouteItem>>>(
+    '/system/auth/list-menus'
+  )
 }
 
 /**

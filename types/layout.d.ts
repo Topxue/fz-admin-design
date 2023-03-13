@@ -42,5 +42,5 @@ declare type ParentViewState<T = any> = {
 // navBars link
 declare type LinkViewState = {
   title: string
-  isLink: string
+  link: string
 }

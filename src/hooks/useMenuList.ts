@@ -4,7 +4,7 @@ import pinia, { useRoutesList } from '@/stores'
 // 路由过滤递归函数
 const filterRoutesFun = <T extends RouteItem>(arr: T[]): T[] => {
   return arr
-    .filter((item: T) => !item.meta?.isHide)
+    .filter((item: T) => !item.meta?.hidden)
     .map((item: T) => {
       item = Object.assign({}, item)
       if (item.children) item.children = filterRoutesFun(item.children)

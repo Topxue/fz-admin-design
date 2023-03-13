@@ -4,9 +4,10 @@ import { FzModal } from 'fz-arco-design'
 
 import router from '@/router'
 import {
-  getUserInfo,
   login,
+  loginOut,
   LoginData,
+  getUserInfo,
   refreshTokenApi,
   RefreshTokenResult
 } from '@/services/api/user'
@@ -62,12 +63,10 @@ const userStore = defineStore('user', {
         title: '提示',
         content: '此操作将退出登录, 是否继续？',
         async onOk() {
-          router.push('/login')
+          const [error] = await to(loginOut())
+          if (error) return
 
-          await _this.resetInfo()
-          await useRoutesList().clearRoutesList()
-          await useKeepALiveNames().clearAllCached()
-          await useTagsViewRoutes().clearTagsVieList()
+          await _this.logoutCallBack()
         }
       })
     },
@@ -89,6 +88,15 @@ const userStore = defineStore('user', {
 
     setInfo(partial: Partial<UserState>) {
       this.$patch(partial)
+    },
+
+    async logoutCallBack() {
+      router.push('/login')
+
+      await this.resetInfo()
+      await useRoutesList().clearRoutesList()
+      await useKeepALiveNames().clearAllCached()
+      await useTagsViewRoutes().clearTagsVieList()
     },
 
     resetInfo() {

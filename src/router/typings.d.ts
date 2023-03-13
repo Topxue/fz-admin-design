@@ -2,24 +2,27 @@ import 'vue-router'
 
 declare module 'vue-router' {
   interface RouteMeta {
-    // 菜单标题（国际化写法）
     title?: string
-    isLink?: string
+    // 是否外链
+    link?: string
+    // 外链/内嵌地址
+    linkUrl?: string
     // 菜单是否隐藏（菜单不显示在界面，但可以进行跳转）
-    isHide?: boolean
+    hidden?: boolean
     // 菜单是否缓存
-    isKeepAlive?: boolean
+    keepAlive?: boolean
     // 菜单是否固定（固定在 tagsView 中，不可进行关闭），右键菜单无 `关闭` 项
-    isAffix?: boolean
+    affix?: boolean
     // 是否内嵌
-    // 开启条件，`1、isIframe: true 2、链接地址不为空（meta.isLink）`
-    isIframe?: boolean
-    // 当前路由权限标识，取角色管理。控制路由显示、隐藏。超级管理员：admin 普通角色：common
-    // 之前 auth 取用户（角色下有多个用户）
-    roles?: string[]
+    // 开启条件，`1、iframe: true 2、链接地址不为空（meta.link）`
+    iframe?: boolean
+    // 当前路由权限标识
+    permission?: string
     // 菜单图标
     icon?: string
+    // 状态启用禁用
+    status?: number
     // 路由权重
-    order?: number
+    sort?: number
   }
 }

@@ -6,18 +6,13 @@ export const formOptions = reactive({
   },
   list: [
     {
-      type: 'Select',
-      model: 'parent',
+      type: 'TreeSelect',
+      model: 'parentId',
       label: '父级菜单',
       options: {
         value: '',
         placeholder: '请选择父级菜单',
-        options: [
-          {
-            label: '1231',
-            value: '213'
-          }
-        ]
+        options: []
       }
     },
     {
@@ -81,27 +76,16 @@ export const formOptions = reactive({
       }
     },
     {
-      type: 'Select',
-      model: 'roles',
+      type: 'Input',
+      model: 'permission',
       label: '权限标识',
       options: {
-        value: [],
-        multiple: true,
-        options: [
-          {
-            label: 'admin',
-            value: 'admin'
-          },
-          {
-            label: 'user',
-            value: 'user'
-          }
-        ]
+        value: ''
       }
     },
     {
       type: 'InputNumber',
-      model: 'order',
+      model: 'sort',
       label: '菜单排序',
       options: {
         value: 1,
@@ -110,7 +94,7 @@ export const formOptions = reactive({
     },
     {
       type: 'Input',
-      model: 'isLink',
+      model: 'linkUrl',
       label: '链接地址',
       options: {
         value: '',
@@ -120,25 +104,43 @@ export const formOptions = reactive({
     },
     {
       type: 'Radio',
-      model: 'isHide',
+      model: 'hidden',
       label: '显示状态',
       options: {
-        value: 'true',
+        value: 'false',
         options: [
           {
             label: '显示',
-            value: 'true'
+            value: 'false'
           },
           {
             label: '隐藏',
-            value: 'false'
+            value: 'true'
           }
         ]
       }
     },
     {
       type: 'Radio',
-      model: 'isKeepAlive',
+      model: 'status',
+      label: '启用状态',
+      options: {
+        value: 1,
+        options: [
+          {
+            label: '启用',
+            value: 1
+          },
+          {
+            label: '禁用',
+            value: 0
+          }
+        ]
+      }
+    },
+    {
+      type: 'Radio',
+      model: 'keepAlive',
       label: '页面缓存',
       options: {
         value: 'false',
@@ -156,7 +158,7 @@ export const formOptions = reactive({
     },
     {
       type: 'Radio',
-      model: 'isAffix',
+      model: 'affix',
       label: '是否固定',
       options: {
         value: 'false',
@@ -174,7 +176,7 @@ export const formOptions = reactive({
     },
     {
       type: 'Radio',
-      model: 'isLinked',
+      model: 'link',
       label: '是否外链',
       options: {
         value: 'false',
@@ -190,7 +192,7 @@ export const formOptions = reactive({
         ],
         onChange: (val: string) => {
           const target = formOptions.list.find(
-            (item) => item.model === 'isLink'
+            (item) => item.model === 'linkUrl'
           )
           if (target) {
             target.options.disabled = val !== 'true'
@@ -200,7 +202,7 @@ export const formOptions = reactive({
     },
     {
       type: 'Radio',
-      model: 'isIframe',
+      model: 'iframe',
       label: '是否内嵌',
       options: {
         value: 'false',
@@ -213,7 +215,15 @@ export const formOptions = reactive({
             label: '否',
             value: 'false'
           }
-        ]
+        ],
+        onChange: (val: string) => {
+          const target = formOptions.list.find(
+            (item) => item.model === 'linkUrl'
+          )
+          if (target) {
+            target.options.disabled = val !== 'true'
+          }
+        }
       }
     }
   ]

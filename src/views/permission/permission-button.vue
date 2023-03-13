@@ -2,9 +2,7 @@
   <div>
     <div class="margin-15">
       <a-alert :show-icon="false" type="error">
-        当前用户页面权限：[{{ getRole }}]，当前用户按钮权限：{{
-          getPermissions
-        }}
+        当前用户页面权限：{{ getRole }}，当前用户按钮权限：{{ getPermissions }}
       </a-alert>
     </div>
 
@@ -13,7 +11,7 @@
         <a-row>
           <a-col :span="4">
             <a-select :default-value="getRole" @change="changeRole">
-              <a-option value="admin">管理员角色</a-option>
+              <a-option value="super_admin">超级管理员角色</a-option>
               <a-option value="user">普通角色</a-option>
             </a-select>
           </a-col>
@@ -220,7 +218,7 @@ import { initBackEndControlRoutes } from '@/router/guard/backEnd'
 const userStore = useUserStore(pinia)
 const { userInfo } = storeToRefs(userStore)
 
-const getRole = computed(() => userInfo.value.role)
+const getRole = computed(() => userInfo.value.roles)
 const getPermissions = computed(() => userInfo.value.permissions)
 
 const changeRole = async (role: string) => {

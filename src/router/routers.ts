@@ -14,7 +14,7 @@ export const dynamicRoutes: Array<RouteRecordRaw> = [
     component: Layout,
     redirect: '/home',
     meta: {
-      isKeepAlive: true
+      keepAlive: true
     },
     children: []
   }
@@ -30,7 +30,7 @@ export const notFoundAndNoPower = [
     component: () => import('@/views/error/404.vue'),
     meta: {
       title: '404',
-      isHide: true
+      hidden: true
     }
   },
   {
@@ -39,7 +39,7 @@ export const notFoundAndNoPower = [
     component: () => import('@/views/error/403.vue'),
     meta: {
       title: '403',
-      isHide: true
+      hidden: true
     }
   },
   {
@@ -48,7 +48,7 @@ export const notFoundAndNoPower = [
     component: () => import('@/views/error/500.vue'),
     meta: {
       title: '500',
-      isHide: true
+      hidden: true
     }
   }
 ]

@@ -5,7 +5,7 @@
         <a-spin class="w100 vh100" :loading="v.meta.loading" tip="加载中...">
           <transition-group :name="name" mode="out-in">
             <iframe
-              :src="v.meta.isLink"
+              :src="v.meta.linkUrl"
               :key="v.path"
               frameborder="0"
               height="100%"
@@ -51,7 +51,7 @@ const route = useRoute()
 
 // 处理 list 列表，当打开时，才进行加载
 const setIframeList = computed(() => {
-  return (<RouteItems>props.list).filter((v: RouteItem) => v.meta?.isIframeOpen)
+  return (<RouteItems>props.list).filter((v: RouteItem) => v.meta?.iframeOpen)
 })
 // 获取 iframe 当前路由 path
 const getRoutePath = computed(() => {
@@ -64,7 +64,7 @@ const closeIframeLoading = (val: string, item: RouteItem) => {
     iframeRef.value.forEach((v: HTMLElement) => {
       if (v.dataset.url === val) {
         v.onload = () => {
-          if (item.meta?.isIframeOpen && item.meta.loading)
+          if (item.meta?.iframeOpen && item.meta.loading)
             item.meta.loading = false
         }
       }
@@ -77,7 +77,7 @@ watch(
   (val) => {
     const item: any = props.list.find((v: any) => v.path === val)
     if (!item) return false
-    if (!item.meta.isIframeOpen) item.meta.isIframeOpen = true
+    if (!item.meta.iframeOpen) item.meta.iframeOpen = true
     closeIframeLoading(val, item)
   },
   {
@@ -90,9 +90,9 @@ watch(
   () => {
     const item: any = props.list.find((v: any) => v.path === route.path)
     if (!item) return false
-    if (item.meta.isIframeOpen) item.meta.isIframeOpen = false
+    if (item.meta.iframeOpen) item.meta.iframeOpen = false
     setTimeout(() => {
-      item.meta.isIframeOpen = true
+      item.meta.iframeOpen = true
       item.meta.loading = true
       closeIframeLoading(route.fullPath, item)
     })

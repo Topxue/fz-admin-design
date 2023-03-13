@@ -16,8 +16,8 @@
         </template> -->
         <template
           v-if="
-            !routeItem.meta.isLink ||
-            (routeItem.meta.isLink && routeItem.meta.isIframe)
+            !routeItem.meta.linkUrl ||
+            (routeItem.meta.linkUrl && routeItem.meta.iframe)
           "
         >
           <span>{{ routeItem.meta.title }}</span>
@@ -54,7 +54,7 @@ const chils = computed(() => {
 // const onALinkClick = (routeItem: RouteItem) => {
 //   const { origin, pathname } = window.location
 //   router.push(val.path)
-//   if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
-//   else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
+//   if (verifyUrl(<string>val.meta?.link)) window.open(val.meta?.link)
+//   else window.open(`${origin}${pathname}#${val.meta?.link}`)
 // }
 </script>

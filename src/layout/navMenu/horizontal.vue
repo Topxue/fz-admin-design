@@ -23,7 +23,7 @@
           <template #icon><icon-bug></icon-bug></template>
           <template
             v-if="
-              !route.meta.isLink || (route.meta.isLink && route.meta.isIframe)
+              !route.meta.linkUrl || (route.meta.linkUrl && route.meta.iframe)
             "
           >
             <span>{{ route.meta.title }}</span>

@@ -59,7 +59,7 @@ export async function initBackEndControlRoutes() {
 /**
  * 设置路由到 pinia routesList 中（已处理成多级嵌套路由）及缓存多级嵌套数组处理后的一维数组
  * @description 用于左侧菜单、横向菜单的显示
- * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
+ * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(hidden)
  */
 export async function setFilterMenuAndCacheTagsViewRoutes() {
   const storesRoutesList = useRoutesList(pinia)
@@ -69,7 +69,7 @@ export async function setFilterMenuAndCacheTagsViewRoutes() {
 
 /**
  * 缓存多级嵌套数组处理后的一维数组
- * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(isHide)
+ * @description 用于 tagsView、菜单搜索中：未过滤隐藏的(hidden)
  */
 export function setCacheTagsViewRoutes() {
   const storesTagsView = useTagsViewRoutes(pinia)
@@ -116,7 +116,7 @@ export function formatFlatteningRoutes(arr: any) {
 
 /**
  * 一维数组处理成多级嵌套数组（只保留二级：也就是二级以上全部处理成只有二级，keep-alive 支持二级缓存）
- * @description isKeepAlive 处理 `name` 值，进行缓存。顶级关闭，全部不缓存
+ * @description keepAlive 处理 `name` 值，进行缓存。顶级关闭，全部不缓存
  * @link 参考：https://v3.cn.vuejs.org/api/built-in-components.html#keep-alive
  * @param arr 处理后的一维路由菜单数组
  * @returns 返回将一维数组重新处理成 `定义动态路由（dynamicRoutes）` 的格式
@@ -145,8 +145,9 @@ export function formatTwoStageRoutes(arr: any) {
       newArr[0].children.push({ ...v })
       // 存 name 值，keep-alive 中 include 使用，实现路由的缓存
       // 路径：@/layout/routerView/parent.vue
-      if (newArr[0].meta.isKeepAlive && v.meta.isKeepAlive) {
-        cacheList.push(v.name)
+      if (newArr[0].meta.keepAlive && v.meta.keepAlive) {
+        if (v.name) cacheList.push(v.name)
+
         const stores = useKeepALiveNames(pinia)
         stores.setCacheKeepAlive(cacheList)
       }
@@ -173,25 +174,8 @@ export async function setAddRoute() {
  * @returns 返回后端路由菜单数据
  */
 export function getBackEndControlRoutes() {
-  const role = useUserStore().userInfo?.role || 'admin'
-
-  return getRouteList({ role })
+  return getRouteList()
 }
-
-/** 重置路由 */
-// export function resetRouter() {
-//   router.getRoutes().forEach((route) => {
-//     const { name } = route
-//     if (name && router.hasRoute(name)) {
-//       console.log(name, 'name..')
-//       router.removeRoute(name)
-//       // router.options.routes = formatTwoStageRoutes(
-//       //   formatFlatteningRoutes(buildHierarchyTree(ascending(routes)))
-//       // )
-//     }
-//   })
-//   // usePermissionStoreHook().clearAllCachePage()
-// }
 
 /**
  * 后端路由 component 转换

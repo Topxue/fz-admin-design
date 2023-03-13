@@ -69,7 +69,7 @@ const setTransitionName = computed(() => {
 
 // 设置 iframe 显示/隐藏
 const isIframePage = computed(() => {
-  return route.meta.isIframe
+  return route.meta.iframe
 })
 
 // 页面加载前，处理缓存，页面刷新时路由缓存处理
@@ -99,7 +99,7 @@ const getKeepAliveNames = computed(() => {
 // 获取 iframe 组件列表(未进行渲染)
 const getIframeListRoutes = async () => {
   router.getRoutes().forEach((v) => {
-    if (v.meta.isIframe) {
+    if (v.meta.iframe) {
       v.meta.isIframeOpen = false
       v.meta.loading = true
       state.iframeList.push({ ...v })
@@ -116,7 +116,7 @@ onMounted(() => {
       if (appConfig.value.isCacheTagsView) {
         let tagsViewArr: RouteItem[] = Session.get('tagsViewList') || []
         cachedViews.value = tagsViewArr
-          .filter((item) => item.meta?.isKeepAlive)
+          .filter((item) => item.meta?.keepAlive)
           .map((item) => item.name as string)
       }
     }, 0)

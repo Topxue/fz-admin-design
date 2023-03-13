@@ -6,8 +6,8 @@ import ArcoVueIcon from '@arco-design/web-vue/es/icon'
 import Fzui from 'fz-arco-design'
 
 import './style/main.less'
-import 'fz-arco-design/dist/style.css'
 import '@arco-themes/vue-fzui-theme/css/arco.css'
+import 'fz-arco-design/dist/style.css'
 
 import globalComponents from '@/components'
 import { directive } from './directives'

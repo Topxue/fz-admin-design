@@ -10,11 +10,11 @@ const adminRoutes = [
     component: 'home/index',
     meta: {
       title: '首页',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: true,
-      isIframe: false,
+      keepAlive: true,
+      affix: true,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconHome'
     },
@@ -27,11 +27,11 @@ const adminRoutes = [
     redirect: '/system/menu',
     meta: {
       title: '系统管理',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: true,
+      affix: false,
+      iframe: false,
       roles: ['admin'],
       icon: 'IconSettings'
     },
@@ -42,11 +42,11 @@ const adminRoutes = [
         component: 'system/menu/index',
         meta: {
           title: '菜单管理',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin'],
           icon: 'iconfont icon-caidan'
         }
@@ -57,11 +57,11 @@ const adminRoutes = [
         component: 'system/user/index',
         meta: {
           title: '用户管理',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin']
         }
       }
@@ -74,11 +74,11 @@ const adminRoutes = [
     redirect: '/params/common',
     meta: {
       title: '路由参数',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconApps'
     },
@@ -89,11 +89,11 @@ const adminRoutes = [
         component: 'params/common/index',
         meta: {
           title: '普通路由',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -104,11 +104,11 @@ const adminRoutes = [
         component: 'params/common/common-detail',
         meta: {
           title: '普通路由参数详情',
-          isLink: '',
+          link: '',
           isHide: true,
-          isKeepAlive: false,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: false,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -119,11 +119,11 @@ const adminRoutes = [
         component: 'params/dynamic/index',
         meta: {
           title: '动态路由',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: false,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: false,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -133,11 +133,11 @@ const adminRoutes = [
         component: 'params/dynamic/detail',
         meta: {
           title: '动态路由参数详情',
-          isLink: '',
+          link: '',
           isHide: true,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin'],
           icon: 'iconfont icon-select'
         }
@@ -151,11 +151,11 @@ const adminRoutes = [
     redirect: '/permission/page',
     meta: {
       title: '权限管理',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconExperiment'
     },
@@ -166,11 +166,11 @@ const adminRoutes = [
         component: 'permission/permission-page',
         meta: {
           title: '页面权限',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -181,11 +181,11 @@ const adminRoutes = [
         component: 'permission/permission-button',
         meta: {
           title: '按钮权限',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -200,11 +200,11 @@ const adminRoutes = [
     // redirect: '/able/icon-select',
     meta: {
       title: '功能',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconApps'
     },
@@ -215,11 +215,11 @@ const adminRoutes = [
         component: 'able/icon-select/index',
         meta: {
           title: '图标选择器',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -229,11 +229,11 @@ const adminRoutes = [
         component: 'able/print/index',
         meta: {
           title: '打印',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -243,11 +243,11 @@ const adminRoutes = [
         component: 'able/pdf',
         meta: {
           title: 'PDF预览',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       }
@@ -259,11 +259,11 @@ const adminRoutes = [
     component: 'personal/index',
     meta: {
       title: '个人中心',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: true,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'iconfont icon-gerenzhongxin'
     }
@@ -274,11 +274,11 @@ const adminRoutes = [
     component: 'layout/routerView/link',
     meta: {
       title: '外部链接',
-      isLink: 'https://arco.design/vue/docs/start',
+      link: 'https://arco.design/vue/docs/start',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin'],
       icon: 'IconLink'
     }
@@ -289,12 +289,11 @@ const adminRoutes = [
     component: 'layout/routerView/iframes',
     meta: {
       title: '内嵌Iframe',
-      isLink:
-        'https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1',
+      link: 'https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: false,
-      isIframe: true,
+      keepAlive: true,
+      affix: false,
+      iframe: true,
       roles: ['admin'],
       icon: 'iconfont icon-neiqianshujuchucun'
     }
@@ -310,11 +309,11 @@ const userRoutes = [
     component: 'home/index',
     meta: {
       title: '首页',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: true,
-      isIframe: false,
+      keepAlive: true,
+      affix: true,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconHome'
     },
@@ -327,11 +326,11 @@ const userRoutes = [
     redirect: '/params/common',
     meta: {
       title: '路由参数',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconApps'
     },
@@ -342,11 +341,11 @@ const userRoutes = [
         component: 'params/common/index',
         meta: {
           title: '普通路由',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -357,11 +356,11 @@ const userRoutes = [
         component: 'params/common/common-detail',
         meta: {
           title: '普通路由参数详情',
-          isLink: '',
+          link: '',
           isHide: true,
-          isKeepAlive: false,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: false,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -372,11 +371,11 @@ const userRoutes = [
         component: 'params/dynamic/index',
         meta: {
           title: '动态路由',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: false,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: false,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -386,11 +385,11 @@ const userRoutes = [
         component: 'params/dynamic/detail',
         meta: {
           title: '动态路由参数详情',
-          isLink: '',
+          link: '',
           isHide: true,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin'],
           icon: 'iconfont icon-select'
         }
@@ -404,11 +403,11 @@ const userRoutes = [
     redirect: '/permission/page',
     meta: {
       title: '权限管理',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconExperiment'
     },
@@ -419,11 +418,11 @@ const userRoutes = [
         component: 'permission/permission-page',
         meta: {
           title: '页面权限',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -434,11 +433,11 @@ const userRoutes = [
         component: 'permission/permission-button',
         meta: {
           title: '按钮权限',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user'],
           icon: 'iconfont icon-shouye'
         }
@@ -452,11 +451,11 @@ const userRoutes = [
     redirect: '/able/icon-select',
     meta: {
       title: '功能',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'IconApps'
     },
@@ -467,11 +466,11 @@ const userRoutes = [
         component: 'able/icon-select/index',
         meta: {
           title: '图标选择器',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -481,11 +480,11 @@ const userRoutes = [
         component: 'able/print/index',
         meta: {
           title: '打印',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       },
@@ -495,11 +494,11 @@ const userRoutes = [
         component: 'able/pdf',
         meta: {
           title: 'PDF预览',
-          isLink: '',
+          link: '',
           isHide: false,
-          isKeepAlive: true,
-          isAffix: false,
-          isIframe: false,
+          keepAlive: true,
+          affix: false,
+          iframe: false,
           roles: ['admin', 'user']
         }
       }
@@ -511,11 +510,11 @@ const userRoutes = [
     component: 'personal/index',
     meta: {
       title: '个人中心',
-      isLink: '',
+      link: '',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: true,
+      affix: false,
+      iframe: false,
       roles: ['admin', 'user'],
       icon: 'iconfont icon-gerenzhongxin'
     }
@@ -526,11 +525,11 @@ const userRoutes = [
     component: 'layout/routerView/link',
     meta: {
       title: '外部链接',
-      isLink: 'https://arco.design/vue/docs/start',
+      link: 'https://arco.design/vue/docs/start',
       isHide: false,
-      isKeepAlive: false,
-      isAffix: false,
-      isIframe: false,
+      keepAlive: false,
+      affix: false,
+      iframe: false,
       roles: ['admin'],
       icon: 'IconLink'
     }
@@ -541,12 +540,11 @@ const userRoutes = [
     component: 'layout/routerView/iframes',
     meta: {
       title: '内嵌Iframe',
-      isLink:
-        'https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1',
+      link: 'https://router.vuejs.org/zh/guide/advanced/dynamic-routing.html#%E6%B7%BB%E5%8A%A0%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1',
       isHide: false,
-      isKeepAlive: true,
-      isAffix: false,
-      isIframe: true,
+      keepAlive: true,
+      affix: false,
+      iframe: true,
       roles: ['admin'],
       icon: 'iconfont icon-neiqianshujuchucun'
     }
@@ -562,7 +560,7 @@ module.exports = (req, res, next) => {
     const username = req.body.username,
       password = req.body.password
 
-    if (username === 'admin' && password === '123456') {
+    if (username === 'admin' && password === 'admin123') {
       return res.status(200).json({
         code: SUCCESS_CODE,
         data: {

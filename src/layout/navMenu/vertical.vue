@@ -24,7 +24,7 @@
           </template>
           <template
             v-if="
-              !route.meta.isLink || (route.meta.isLink && route.meta.isIframe)
+              !route.meta.linkUrl || (route.meta.linkUrl && route.meta.iframe)
             "
           >
             <span>{{ route.meta.title }}</span>
@@ -82,7 +82,7 @@ const menuLists = computed(() => {
 const handleMenuItemClick = (path: string) => {
   const routeItem = tagsViewRoutes.value.find((item) => item.path === path)
 
-  if (routeItem.meta.isLink && !routeItem.meta.isIframe) {
+  if (routeItem.meta.linkUrl && !routeItem.meta.iframe) {
     onALinkClick(routeItem)
   } else {
     router.push(path)
@@ -93,8 +93,9 @@ const onALinkClick = (val: RouteItem) => {
   const { origin, pathname } = window.location
   // router.push(val.path)
 
-  if (verifyUrl(<string>val.meta?.isLink)) window.open(val.meta?.isLink)
-  else window.open(`${origin}${pathname}#${val.meta?.isLink}`)
+  if (val.meta?.link && verifyUrl(<string>val.meta?.linkUrl))
+    window.open(val.meta?.linkUrl)
+  else window.open(`${origin}${pathname}#${val.meta?.linkUrl}`)
 }
 
 // 路由更新时

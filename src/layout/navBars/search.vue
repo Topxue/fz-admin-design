@@ -62,7 +62,7 @@ const initTageView = () => {
   // 初始化菜单数据
   if (state.tagsViewList.length > 0) return false
   state.tagsViewList = tagsViewRoutes.value.filter(
-    (v: RouteItem) => !v.meta?.isHide
+    (v: RouteItem) => !v.meta?.hidden
   )
 }
 
@@ -70,7 +70,7 @@ const initTageView = () => {
 const handleSelectedMenu = (path: string) => {
   const item = state.tagsViewList.find((item) => item.path === path)
 
-  if (item?.meta?.isLink && !item.meta?.isIframe) window.open(item.meta?.isLink)
+  if (item?.meta?.linkUrl && !item.meta?.iframe) window.open(item.meta?.linkUrl)
   else if (item?.redirect) router.push(item.redirect)
   else router.push(path)
 

@@ -2,9 +2,9 @@
   <a-dropdown @select="handleSelect" trigger="hover">
     <div class="avatar-wrapper">
       <a-avatar :size="30">
-        <img :src="userInfo.avatar" />
+        <img :src="userInfo.user.avatar" />
       </a-avatar>
-      <span class="user-name">{{ userInfo.name }}</span>
+      <span class="user-name">{{ userInfo.user.nickname }}</span>
       <icon-down />
     </div>
     <template #content>

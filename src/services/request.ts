@@ -17,6 +17,8 @@ import { Message } from '@arco-design/web-vue'
 
 // SUCCESS_CODE
 const ERROR_OK = 200
+// 登录错误相关状态码
+const LOGIN_ERROR_CODE = [401, 403]
 
 /** 请求白名单，放置一些不需要token的接口（通过设置请求白名单，防止token过期后再请求造成的死循环问题） */
 const whiteList = ['/system/auth/refresh-token', '/system/auth/login']
@@ -170,6 +172,11 @@ class FzHttp {
           content: response.data.msg || 'Error',
           duration: 5 * 1000
         })
+
+        // 登录相关错误处理
+        if (LOGIN_ERROR_CODE.includes(response.data.code)) {
+          useUserStore().logoutCallBack()
+        }
 
         return Promise.reject(response.data)
       },

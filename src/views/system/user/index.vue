@@ -1,6 +1,8 @@
 <template>
   <div class="fz-container">
-    <a-card title="用户管理"></a-card>
+    <a-card title="用户管理">
+      <a-input />
+    </a-card>
   </div>
 </template>
 
@@ -11,4 +13,5 @@ onMounted(() => {
   console.log(name.value)
 })
 </script>
+
 <style scoped lang="less"></style>
