@@ -12,7 +12,7 @@ import {
 } from './type'
 import { stringify } from 'qs'
 import { useUserStore } from '@/stores'
-import NProgress from '@/utils/progress'
+// import NProgress from '@/utils/progress'
 import { Message } from '@arco-design/web-vue'
 
 // SUCCESS_CODE
@@ -91,7 +91,7 @@ class FzHttp {
         setRequestHeaders(config, users.getToken)
 
         // 开启进度条动画
-        NProgress.start()
+        // NProgress.start()
         // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
         if (typeof config.beforeRequestCallback === 'function') {
           config.beforeRequestCallback(config)
@@ -152,7 +152,7 @@ class FzHttp {
       (response: FzHttpResponse) => {
         const $config = response.config
         // 关闭进度条动画
-        NProgress.done()
+        // NProgress.done()
 
         // 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
         if (typeof $config.beforeResponseCallback === 'function') {
@@ -183,8 +183,14 @@ class FzHttp {
       (error: FzHttpError) => {
         const $error = error
         $error.isCancelRequest = Axios.isCancel($error)
+
+        Message.error({
+          content: $error.message || 'Error',
+          duration: 5 * 1000
+        })
+
         // 关闭进度条动画
-        NProgress.done()
+        // NProgress.done()
         // 所有的响应异常 区分来源为取消请求/非取消请求
         return Promise.reject($error)
       }

@@ -22,7 +22,7 @@ export default {
   // 是否开启水印
   isWartermark: false,
   // 水印文案
-  wartermarkText: 'FZ-ADMIN',
+  wartermarkText: '法正智能科技',
   /**
    * 布局切换
    * 注意：为了演示，切换布局时，颜色会被还原成默认，代码位置：/@/layout/navBars/breadcrumb/setings.vue
@@ -62,7 +62,7 @@ export default {
    * 全局网站标题 / 副标题
    */
   // 网站主标题（菜单导航、浏览器当前网页标题）
-  globalTitle: 'FZADMIN',
+  globalTitle: '法正智能科技',
   // 默认全局组件大小，可选值"<large|'default'|small>"，默认 'large'
   globalComponentSize: 'large'
 }

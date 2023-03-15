@@ -1,14 +1,14 @@
 <template>
-  <a-card title="菜单管理" class="fz-container">
+  <div class="fz-container">
     <fz-table
       row-key="path"
       :columns="columns"
-      :data="menuList"
-      :total="menuList.length"
+      :data="state.menuList"
+      :pagination="false"
     >
       <template #toolbar>
         <div class="toolbar">
-          <a-button type="primary" @click="createVisible = true">
+          <a-button type="primary" @click="state.createVisible = true">
             <icon-plus />
             新建菜单
           </a-button>
@@ -29,49 +29,64 @@
       <template #path="{ record }">
         <a-tag>{{ record.path }}</a-tag>
       </template>
-      <template #hidden="{ record }">
-        <a-tag :color="record.meta.hidden ? '#E03E4B' : '#01B87A'">
-          {{ record.meta.hidden ? '隐藏' : '正常' }}
+      <template #sort="{ record }">
+        <a-tag>{{ record.sort }}</a-tag>
+      </template>
+      <template #status="{ record }">
+        <a-tag :color="record.meta.status === 1 ? '#01B87A' : '#E03E4B'">
+          {{ record.meta.status === 1 ? '启用' : '禁用' }}
         </a-tag>
       </template>
 
       <template #optional="{ record }">
-        <a-space>
-          <a-button type="text" @click="createMenu(record.id)">
-            <icon-plus />
-            新增
+        <a-button type="text" @click="createMenu(record.id)">
+          <icon-plus />
+          新增
+        </a-button>
+        <a-button
+          type="text"
+          @click="createButton(record.id)"
+          v-if="isBtnPermisson(record)"
+        >
+          <icon-plus />
+          按钮
+        </a-button>
+        <a-button type="text" status="warning" @click="handleEditMenu(record)">
+          <icon-edit />
+          编辑
+        </a-button>
+        <a-popconfirm
+          :content="`是否确认删除&quot;${record.meta.title}&quot;菜单?`"
+          type="warning"
+          @ok="handleDeleteMenu(record.id)"
+        >
+          <a-button type="text" status="danger">
+            <icon-delete />
+            删除
           </a-button>
-          <a-button type="text" @click="handleEditMenu(record)">
-            <icon-edit />
-            编辑
-          </a-button>
-          <a-popconfirm
-            :content="`是否确认删除&quot;${record.meta.title}&quot;菜单?`"
-            type="warning"
-            @ok="handleDeleteMenu(record.id)"
-          >
-            <a-button type="text">
-              <icon-delete />
-              删除
-            </a-button>
-          </a-popconfirm>
-        </a-space>
+        </a-popconfirm>
       </template>
     </fz-table>
 
+    <!-- 创建菜单 -->
     <CreateMenu
-      v-model:visible="createVisible"
-      v-model:id="menuId"
-      v-model:active-menu-id="activeMenuId"
-      :menu-list="menuList"
+      v-model:visible="state.createVisible"
+      v-model:id="state.menuId"
+      v-model:active-menu-id="state.activeMenuId"
       @success="createSuccess"
     />
-  </a-card>
+
+    <!-- 按钮权限 -->
+    <ButtonPermisson
+      v-model:visible="state.btnVisible"
+      v-model:menu-id="state.menuId"
+    />
+  </div>
 </template>
 
 <script setup lang="ts">
 import to from 'await-to-js'
-import { ref, onMounted, defineAsyncComponent } from 'vue'
+import { reactive, onMounted, computed, defineAsyncComponent } from 'vue'
 import { Message } from '@arco-design/web-vue'
 
 import { getMenuList, deleteMenu } from '@/services/api/menu'
@@ -79,11 +94,23 @@ import { getMenuList, deleteMenu } from '@/services/api/menu'
 const CreateMenu = defineAsyncComponent(
   () => import('./components/create-menu.vue')
 )
+const ButtonPermisson = defineAsyncComponent(
+  () => import('./components/button-permisson.vue')
+)
 
-const menuId = ref('')
-const activeMenuId = ref('')
-const menuList = ref<any>([])
-const createVisible = ref(false)
+const state = reactive<{
+  menuId: string
+  activeMenuId: string
+  menuList: any
+  createVisible: boolean
+  btnVisible: boolean
+}>({
+  menuId: '',
+  activeMenuId: '',
+  menuList: [],
+  createVisible: false,
+  btnVisible: false
+})
 
 const columns = [
   {
@@ -95,11 +122,6 @@ const columns = [
     dataIndex: 'meta.icon',
     slotName: 'icon',
     align: 'center'
-  },
-  {
-    title: '权重',
-    align: 'center',
-    dataIndex: 'sort'
   },
   {
     title: '权限标识',
@@ -116,8 +138,14 @@ const columns = [
   {
     title: '状态',
     align: 'center',
-    dataIndex: 'meta.hidden',
-    slotName: 'hidden'
+    dataIndex: 'meta.status',
+    slotName: 'status'
+  },
+  {
+    title: '权重',
+    align: 'center',
+    dataIndex: 'sort',
+    slotName: 'sort'
   },
   {
     title: '创建时间',
@@ -131,15 +159,35 @@ const columns = [
   }
 ]
 
+// 是否显示按钮权限按钮
+const isBtnPermisson = computed(() => {
+  return (record: any) => {
+    if (record.meta.link || record.meta.iframe) {
+      return false
+    }
+
+    return (
+      (record.parentId === 0 && !record.children?.length) ||
+      record.parentId !== 0
+    )
+  }
+})
+
 // 创建菜单
 const createMenu = (id: string) => {
-  activeMenuId.value = id
-  createVisible.value = true
+  state.activeMenuId = id
+  state.createVisible = true
+}
+
+// 创建按钮
+const createButton = (id: string) => {
+  state.menuId = id
+  state.btnVisible = true
 }
 
 const handleEditMenu = (record: any) => {
-  menuId.value = record.id
-  createVisible.value = true
+  state.menuId = record.id
+  state.createVisible = true
 }
 
 const handleDeleteMenu = async (id: string) => {
@@ -154,7 +202,7 @@ const queryMenuList = async () => {
   const [error, res] = await to(getMenuList())
   if (error) return
 
-  menuList.value = res.data
+  state.menuList = res.data
 }
 
 const createSuccess = () => {

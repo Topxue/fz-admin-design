@@ -79,6 +79,7 @@ export const formOptions = reactive({
       type: 'Input',
       model: 'permission',
       label: '权限标识',
+      tooltip: 'system:user:list',
       options: {
         value: ''
       }
@@ -106,6 +107,7 @@ export const formOptions = reactive({
       type: 'Radio',
       model: 'hidden',
       label: '显示状态',
+      tooltip: '选择隐藏时，路由将不会出现在侧边栏，可以被访问',
       options: {
         value: 'false',
         options: [
@@ -124,6 +126,7 @@ export const formOptions = reactive({
       type: 'Radio',
       model: 'status',
       label: '启用状态',
+      tooltip: '选择禁用时，路由将不会出现在侧边栏，也不能被访问',
       options: {
         value: 1,
         options: [
@@ -224,6 +227,59 @@ export const formOptions = reactive({
             target.options.disabled = val !== 'true'
           }
         }
+      }
+    }
+  ]
+})
+
+export const createBtnFormOptions = reactive({
+  config: {
+    isHiddenButton: true
+  },
+  list: [
+    {
+      type: 'Input',
+      model: 'title',
+      label: '按钮名称',
+      options: {
+        value: '',
+        placeholder: '请输入按钮名称',
+        rules: {
+          required: true,
+          message: '请输入按钮名称'
+        }
+      }
+    },
+    {
+      type: 'Input',
+      model: 'permission',
+      label: '权限标识',
+      tooltip: 'system:button:add',
+      options: {
+        value: '',
+        rules: {
+          required: true,
+          message: '请输入权限标识'
+        }
+      }
+    },
+    {
+      type: 'InputNumber',
+      model: 'sort',
+      label: '按钮排序',
+      options: {
+        value: 1,
+        min: 1
+      }
+    },
+    {
+      type: 'Switch',
+      model: 'status',
+      label: '状态',
+      options: {
+        value: true,
+        checked: '启用',
+        unchecked: '禁用'
       }
     }
   ]

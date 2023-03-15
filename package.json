@@ -54,7 +54,7 @@
     "yarn": "^1.22.19"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.40.0",
+    "@arco-design/web-vue": "^2.44.1",
     "@arco-themes/vue-fzui-theme": "^0.0.4",
     "@commitlint/cli": "^17.4.2",
     "@commitlint/config-conventional": "^17.4.2",

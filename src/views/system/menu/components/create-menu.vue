@@ -4,7 +4,7 @@
     :visible="visible"
     @cancel="handleClose"
     @ok="handleCreate"
-    @open="handleOpen"
+    @before-open="handleOpen"
     :ok-loading="loading"
   >
     <fz-form :options="formOptions" ref="formRef">
@@ -13,7 +13,7 @@
           v-model="item.parentId"
           :allow-search="true"
           :allow-clear="true"
-          :data="mapMenuList"
+          :data="menuList"
           :filter-tree-node="customFilterTreeNode"
           placeholder="请选择父级菜单"
           :treeProps="{
@@ -36,16 +36,15 @@
 
 <script setup lang="ts">
 import to from 'await-to-js'
-import { ref, computed, defineAsyncComponent } from 'vue'
-import { Message } from '@arco-design/web-vue'
-import { TreeNodeData } from '@arco-design/web-vue/es/tree/interface'
+import { ref, defineAsyncComponent } from 'vue'
+import { Message, TreeNodeData } from '@arco-design/web-vue'
 
 import { formOptions } from './options'
-
 import useFunction from '@/utils/commonFunction'
 import {
   editMenu,
   getMenuDetail,
+  queryOpenMenuList,
   newlyIncreasedMenu
 } from '@/services/api/menu'
 import useLoading from '@/hooks/loading'
@@ -58,19 +57,18 @@ const { stringToBool } = useFunction()
 const { loading, setLoading } = useLoading()
 
 const formRef = ref()
+const menuList = ref<Array<RouteItem>>([])
 
 const props = withDefaults(
   defineProps<{
     id?: string
     visible: boolean
     activeMenuId?: string
-    menuList: Array<RouteItem>
   }>(),
   {
     id: '',
     visible: false,
-    activeMenuId: '',
-    menuList: () => []
+    activeMenuId: ''
   }
 )
 
@@ -80,19 +78,6 @@ const emits = defineEmits<{
   (e: 'update:visible', state: boolean): void
   (e: 'update:activeMenuId', payload: string): void
 }>()
-
-const mapMenuList = computed(() => {
-  const recurrence = (children: Array<RouteItem>) => {
-    return children.map((item) => {
-      item.title = item.meta.title
-      if (item.children) recurrence(item.children)
-
-      return item
-    })
-  }
-
-  return recurrence(props.menuList)
-})
 
 const handleClose = () => {
   setLoading(false)
@@ -141,7 +126,19 @@ const handleCreate = async () => {
   }
 }
 
+const getOpenMenuList = async () => {
+  // 优化、不需要每次都进行请求
+  if (menuList.value.length) return
+
+  const [error, res]: any = await to(queryOpenMenuList())
+  if (error) return
+
+  menuList.value = res.data
+}
+
 const handleOpen = async () => {
+  await getOpenMenuList()
+
   if (props.activeMenuId) {
     formRef.value.setModelValues({
       parentId: props.activeMenuId
