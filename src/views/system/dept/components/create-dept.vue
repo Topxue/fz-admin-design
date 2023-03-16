@@ -18,6 +18,7 @@
             :allow-clear="true"
             :data="deptData"
             placeholder="请选择上级组织"
+            :filter-tree-node="customFilterTreeNode"
             :treeProps="{
               virtualListProps: {
                 height: 200
@@ -36,7 +37,7 @@
 
 <script setup lang="ts">
 import to from 'await-to-js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Message } from '@arco-design/web-vue'
 
 import useLoading from '@/hooks/loading'
@@ -48,6 +49,7 @@ import {
   queryOpenDeptList,
   createOrganization
 } from '@/services/api/dept'
+import { querySimpleUserList } from '@/services/api/person'
 
 const { loading, setLoading } = useLoading()
 
@@ -73,8 +75,8 @@ const props = withDefaults(
 
 const emits = defineEmits<{
   (e: 'success'): void
-  (e: 'update:active-id', payload: string): void
   (e: 'update:visible', state: boolean): void
+  (e: 'update:active-id', payload: string): void
 }>()
 
 const getOpenDeptList = async () => {
@@ -84,6 +86,23 @@ const getOpenDeptList = async () => {
   if (error) return
 
   deptData.value = res.data
+}
+
+onMounted(async () => {
+  const { data } = await querySimpleUserList()
+  if (!data) return
+
+  const leaderUser = createDeptOptions.list.find(
+    (item) => item.model === 'leaderUserId'
+  )
+
+  if (leaderUser) {
+    leaderUser.options.options = data as any
+  }
+})
+
+const customFilterTreeNode = (searchKey: string, nodeData: IOpenDeptData) => {
+  return nodeData.name ? nodeData.name.indexOf(searchKey) > -1 : false
 }
 
 const handleCancel = () => {
@@ -103,8 +122,7 @@ const handleOk = async () => {
 
   const params = {
     ...valid,
-    type: props.type,
-    status: valid.status ? 1 : 0
+    type: props.type
   }
 
   isEdit
@@ -122,6 +140,7 @@ const handleOk = async () => {
 const handleOpen = async () => {
   await getOpenDeptList()
 
+  // 回显上级组织
   if (props.activeId) {
     formRef.value.setModelValues({
       parentId: props.activeId
@@ -144,7 +163,7 @@ const handleOpen = async () => {
       name: data.name,
       sort: data.sort,
       leaderUserId: data.leaderUserId,
-      status: data.status === 1
+      status: data.status
     })
   }
 }

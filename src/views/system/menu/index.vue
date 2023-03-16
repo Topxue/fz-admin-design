@@ -5,6 +5,7 @@
       :columns="columns"
       :data="state.menuList"
       :pagination="false"
+      :loading="loading"
     >
       <template #toolbar>
         <div class="toolbar">
@@ -89,6 +90,7 @@ import to from 'await-to-js'
 import { reactive, onMounted, computed, defineAsyncComponent } from 'vue'
 import { Message } from '@arco-design/web-vue'
 
+import useLoading from '@/hooks/loading'
 import { getMenuList, deleteMenu } from '@/services/api/menu'
 
 const CreateMenu = defineAsyncComponent(
@@ -97,6 +99,8 @@ const CreateMenu = defineAsyncComponent(
 const ButtonPermisson = defineAsyncComponent(
   () => import('./components/button-permisson.vue')
 )
+
+const { loading, setLoading } = useLoading()
 
 const state = reactive<{
   menuId: string
@@ -112,6 +116,7 @@ const state = reactive<{
   btnVisible: false
 })
 
+// TODO: 负责人缺少中文字段
 const columns = [
   {
     title: '菜单名称',
@@ -199,10 +204,15 @@ const handleDeleteMenu = async (id: string) => {
 }
 
 const queryMenuList = async () => {
+  setLoading(true)
   const [error, res] = await to(getMenuList())
-  if (error) return
+  if (error) {
+    setLoading(false)
+    return
+  }
 
   state.menuList = res.data
+  setLoading(false)
 }
 
 const createSuccess = () => {

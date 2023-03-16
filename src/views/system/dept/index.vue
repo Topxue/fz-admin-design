@@ -1,6 +1,14 @@
 <template>
   <div class="pd15">
-    <fz-table :columns="columns" :data="state.deptData" :pagination="false">
+    <fz-table
+      :columns="columns"
+      :data="state.deptData"
+      :pagination="false"
+      :loading="loading"
+      :default-expand-all-rows="true"
+      @search="handleSearch"
+      @reset="getDeptList"
+    >
       <template #toolbar>
         <a-space>
           <a-dropdown @select="handleCreate">
@@ -68,8 +76,10 @@ import to from 'await-to-js'
 import { reactive, onMounted, defineAsyncComponent } from 'vue'
 import { Message } from '@arco-design/web-vue'
 
+import useLoading from '@/hooks/loading'
 import {
   IQueryDeptListDataItem,
+  IQueryDeptListParams,
   deleteOrganization,
   querySystemDeptList
 } from '@/services/api/dept'
@@ -78,9 +88,10 @@ const CreateDept = defineAsyncComponent(
   () => import('./components/create-dept.vue')
 )
 
+const { loading, setLoading } = useLoading()
+
 // 1:企业 2：部门
 type TCreatetype = 1 | 2
-
 const state = reactive<{
   isEdit: boolean
   visible: boolean
@@ -130,7 +141,26 @@ const columns = [
     title: '状态',
     align: 'center',
     dataIndex: 'status',
-    slotName: 'status'
+    slotName: 'status',
+    searchOptions: {
+      type: 'Select',
+      col: { span: 6 },
+      options: {
+        value: '',
+        allowClear: true,
+        placeholder: '请选择状态',
+        options: [
+          {
+            label: '启用',
+            value: 1
+          },
+          {
+            label: '禁用',
+            value: 0
+          }
+        ]
+      }
+    }
   },
   {
     title: '创建时间',
@@ -144,11 +174,16 @@ const columns = [
   }
 ]
 
-const getDeptList = async () => {
-  const [error, res] = await to(querySystemDeptList())
-  if (error) return
+const getDeptList = async (params: IQueryDeptListParams = {}) => {
+  setLoading(true)
+  const [error, res] = await to(querySystemDeptList(params))
+  if (error) {
+    setLoading(false)
+    return
+  }
 
   state.deptData = res.data
+  setLoading(false)
 }
 
 const handleCreate = (commond: TCreatetype) => {
@@ -168,6 +203,12 @@ const handleEditOrg = (record: IQueryDeptListDataItem) => {
   state.isEdit = true
   state.visible = true
   state.activeId = record.id
+}
+
+// 搜索
+const handleSearch = (params: IQueryDeptListParams) => {
+  getDeptList(params)
+  console.log(params, 'value...')
 }
 
 const handleDeleteOrg = async (id: string) => {

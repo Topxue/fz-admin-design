@@ -5,7 +5,7 @@ import { ResponseResult } from '../type'
  * 获取部门列表
  */
 
-interface IQueryDeptListParams {
+export interface IQueryDeptListParams {
   name?: string
   status?: number
 }
@@ -31,9 +31,9 @@ export const querySystemDeptList = (params?: IQueryDeptListParams) => {
 
 export interface IOpenDeptData {
   children?: Array<IOpenDeptData>
-  id: string | number
+  id: string
   name: string
-  parentId: string | number
+  parentId: string
   sort: number
   type: 1 | 2
 }

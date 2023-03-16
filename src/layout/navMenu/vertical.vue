@@ -47,7 +47,7 @@ import { onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import { setParentHighlight } from './utils'
 import { useTagsViewRoutes } from '@/stores'
-import { verifyUrl } from '@/utils/validate'
+import { verifyUrl } from '@/utils/validator'
 
 const MenuItem = defineAsyncComponent(
   () => import('@/layout/navMenu/menuItem.vue')

@@ -277,9 +277,11 @@ export const createBtnFormOptions = reactive({
       model: 'status',
       label: '状态',
       options: {
-        value: true,
+        value: 1,
         checked: '启用',
-        unchecked: '禁用'
+        unchecked: '禁用',
+        checkedValue: 1,
+        uncheckedValue: 0
       }
     }
   ]

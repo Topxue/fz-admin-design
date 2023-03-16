@@ -137,4 +137,9 @@ watch(
 )
 </script>
 
-<style scoped lang="less"></style>
+<style scoped lang="less">
+.layout-parent {
+  height: 100%;
+  overflow: hidden;
+}
+</style>

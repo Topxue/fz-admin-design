@@ -76,8 +76,7 @@ const handleCreate = async () => {
 
   const params = {
     ...valid,
-    parentId: props.parentId,
-    status: valid.status ? 1 : 0
+    parentId: props.parentId
   }
 
   if (isEdit.value) {
@@ -107,7 +106,7 @@ const handleOpen = () => {
     permission,
     sort,
     title,
-    status: status === 1
+    status
   })
 }
 </script>
