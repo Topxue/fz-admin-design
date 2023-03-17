@@ -1,6 +1,6 @@
 <template>
   <fz-modal
-    title="菜单权限"
+    title="数据权限"
     :visible="visible"
     :ok-loading="loading"
     @ok="handleOK"
@@ -9,7 +9,7 @@
     draggable
   >
     <template #content>
-      <fz-form ref="formRef" :options="menuPermissonForm" />
+      <fz-form ref="formRef" :options="dataPermissonForm" />
     </template>
   </fz-modal>
 </template>
@@ -20,10 +20,10 @@ import to from 'await-to-js'
 import { Message } from '@arco-design/web-vue'
 
 import useLoading from '@/hooks/loading'
-import { menuPermissonForm } from './form'
+import { dataPermissonForm } from './form'
 import { getRoleInfo } from '@/services/api/role'
-import { queryOpenMenuList } from '@/services/api/menu'
-import { createMenuPermisson, getRoleMenuIds } from '@/services/api/permisson'
+import { serRoleDataPermisson } from '@/services/api/permisson'
+import { queryOpenDeptList } from '@/services/api/dept'
 
 const { loading, setLoading } = useLoading()
 
@@ -47,12 +47,13 @@ const emits = defineEmits<{
 
 const handleOK = async () => {
   setLoading(true)
-  const valid = await formRef.value.onSubmit()
+  const data = await formRef.value.onSubmit()
 
   const [error] = await to(
-    createMenuPermisson({
+    serRoleDataPermisson({
       roleId: props.editId,
-      menuIds: valid.menuIds
+      dataScope: data.dataScope,
+      dataScopeDeptIds: data.dataScopeDeptIds
     })
   )
 
@@ -66,30 +67,48 @@ const handleOK = async () => {
 const handleCancel = () => {
   emits('update:edit-id', '')
   emits('update:visible', false)
+  formRef.value.onReset()
+
+  const dataScopeDeptIds = getDatePermissonOptions()
+  if (dataScopeDeptIds) dataScopeDeptIds.hidden = true
 }
 
-const getMenuList = async () => {
-  const { data } = await queryOpenMenuList()
+// 获取数据权限 `options`
+const getDatePermissonOptions = () => {
+  return dataPermissonForm.list.find(
+    (item) => item.model === 'dataScopeDeptIds'
+  )
+}
+
+// 获取部门数据
+const getDeptList = async () => {
+  const dataScopeDeptIds = getDatePermissonOptions()
+  if (dataScopeDeptIds && dataScopeDeptIds.options.options?.length) return
+
+  const { data } = await queryOpenDeptList({ onlyCompany: false })
 
   if (data) {
-    const menuIds = menuPermissonForm.list.find(
-      (item) => item.model === 'menuIds'
-    )
-    if (menuIds) menuIds.options.options = data as any
+    if (dataScopeDeptIds) dataScopeDeptIds.options.options = data as any
   }
 }
 
 const handleOpen = async () => {
-  await getMenuList()
+  await getDeptList()
 
   if (props.editId) {
     const { data } = await getRoleInfo({ id: props.editId })
-    const res = await getRoleMenuIds({ roleId: props.editId })
+
+    // 是否为指定部门权限
+    if (data.dataScope === 2) {
+      const dataScopeDeptIds = getDatePermissonOptions()
+      if (dataScopeDeptIds) dataScopeDeptIds.hidden = false
+    }
 
     formRef.value.setModelValues({
       name: data.name,
       code: data.code,
-      menuIds: res.data
+      dataScope: data.dataScope,
+      dataScopeDeptIds: data.dataScopeDeptIds
     })
   }
 }

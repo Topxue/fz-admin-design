@@ -181,5 +181,6 @@ const handleCreate = () => {
 <style scoped lang="less">
 :deep .fz-pro__table {
   padding: 0;
+  border: none;
 }
 </style>

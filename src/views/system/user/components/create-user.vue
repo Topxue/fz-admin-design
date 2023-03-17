@@ -21,6 +21,7 @@ import { Message } from '@arco-design/web-vue'
 
 import { createUserForm } from './form'
 import useLoading from '@/hooks/loading'
+import { getOpenPostList } from '@/services/api/post'
 import { queryOpenDeptList } from '@/services/api/dept'
 import { createUser, getUserInfo, updateUserInfo } from '@/services/api/person'
 
@@ -95,12 +96,17 @@ const getDepartment = async () => {
   deptIdOption.options.options = data
 }
 
-// TODO: 获取岗位数据渲染逻辑待处理
+// 获取岗位数据
 const getPost = async () => {
   const postIds = createUserForm.list.find(
     (item: any) => item.model === 'postIds'
   )
-  if (postIds && postIds.options.options?.length) return
+  if (postIds && postIds.options.options.length) return
+
+  const { data } = await getOpenPostList()
+  if (data) {
+    postIds.options.options = data
+  }
 }
 
 // 获取用户详情

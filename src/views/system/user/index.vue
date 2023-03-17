@@ -9,8 +9,9 @@
         :data="state.userData"
         :total="state.total"
         :loading="loading"
-        @search="handleSearch"
+        @search="getUserData"
         @reset="getUserData"
+        @pagination="onPagination"
       >
         <template #toolbar>
           <a-button type="primary" @click="state.createUserVisible = true">
@@ -143,11 +144,16 @@ const state = reactive<{
   }
 })
 
+const searchParams = reactive<IQueryUserParams>({
+  pageNo: 1,
+  pageSize: 10
+})
+
 const columns = [
   {
     title: '用户姓名',
     align: 'center',
-    dataIndex: 'username',
+    dataIndex: 'nickname',
     searchOptions: {
       type: 'Input',
       col: { span: 8 },
@@ -161,7 +167,7 @@ const columns = [
   {
     title: '用户账号',
     align: 'center',
-    dataIndex: 'nickname'
+    dataIndex: 'username'
   },
   {
     title: '部门',
@@ -234,21 +240,7 @@ const selectedOrigin = (value: string[]) => {
   })
 }
 
-const handleSearch = (params: IQueryUserParams) => {
-  getUserData({
-    ...params,
-    pageNo: 1,
-    pageSize: 10
-  })
-}
-
-// TODO:查询起始时间格式修改[开始, 结束]
-const getUserData = async (
-  params: IQueryUserParams = {
-    pageNo: 1,
-    pageSize: 10
-  }
-) => {
+const getUserData = async (params = searchParams) => {
   setLoading(true)
   const [error, res] = await to(queryUserData(params))
   if (error) {
@@ -260,6 +252,12 @@ const getUserData = async (
 
   state.total = res.data.total
   state.userData = res.data.list
+}
+
+const onPagination = (params: IQueryUserParams) => {
+  Object.assign(searchParams, { ...params })
+
+  getUserData()
 }
 
 const userId = ref('')
@@ -344,14 +342,6 @@ onMounted(() => {
     border-radius: 4px;
     border: 1px solid var(--color-border-1);
     overflow-y: auto;
-  }
-
-  :deep .fz-pro__search {
-    border: 1px solid var(--color-border-1);
-  }
-
-  :deep .fz-pro__table {
-    border: 1px solid var(--color-border-1);
   }
 }
 </style>

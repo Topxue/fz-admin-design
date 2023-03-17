@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="margin-15">
+    <div class="margin-12">
       <a-alert :show-icon="false" type="error">
         当前用户页面权限：{{ getRole }}，当前用户按钮权限：{{ getPermissions }}
       </a-alert>

@@ -20,7 +20,7 @@ export interface IRoleDataItem {
   code: string
   createTime: string
   creator: string
-  dataScope: string
+  dataScope: number
   dataScopeDeptIds: string[]
   deleted: boolean
   id: string

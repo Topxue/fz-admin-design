@@ -21,7 +21,7 @@ import { Message } from '@arco-design/web-vue'
 
 import { setRoleForm } from './form'
 import useLoading from '@/hooks/loading'
-import { setRole } from '@/services/api/permisson'
+import { setRole, getUserRoles } from '@/services/api/permisson'
 import { queryOpenRoleList } from '@/services/api/role'
 
 const formRef = ref()
@@ -73,6 +73,7 @@ const handleCancel = () => {
   emits('update:visible', false)
 }
 
+// 获取角色列表
 const getRoleList = async () => {
   const { data } = await queryOpenRoleList()
   console.log(data, 'data...')
@@ -85,6 +86,16 @@ const getRoleList = async () => {
 
 const handleOpen = async () => {
   await getRoleList()
+  // 获取用户拥有的角色
+  const { data } = await getUserRoles({ userId: props.userInfo.id })
+
+  console.log(data, 'data...')
+
+  formRef.value.setModelValues({
+    username: props.userInfo.username,
+    nickname: props.userInfo.nickname,
+    roleIds: data ?? []
+  })
 
   console.log(props.userInfo, 'userInfo..')
 }

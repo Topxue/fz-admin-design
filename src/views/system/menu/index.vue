@@ -1,5 +1,5 @@
 <template>
-  <div class="fz-container">
+  <div class="margin-12">
     <fz-table
       row-key="path"
       :columns="columns"

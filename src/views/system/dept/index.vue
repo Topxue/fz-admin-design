@@ -123,7 +123,7 @@ const columns = [
   {
     title: '负责人',
     align: 'center',
-    dataIndex: 'leaderUserId'
+    dataIndex: 'leaderNickname'
   },
   {
     title: '排序',

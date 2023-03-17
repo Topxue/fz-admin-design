@@ -133,7 +133,11 @@ export const createUserForm = reactive<any>({
         multiple: true,
         placeholder: '请选择岗位',
         allowClear: true,
-        options: []
+        options: [],
+        fieldNames: {
+          value: 'id',
+          label: 'name'
+        }
       }
     }
   ]
@@ -169,7 +173,11 @@ export const setRoleForm = reactive({
       options: {
         value: [],
         options: [],
-        multiple: true
+        multiple: true,
+        fieldNames: {
+          label: 'name',
+          value: 'id'
+        }
       }
     }
   ]

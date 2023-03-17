@@ -56,7 +56,7 @@ export default {
    * 其它设置
    */
   // 主页面切换动画：可选值"<slide-right|slide-left|opacitys>"，默认 slide-right
-  animation: 'slide-right',
+  animation: 'opacitys',
 
   /**
    * 全局网站标题 / 副标题
