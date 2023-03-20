@@ -1,9 +1,9 @@
 import request from '@/services/request'
 import { ResponseResult } from '../type'
 
-interface IMenuParams {
-  status: number
-  title: string
+export interface IMenuParams {
+  status?: number
+  title?: string
 }
 
 interface ICreateMenuParams {
@@ -28,10 +28,10 @@ interface ICreateMenuParams {
  * 获取菜单列表
  * @param {data}
  */
-export const getMenuList = (data?: IMenuParams) => {
+export const getMenuList = (params?: IMenuParams) => {
   return request.get<IMenuParams, ResponseResult<RouteItem>>(
     '/system/menu/menu-list',
-    { data }
+    { params }
   )
 }
 

@@ -53,7 +53,6 @@ const emits = defineEmits<{
 const handleOK = async () => {
   setLoading(true)
   const valid = await formRef.value.onSubmit()
-  console.log(valid, 'valid...')
 
   const [error] = await to(
     setRole({
@@ -76,7 +75,6 @@ const handleCancel = () => {
 // 获取角色列表
 const getRoleList = async () => {
   const { data } = await queryOpenRoleList()
-  console.log(data, 'data...')
 
   if (data) {
     const roleIds = setRoleForm.list.find((item) => item.model === 'roleIds')
@@ -88,8 +86,6 @@ const handleOpen = async () => {
   await getRoleList()
   // 获取用户拥有的角色
   const { data } = await getUserRoles({ userId: props.userInfo.id })
-
-  console.log(data, 'data...')
 
   formRef.value.setModelValues({
     username: props.userInfo.username,

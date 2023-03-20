@@ -3,8 +3,9 @@
     :width="620"
     title="按钮权限"
     :visible="visible"
+    @ok="handleClose"
     @cancel="handleClose"
-    @ok="handleCreate"
+    @before-open="handleOpen"
   >
     <fz-table
       row-key="path"
@@ -43,10 +44,6 @@
             删除
           </a-button>
         </a-popconfirm>
-        <!-- <a-button type="text" status="danger">
-          <icon-delete />
-          删除
-        </a-button> -->
       </template>
     </fz-table>
 
@@ -62,7 +59,7 @@
 <script setup lang="ts">
 import to from 'await-to-js'
 import { Message } from '@arco-design/web-vue'
-import { reactive, watch, defineAsyncComponent } from 'vue'
+import { reactive, defineAsyncComponent } from 'vue'
 
 import {
   deleteMenu,
@@ -144,13 +141,6 @@ const queryMenuButtonList = async () => {
   state.buttonList = res.data
 }
 
-watch(
-  () => props.menuId,
-  () => {
-    props.menuId && queryMenuButtonList()
-  }
-)
-
 // 编辑
 const handleEdit = (record: IMenButtonListData) => {
   state.createBtnVisible = true
@@ -172,9 +162,10 @@ const handleClose = () => {
   emits('update:visible', false)
 }
 
-// 确定创建
-const handleCreate = () => {
-  console.log('21312')
+const handleOpen = () => {
+  if (props.menuId) {
+    queryMenuButtonList()
+  }
 }
 </script>
 

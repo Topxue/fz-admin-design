@@ -38,6 +38,7 @@
             编辑
           </a-button>
           <a-popconfirm
+            v-if="!record.superAdmin"
             :content="`是否确认删除用户&quot;${record.username}&quot;?`"
             type="warning"
             @ok="handleDeleteUser(record.id)"

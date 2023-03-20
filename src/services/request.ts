@@ -24,6 +24,8 @@ const LOGIN_ERROR_CODE = [401, 403]
 const whiteList = ['/system/auth/refresh-token', '/system/auth/login']
 
 const baseURL = import.meta.env.VITE_API_BASE_URL
+// 测试_租户ID
+const TENANT_ID = import.meta.env.VITE_TENANT_ID
 
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
@@ -47,7 +49,7 @@ const formatToken = (token: string): string => {
 
 const setRequestHeaders = (config: FzHttpRequestConfig, token: string) => {
   if (config.headers) {
-    config.headers['tenant_id'] = 1
+    config.headers['tenant_id'] = TENANT_ID
     config.headers['Authorization'] = formatToken(token)
   }
 }

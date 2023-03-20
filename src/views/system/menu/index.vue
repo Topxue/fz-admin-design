@@ -4,8 +4,10 @@
       row-key="path"
       :columns="columns"
       :data="state.menuList"
-      :pagination="false"
       :loading="loading"
+      :pagination="false"
+      @search="queryMenuList"
+      @reset="queryMenuList"
     >
       <template #toolbar>
         <div class="toolbar">
@@ -90,8 +92,9 @@ import to from 'await-to-js'
 import { reactive, onMounted, computed, defineAsyncComponent } from 'vue'
 import { Message } from '@arco-design/web-vue'
 
+import { columns } from './columns'
 import useLoading from '@/hooks/loading'
-import { getMenuList, deleteMenu } from '@/services/api/menu'
+import { getMenuList, deleteMenu, IMenuParams } from '@/services/api/menu'
 
 const CreateMenu = defineAsyncComponent(
   () => import('./components/create-menu.vue')
@@ -115,54 +118,6 @@ const state = reactive<{
   createVisible: false,
   btnVisible: false
 })
-
-// TODO: 负责人缺少中文字段
-const columns = [
-  {
-    title: '菜单名称',
-    dataIndex: 'meta.title'
-  },
-  {
-    title: '图标',
-    dataIndex: 'meta.icon',
-    slotName: 'icon',
-    align: 'center'
-  },
-  {
-    title: '权限标识',
-    dataIndex: 'meta.permission',
-    slotName: 'permission',
-    align: 'center'
-  },
-  {
-    title: '路由地址',
-    dataIndex: 'path',
-    align: 'center',
-    slotName: 'path'
-  },
-  {
-    title: '状态',
-    align: 'center',
-    dataIndex: 'meta.status',
-    slotName: 'status'
-  },
-  {
-    title: '权重',
-    align: 'center',
-    dataIndex: 'sort',
-    slotName: 'sort'
-  },
-  {
-    title: '创建时间',
-    align: 'center',
-    dataIndex: 'createTime'
-  },
-  {
-    title: '操作',
-    align: 'center',
-    slotName: 'optional'
-  }
-]
 
 // 是否显示按钮权限按钮
 const isBtnPermisson = computed(() => {
@@ -203,9 +158,9 @@ const handleDeleteMenu = async (id: string) => {
   queryMenuList()
 }
 
-const queryMenuList = async () => {
+const queryMenuList = async (params?: IMenuParams) => {
   setLoading(true)
-  const [error, res] = await to(getMenuList())
+  const [error, res] = await to(getMenuList(params))
   if (error) {
     setLoading(false)
     return

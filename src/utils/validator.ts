@@ -38,6 +38,6 @@ export const phoneValidator = (value: string, callback: Callback) => {
  */
 export const accountValidator = (value: string, callback: Callback) => {
   if (value && !accountValidate(value)) {
-    callback('用户账号长度为4-30个字符')
+    callback('用户账号由 数字、字母 组成4-30个字符')
   }
 }

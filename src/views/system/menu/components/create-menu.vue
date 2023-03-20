@@ -127,9 +127,6 @@ const handleCreate = async () => {
 }
 
 const getOpenMenuList = async () => {
-  // 优化、不需要每次都进行请求
-  if (menuList.value.length) return
-
   const [error, res]: any = await to(queryOpenMenuList())
   if (error) return
 
