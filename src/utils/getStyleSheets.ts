@@ -34,7 +34,7 @@ const getAlicdnIconfont = () => {
   })
 }
 
-// 初始化获取 css 样式，获取 element plus 自带 svg 图标，增加了 ele- 前缀，使用时：ele-Aim
+// 初始化获取 css 样式，获取 Arco design 自带 svg 图标
 const getArcoDesignIconfont = () => {
   return new Promise((resolve, reject) => {
     nextTick(() => {

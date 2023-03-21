@@ -18,13 +18,13 @@ export default defineComponent({
 
     return () => {
       return (
-        <div>
+        <span>
           {isArcoIcon.value ? (
             <i>{h(compile(`<${props.icon} size="${props.size}" />`))}</i>
           ) : (
             <i class={props.icon} style={{ fontSize: `${props.size}px` }}></i>
           )}
-        </div>
+        </span>
       )
     }
   }

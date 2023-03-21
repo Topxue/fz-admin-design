@@ -19,12 +19,15 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores'
+import router from '@/router'
 
 const userStore = useUserStore()
 const { userInfo } = storeToRefs(userStore)
 
 const handleSelect = (type: string) => {
-  if (type === 'loginOut') {
+  if (type === 'personal') {
+    router.push('/personal')
+  } else {
     userStore.loginOut()
   }
 }
